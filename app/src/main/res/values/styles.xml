@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="Toolbar" parent="Widget.MaterialComponents.Toolbar">
+        <item name="android:background">@color/background</item>
+        <item name="titleTextAppearance">@style/h1</item>
+        <item name="titleTextColor">@color/primary</item>
+    </style>
+
+    <style name="CardViewText" parent="Body1">
+        <item name="android:textColor">@color/onSurface</item>
+    </style>
+
+    <style name="DefaultText" parent="Body1">
+        <item name="android:textColor">@color/onSurface</item>
+    </style>
+
+    <style name="CategoryChip" parent="Widget.MaterialComponents.Chip.Entry">
+        <item name="chipBackgroundColor">@color/secondary</item>
+        <item name="closeIconTint">@color/onSecondary</item>
+        <item name="android:textColor">@color/onSecondary</item>
+    </style>
+
+</resources>

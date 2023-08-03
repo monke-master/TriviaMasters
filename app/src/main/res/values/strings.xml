@@ -1,0 +1,28 @@
+<resources>
+    <string name="app_name">TriviaMasters</string>
+    <string name="searchCategories">Search categories</string>
+    <string name="fullyRandom">Fully random!</string>
+    <string name="strengthTest">Strength test</string>
+    <string name="ownGame">Own game</string>
+    <string name="myProfile">My profile</string>
+    <string name="pointsScored">Points scored</string>
+    <string name="playingSince">Has been playing since</string>
+    <string name="categoryExample">For example, Russia</string>
+    <string name="start">Start</string>
+    <string name="categories">Categories</string>
+    <string name="questionsPrice">Questions price</string>
+    <string name="from">From</string>
+    <string name="to">to</string>
+    <string name="questionsNumber">Questions number</string>
+    <string name="question">Question:</string>
+    <string name="answer">Answer</string>
+    <string name="yourAnswer">Your answer</string>
+    <string name="category">Category:</string>
+    <string name="price">Price:</string>
+
+    <string name="mock_string">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua </string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+
+</resources>
