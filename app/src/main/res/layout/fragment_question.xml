@@ -42,6 +42,7 @@
         tools:text="Category" />
 
     <com.google.android.material.divider.MaterialDivider
+        android:id="@+id/divider1"
         android:layout_width="wrap_content"
         android:layout_height="1dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -49,28 +50,80 @@
         app:layout_constraintTop_toBottomOf="@+id/chip_category" />
 
     <TextView
-        android:id="@+id/hdr_category"
+        android:id="@+id/hdr_price"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="8dp"
-        android:layout_marginTop="8dp"
-        android:text="@string/category"
+        android:layout_marginTop="16dp"
+        android:text="@string/price"
         android:textColor="@color/primary"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar2" />
+        app:layout_constraintTop_toBottomOf="@+id/divider1" />
 
     <com.google.android.material.chip.Chip
-        android:id="@+id/chip_category"
+        android:id="@+id/chip_price"
         style="@style/CategoryChip"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         app:closeIconVisible="false"
-        app:layout_constraintBottom_toBottomOf="@+id/hdr_category"
-        app:layout_constraintStart_toEndOf="@+id/hdr_category"
-        app:layout_constraintTop_toTopOf="@+id/hdr_category"
-        tools:text="Category" />
+        app:layout_constraintBottom_toBottomOf="@+id/hdr_price"
+        app:layout_constraintStart_toEndOf="@+id/hdr_price"
+        app:layout_constraintTop_toTopOf="@+id/hdr_price"
+        tools:text="2000" />
 
+    <com.google.android.material.divider.MaterialDivider
+        android:id="@+id/divider2"
+        android:layout_width="wrap_content"
+        android:layout_height="1dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/chip_price" />
+
+    <TextView
+        android:id="@+id/hdr_question"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="8dp"
+        android:layout_marginTop="16dp"
+        android:text="@string/question"
+        android:textColor="@color/primary"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/divider2" />
+
+    <TextView
+        android:id="@+id/txt_question"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="8dp"
+        tools:text="Этот тигр живет в Антарктиде"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/hdr_question" />
+
+    <EditText
+        android:hint="@string/yourAnswer"
+        android:id="@+id/edit_text_answer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txt_question" />
+
+    <Button
+        android:id="@+id/btn_answer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:layout_marginHorizontal="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="16dp"
+        android:text="@string/answer"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
