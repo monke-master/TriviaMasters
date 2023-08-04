@@ -9,6 +9,7 @@
         <item name="colorSurface">@color/surface</item>
         <item name="colorOnSurface">@color/onSurface</item>
         <item name="colorError">@color/red</item>
+        <item name="colorPrimaryDark">@color/primaryDark</item>
 
         <item name="toolbarStyle">@style/Toolbar</item>
         <item name="android:textViewStyle">@style/DefaultText</item>

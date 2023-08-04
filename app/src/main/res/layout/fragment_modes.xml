@@ -4,7 +4,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
     tools:context=".ui.modesFeature.ModesFragment">
 
     <LinearLayout
@@ -12,26 +11,22 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <com.google.android.material.appbar.MaterialToolbar
-            app:navigationIcon="@drawable/ic_menu"
-            android:id="@+id/materialToolbar2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:minHeight="?attr/actionBarSize" />
-
 
         <androidx.recyclerview.widget.RecyclerView
-            android:layout_marginHorizontal="16dp"
-            tools:itemCount="4"
-            tools:orientation="vertical"
-            tools:listitem="@layout/item_mode"
+            android:id="@+id/rw_modes"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            tools:itemCount="4"
+            tools:listitem="@layout/item_mode"
+            tools:orientation="vertical" />
 
     </LinearLayout>
 
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        android:id="@+id/btn_own_game"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="end|bottom"

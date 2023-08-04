@@ -1,25 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+<androidx.cardview.widget.CardView
     xmlns:tools="http://schemas.android.com/tools"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:elevation="@dimen/elevation"
+    app:cardCornerRadius="@dimen/cornerRadius"
+    android:layout_width="match_parent"
+    android:layout_height="200dp">
 
-    <androidx.cardview.widget.CardView
-        android:elevation="@dimen/elevation"
-        app:cardCornerRadius="@dimen/cornerRadius"
-        android:layout_width="match_parent"
-        android:layout_height="200dp">
+    <TextView
+        style="@style/CardViewText"
+        android:layout_marginTop="16dp"
+        android:layout_marginStart="16dp"
+        android:id="@+id/mode_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:text="Search categories" />
 
-        <TextView
-            style="@style/CardViewText"
-            android:layout_marginTop="16dp"
-            android:layout_marginStart="16dp"
-            android:id="@+id/node_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            tools:text="Search categories" />
-
-    </androidx.cardview.widget.CardView>
-
-</FrameLayout>
+</androidx.cardview.widget.CardView>

@@ -4,4 +4,7 @@
     <dimen name="cornerRadius">8dp</dimen>
     <dimen name="elevation">8dp</dimen>
 
+    <dimen name="defaultListPadding">8dp</dimen>
+    <dimen name="defaultHorizontalMargin">8dp</dimen>
+
 </resources>
