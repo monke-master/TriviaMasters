@@ -1,22 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
 
     <com.monke.triviamasters.ui.components.QuestProgressView
-        app:questionsCount="120"
+        android:id="@+id/quest_progress"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        app:questionsCount="12" />
 
-<!--    <androidx.fragment.app.FragmentContainerView-->
+    <com.monke.triviamasters.ui.components.QuestProgressView
+        android:id="@+id/quest_progress2"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        app:questionsCount="12" />
+
+
+    <!--    <androidx.fragment.app.FragmentContainerView-->
 <!--        android:id="@+id/fragmentContainerView"-->
 <!--        android:name="com.monke.triviamasters.ui.mainScreenFeature.MainFragment"-->
 <!--        android:layout_width="match_parent"-->
 <!--        android:layout_height="match_parent" />-->
 
 
-</FrameLayout>
+</LinearLayout>

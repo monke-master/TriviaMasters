@@ -4,13 +4,12 @@ import android.content.Context
 import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.Paint
+import android.graphics.Path
+import android.graphics.RectF
 import android.util.AttributeSet
 import android.view.View
 import com.monke.triviamasters.R
-import java.lang.Math.PI
 import java.lang.Math.min
-import kotlin.math.cos
-import kotlin.math.sin
 
 class QuestProgressView @JvmOverloads constructor(
     context: Context,
@@ -19,12 +18,38 @@ class QuestProgressView @JvmOverloads constructor(
     defStyleRes: Int = 0,
 ): View(context, attrs, defStyleAttr, defStyleRes) {
 
-    private val paint = Paint()
-    private var questionsCount = 0
-    private var angleStep = 2*PI
+    private val circlePaint = Paint().apply {
+        color = Color.BLACK
+        style = Paint.Style.STROKE
+        isAntiAlias = true
+        strokeWidth = 2f
+    }
+    private val backgroundPaint = Paint().apply {
+        color = Color.GREEN
+
+        isAntiAlias = true
+        strokeWidth = 2f
+    }
+
+    private var angleStep = 0f
     private var circleCx = 0f
     private var circleCy = 0f
-    private var circleRadius = 0f
+    private var outerCircleRadius = 0f
+    private var innerCircleRadius = 0f
+    private val circlePath = Path()
+    private var innerRect = RectF()
+    private var outerRect = RectF()
+
+    var questionsCount = 0
+        set(value) {
+            field = value
+            invalidate()
+        }
+    var currentQuestion = 1
+        set(value) {
+            field = value
+            invalidate()
+        }
 
     init {
         attrs?.let { attrs ->
@@ -40,11 +65,6 @@ class QuestProgressView @JvmOverloads constructor(
 
     }
 
-    var currentQuestion = 1
-        set(value) {
-            field = value
-            invalidate()
-        }
 
     override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
         val desiredWidth = 100
@@ -68,25 +88,39 @@ class QuestProgressView @JvmOverloads constructor(
         }
 
         setMeasuredDimension(width, height)
-        angleStep = 2* PI / questionsCount
+        angleStep = 360f / questionsCount
         circleCx = width / 2f
         circleCy = height / 2f
-        circleRadius = width / 4f
+        outerCircleRadius = width / 4f
+        innerCircleRadius = width / 4.5f
+
+        outerRect.set(circleCx - outerCircleRadius,
+            circleCy - outerCircleRadius,
+            circleCx + outerCircleRadius,
+            circleCy + outerCircleRadius)
+        innerRect.set(
+            circleCx - innerCircleRadius,
+            circleCy - innerCircleRadius,
+            circleCx + innerCircleRadius,
+            circleCy + innerCircleRadius
+        )
     }
 
     override fun onDraw(canvas: Canvas) {
-        paint.color = Color.RED
-        canvas.drawCircle(circleCx, circleCy, circleRadius, paint)
-        paint.color = Color.BLACK
+        var alpha = 270f - angleStep
+        var questionCounter = 0
+        while (alpha > -90f - angleStep) {
+            circlePath.reset()
+            circlePath.arcTo(outerRect, alpha, angleStep)
+            circlePath.arcTo(innerRect, alpha + angleStep, -angleStep)
+            circlePath.close()
 
-        var alpha = PI / 2
-        while (alpha < 2.5* PI) {
-            var nx = circleRadius * cos(alpha) + circleCx
-            var ny = circleCy - circleRadius * sin(alpha)
-            canvas.drawLine(circleCx, circleCy, nx.toFloat(), ny.toFloat(), paint)
-            alpha += angleStep
+            if (questionCounter < currentQuestion)
+                canvas.drawPath(circlePath, backgroundPaint)
+            else
+                canvas.drawPath(circlePath, circlePaint)
+            questionCounter++
+            alpha -= angleStep
         }
     }
-
-
 }
