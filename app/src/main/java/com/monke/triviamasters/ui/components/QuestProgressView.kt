@@ -6,6 +6,7 @@ import android.graphics.Color
 import android.graphics.Paint
 import android.graphics.Path
 import android.graphics.RectF
+import android.os.Parcelable
 import android.util.AttributeSet
 import android.view.View
 import com.monke.triviamasters.R
@@ -123,4 +124,14 @@ class QuestProgressView @JvmOverloads constructor(
             alpha -= angleStep
         }
     }
+
+    override fun onSaveInstanceState(): Parcelable? {
+        return super.onSaveInstanceState()
+    }
+
+    override fun onRestoreInstanceState(state: Parcelable?) {
+        super.onRestoreInstanceState(state)
+    }
+
+
 }

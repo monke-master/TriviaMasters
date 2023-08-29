@@ -4,6 +4,7 @@
 
     <style name="h1" parent="Widget.MaterialComponents.TextView">
         <item name="android:textSize">24sp</item>
+        <item name="android:textStyle">bold</item>
     </style>
 
     <style name="Body1" parent="Widget.MaterialComponents.TextView">

@@ -30,6 +30,7 @@
         />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
+        app:labelVisibilityMode="selected"
         app:menu="@menu/menu_main_bottom"
         android:id="@+id/bottom_navigation_view"
         android:layout_width="match_parent"

@@ -4,9 +4,9 @@
     <item
         android:id="@+id/modesFragment"
         android:icon="@drawable/ic_quests"
-        android:title="quests" />
+        android:title="@string/quests" />
     <item
         android:id="@+id/profileFragment"
         android:icon="@drawable/ic_profile"
-        android:title="profile" />
+        android:title="@string/profile" />
 </menu>

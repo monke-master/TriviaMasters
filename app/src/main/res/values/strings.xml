@@ -19,6 +19,17 @@
     <string name="yourAnswer">Your answer</string>
     <string name="category">Category:</string>
     <string name="price">Price:</string>
+    <string name="quests">Quests</string>
+    <string name="profile">Profile</string>
+    <string name="welcome">Welcome to Trivia Masters!</string>
+    <string name="sign_in">Sign in</string>
+    <string name="sign_up">Sign up</string>
+    <string name="continue_wo_reg">Continue without registration</string>
+    <string name="email_disclaimer">Enter your email address that will be used to log into your account. We will send confirmation email to this address.</string>
+    <string name="next">Next</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="confirm_password">Confirm the password</string>
 
     <string name="mock_string">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua </string>
     <!-- TODO: Remove or change this placeholder text -->

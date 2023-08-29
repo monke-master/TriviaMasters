@@ -13,16 +13,16 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val meineView = findViewById<QuestProgressView>(R.id.quest_progress)
-        meineView.currentQuestion = 1
-        meineView.questionsCount = 5
-
-        lifecycleScope.launch {
-            for (i in 1..meineView.questionsCount) {
-                meineView.currentQuestion = i
-                delay(1000)
-            }
-        }
+//        val meineView = findViewById<QuestProgressView>(R.id.quest_progress)
+//        meineView.currentQuestion = 1
+//        meineView.questionsCount = 5
+//
+//        lifecycleScope.launch {
+//            for (i in 1..meineView.questionsCount) {
+//                meineView.currentQuestion = i
+//                delay(1000)
+//            }
+//        }
 
 
     }

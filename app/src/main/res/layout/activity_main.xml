@@ -8,26 +8,11 @@
     tools:context=".MainActivity">
 
 
-    <com.monke.triviamasters.ui.components.QuestProgressView
-        android:id="@+id/quest_progress"
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/fragmentContainerView"
+        android:name="com.monke.triviamasters.ui.mainScreenFeature.MainFragment"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="1"
-        app:questionsCount="12" />
-
-    <com.monke.triviamasters.ui.components.QuestProgressView
-        android:id="@+id/quest_progress2"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="1"
-        app:questionsCount="12" />
-
-
-    <!--    <androidx.fragment.app.FragmentContainerView-->
-<!--        android:id="@+id/fragmentContainerView"-->
-<!--        android:name="com.monke.triviamasters.ui.mainScreenFeature.MainFragment"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="match_parent" />-->
+        android:layout_height="match_parent" />
 
 
 </LinearLayout>

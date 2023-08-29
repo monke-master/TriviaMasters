@@ -11,12 +11,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <com.monke.triviamasters.ui.components.QuestProgressView
-            app:questionsCount="12"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
-
-
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rw_modes"
             android:layout_width="match_parent"
