@@ -1,4 +1,4 @@
-package com.monke.triviamasters.ui.signUpFeature
+package com.monke.triviamasters.ui.createPlayerFeature
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -7,28 +7,28 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.Navigation
 import com.monke.triviamasters.R
-import com.monke.triviamasters.databinding.FragmentPasswordBinding
+import com.monke.triviamasters.databinding.FragmentCreatePlayerBinding
 
 
-class PasswordFragment : Fragment() {
+class CreatePlayerFragment : Fragment() {
 
-    private var binding: FragmentPasswordBinding? = null
+
+    private var binding: FragmentCreatePlayerBinding? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentPasswordBinding.inflate(layoutInflater, container, false)
+        binding = FragmentCreatePlayerBinding.inflate(layoutInflater, container, false)
         return binding?.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        val navController = Navigation.findNavController(view)
 
-        val navigation = Navigation.findNavController(view)
-
-        binding?.btnSignUp?.setOnClickListener {
-            navigation.navigate(R.id.action_passwordFragment_to_createPlayerFragment)
+        binding?.btnSignIn?.setOnClickListener {
+            navController.navigate(R.id.action_createPlayerFragment_to_mainFragment)
         }
     }
 

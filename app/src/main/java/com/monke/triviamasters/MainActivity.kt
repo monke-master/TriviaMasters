@@ -1,29 +1,28 @@
 package com.monke.triviamasters
 
-import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.lifecycle.lifecycleScope
-import com.monke.triviamasters.ui.components.QuestProgressView
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
+import androidx.navigation.NavController
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.NavHostFragment
+import com.monke.triviamasters.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-//        val meineView = findViewById<QuestProgressView>(R.id.quest_progress)
-//        meineView.currentQuestion = 1
-//        meineView.questionsCount = 5
-//
-//        lifecycleScope.launch {
-//            for (i in 1..meineView.questionsCount) {
-//                meineView.currentQuestion = i
-//                delay(1000)
-//            }
-//        }
+        val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment)
+                as NavHostFragment
+        val navController = navHostFragment.navController
 
+        setupNavigation(navController)
+
+    }
+
+    private fun setupNavigation(navController: NavController) {
 
     }
 }

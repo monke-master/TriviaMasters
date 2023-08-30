@@ -26,8 +26,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbar"
         app:defaultNavHost="true"
-        app:navGraph="@navigation/navigation_main"
-        />
+        app:navGraph="@navigation/navigation_main" />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         app:labelVisibilityMode="selected"

@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.monke.triviamasters.databinding.ItemCategoryBinding
 import com.monke.triviamasters.databinding.ItemModeBinding
+import com.monke.triviamasters.domain.Mode
 
 class ModesRWAdapter(
     private val modesList: List<Mode>
@@ -15,7 +16,7 @@ class ModesRWAdapter(
     class ModesViewHolder(private val binding: ItemModeBinding) : ViewHolder(binding.root) {
 
         fun bind(mode: Mode) {
-            binding.modeTitle.text = mode.title
+           // binding.modeTitle.text = mode.title
         }
 
     }

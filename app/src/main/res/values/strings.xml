@@ -30,6 +30,8 @@
     <string name="email">Email</string>
     <string name="password">Password</string>
     <string name="confirm_password">Confirm the password</string>
+    <string name="username_hint">How can we call you, stranger?</string>
+    <string name="username">Your username</string>
 
     <string name="mock_string">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua </string>
     <!-- TODO: Remove or change this placeholder text -->

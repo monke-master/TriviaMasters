@@ -28,7 +28,7 @@ class ModesFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        configureModesRW()
+        //configureModesRW()
     }
 
     override fun onDestroy() {
@@ -37,64 +37,38 @@ class ModesFragment : Fragment() {
     }
 
     // Настройка recycler view с режимами игры
-    private fun configureModesRW() {
-        val adapter = ModesRWAdapter(initModes())
-        val recyclerView = binding?.rwModes
-        recyclerView?.adapter = adapter
-        recyclerView?.layoutManager = LinearLayoutManager(
-            requireContext(),
-            LinearLayoutManager.VERTICAL,
-            false
-        )
-
-        // Добавление декораторов
-//        var dividerItemDecoration = DividerItemDecoration(
+//    private fun configureModesRW() {
+//        val adapter = ModesRWAdapter(initModes())
+//        val recyclerView = binding?.rwModes
+//        recyclerView?.adapter = adapter
+//        recyclerView?.layoutManager = LinearLayoutManager(
 //            requireContext(),
-//            DividerItemDecoration.VERTICAL
+//            LinearLayoutManager.VERTICAL,
+//            false
 //        )
-//        dividerItemDecoration.setDrawable(
-//            resources.getDrawable(
-//                R.drawable.shape_divider,
-//                requireContext().theme
-//            )
+//
+//        // Добавление декораторов
+////        var dividerItemDecoration = DividerItemDecoration(
+////            requireContext(),
+////            DividerItemDecoration.VERTICAL
+////        )
+////        dividerItemDecoration.setDrawable(
+////            resources.getDrawable(
+////                R.drawable.shape_divider,
+////                requireContext().theme
+////            )
+////        )
+////        recyclerView?.addItemDecoration(dividerItemDecoration)
+//
+//        val verticalPadding = resources.getDimensionPixelSize(R.dimen.defaultListPadding)
+//        val horizontalPadding = resources.getDimensionPixelSize(R.dimen.defaultHorizontalMargin)
+//        var verticalSpaceItemDecoration = VerticalSpaceItemDecoration(
+//            verticalPadding = verticalPadding,
+//            horizontalPadding = horizontalPadding
 //        )
-//        recyclerView?.addItemDecoration(dividerItemDecoration)
-
-        val verticalPadding = resources.getDimensionPixelSize(R.dimen.defaultListPadding)
-        val horizontalPadding = resources.getDimensionPixelSize(R.dimen.defaultHorizontalMargin)
-        var verticalSpaceItemDecoration = VerticalSpaceItemDecoration(
-            verticalPadding = verticalPadding,
-            horizontalPadding = horizontalPadding
-        )
-        recyclerView?.addItemDecoration(verticalSpaceItemDecoration)
-
-    }
-
-    // Инициализация режимов игры
-    private fun initModes(): List<Mode> {
-        val modes = ArrayList<Mode>()
-        modes.addAll(
-            listOf(
-                Mode.SearchCategories(
-                    getString(R.string.searchCategories),
-                    "No descr"
-                ) {},
-                Mode.FullyRandom(
-                    getString(R.string.fullyRandom),
-                    "No descr"
-                ) {},
-                Mode.StrengthTest(
-                    getString(R.string.strengthTest),
-                    "No descr"
-                ) {},
-                Mode.OwnGame(
-                    getString(R.string.ownGame),
-                    "No descr"
-                ) {},
-            )
-        )
-        return modes
-    }
+//        recyclerView?.addItemDecoration(verticalSpaceItemDecoration)
+//
+//    }
 
 
 }

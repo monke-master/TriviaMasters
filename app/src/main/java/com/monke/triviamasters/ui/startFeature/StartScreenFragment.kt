@@ -5,17 +5,50 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.NavController
+import androidx.navigation.Navigation
 import com.monke.triviamasters.R
+import com.monke.triviamasters.databinding.FragmentStartBinding
 
 
 class StartScreenFragment : Fragment() {
 
+    private var binding: FragmentStartBinding? = null
+    private lateinit var navController: NavController
+
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_start, container, false)
+        binding = FragmentStartBinding.inflate(layoutInflater, container, false)
+        return binding?.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        navController = Navigation.findNavController(view)
+
+        binding?.btnSignIn?.setOnClickListener {
+            navController.navigate(R.id.action_startScreenFragment_to_signInFragment)
+        }
+
+        binding?.btnSignUp?.setOnClickListener {
+            navController.navigate(R.id.action_startScreenFragment_to_emailFragment)
+        }
+
+
+        binding?.btnContinue?.setOnClickListener {
+            navController.navigate(R.id.action_startScreenFragment_to_createPlayerFragment)
+        }
+
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+
+        binding = null
     }
 
 }
