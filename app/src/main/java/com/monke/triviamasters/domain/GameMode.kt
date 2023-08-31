@@ -1,5 +1,5 @@
 package com.monke.triviamasters.domain
 
-enum class Mode {
+enum class GameMode {
     Category, ExtraHard, FullyRandom, OwnGame
 }

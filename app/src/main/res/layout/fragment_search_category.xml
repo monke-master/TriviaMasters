@@ -16,7 +16,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:navigationIcon="@drawable/ic_back"
-        app:title="@string/searchCategories" />
+        app:title="@string/search_categories" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/textInputLayout"
@@ -35,7 +35,7 @@
 
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/categoryExample" />
+            android:hint="@string/category_example" />
 
     </com.google.android.material.textfield.TextInputLayout>
 

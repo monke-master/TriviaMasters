@@ -1,22 +1,22 @@
 <resources>
     <string name="app_name">TriviaMasters</string>
-    <string name="searchCategories">Search categories</string>
-    <string name="fullyRandom">Fully random!</string>
-    <string name="strengthTest">Strength test</string>
-    <string name="ownGame">Own game</string>
-    <string name="myProfile">My profile</string>
-    <string name="pointsScored">Points scored</string>
-    <string name="playingSince">Has been playing since</string>
-    <string name="categoryExample">For example, Russia</string>
+    <string name="search_categories">Search categories</string>
+    <string name="fully_random">Fully random!</string>
+    <string name="extra_hard">Extra hard</string>
+    <string name="own_game">Own game</string>
+    <string name="my_profile">My profile</string>
+    <string name="points_scored">Points scored</string>
+    <string name="playing_since">Has been playing since</string>
+    <string name="category_example">For example, Russia</string>
     <string name="start">Start</string>
     <string name="categories">Categories</string>
-    <string name="questionsPrice">Questions price</string>
+    <string name="questions_price">Questions price</string>
     <string name="from">From</string>
     <string name="to">to</string>
-    <string name="questionsNumber">Questions number</string>
+    <string name="questions_number">Questions number</string>
     <string name="question">Question:</string>
     <string name="answer">Answer</string>
-    <string name="yourAnswer">Your answer</string>
+    <string name="your_answer">Your answer</string>
     <string name="category">Category:</string>
     <string name="price">Price:</string>
     <string name="quests">Quests</string>
@@ -24,7 +24,7 @@
     <string name="welcome">Welcome to Trivia Masters!</string>
     <string name="sign_in">Sign in</string>
     <string name="sign_up">Sign up</string>
-    <string name="continue_wo_reg">Continue without registration</string>
+    <string name="continue_without_reg">Continue without registration</string>
     <string name="email_disclaimer">Enter your email address that will be used to log into your account. We will send confirmation email to this address.</string>
     <string name="next">Next</string>
     <string name="email">Email</string>
@@ -32,10 +32,11 @@
     <string name="confirm_password">Confirm the password</string>
     <string name="username_hint">How can we call you, stranger?</string>
     <string name="username">Your username</string>
+    <string name="search_categories_description">In this mode you have to answer to all questions from chosen category. </string>
+    <string name="fully_random_description">In this mode you have to answer to random number of random questions from random categories. Sounds randomly!</string>
+    <string name="extra_hard_description">In this mode you have to answer the hardest questions. Get ready!</string>
+    <string name="own_game_description">Customize the game as you wish!</string>
 
     <string name="mock_string">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua </string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-
-
+    
 </resources>

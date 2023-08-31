@@ -9,11 +9,15 @@ import com.monke.triviamasters.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
 
+    lateinit var mainNavController: NavController
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment)
+                as NavHostFragment
+        mainNavController = navHostFragment.navController
     }
 
 

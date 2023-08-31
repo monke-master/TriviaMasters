@@ -6,6 +6,60 @@
     app:startDestination="@id/startScreenFragment">
 
     <fragment
+        android:id="@+id/ownGameFragment"
+        android:name="com.monke.triviamasters.ui.ownGameFeature.OwnGameFragment"
+        android:label="fragment_own_game"
+        tools:layout="@layout/fragment_own_game" />
+    <action
+        android:id="@+id/action_descriptionFragment_to_ownGameFragment"
+        app:destination="@id/ownGameFragment" />
+    <action
+        android:id="@+id/action_descriptionFragment_to_searchCategoryFragment"
+        app:destination="@id/searchCategoryFragment" />
+    <action
+        android:id="@+id/action_descriptionFragment_to_questionFragment"
+        app:destination="@id/questionFragment" />
+    <fragment
+        android:id="@+id/questionFragment"
+        android:name="com.monke.triviamasters.ui.questionFeature.QuestionFragment"
+        android:label="fragment_question"
+        tools:layout="@layout/fragment_question" />
+    <fragment
+        android:id="@+id/descriptionFragment"
+        android:name="com.monke.triviamasters.ui.questionFeature.DescriptionFragment"
+        android:label="fragment_description"
+        tools:layout="@layout/fragment_description">
+        <action
+            android:id="@+id/action_descriptionFragment_to_searchCategoryFragment"
+            app:destination="@id/searchCategoryFragment"
+
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+        <action
+            android:id="@+id/action_descriptionFragment_to_ownGameFragment"
+            app:destination="@id/ownGameFragment"
+
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+        <action
+            android:id="@+id/action_descriptionFragment_to_questionFragment"
+            app:destination="@id/questionFragment"
+
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim"/>
+    </fragment>
+    <fragment
+        android:id="@+id/searchCategoryFragment"
+        android:name="com.monke.triviamasters.ui.searchCategoryFeature.SearchCategoryFragment"
+        android:label="fragment_search_category"
+        tools:layout="@layout/fragment_search_category" />
+    <fragment
         android:id="@+id/startScreenFragment"
         android:name="com.monke.triviamasters.ui.startFeature.StartScreenFragment"
         android:label="fragment_start"
@@ -96,5 +150,14 @@
         android:id="@+id/mainFragment"
         android:name="com.monke.triviamasters.ui.mainScreenFeature.MainFragment"
         android:label="fragment_main"
-        tools:layout="@layout/fragment_main" />
+        tools:layout="@layout/fragment_main" >
+        <action
+            android:id="@+id/action_mainFragment_to_descriptionFragment"
+            app:destination="@id/descriptionFragment"
+
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim"/>
+    </fragment>
 </navigation>

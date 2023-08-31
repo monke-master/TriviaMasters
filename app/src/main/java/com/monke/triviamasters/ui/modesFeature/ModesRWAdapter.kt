@@ -1,22 +1,24 @@
 package com.monke.triviamasters.ui.modesFeature
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
-import com.monke.triviamasters.databinding.ItemCategoryBinding
 import com.monke.triviamasters.databinding.ItemModeBinding
-import com.monke.triviamasters.domain.Mode
+import com.monke.triviamasters.domain.GameMode
+import com.monke.triviamasters.ui.uiModels.GameModeUI
 
 class ModesRWAdapter(
-    private val modesList: List<Mode>
+    private val modesList: Array<GameModeUI>
 ): RecyclerView.Adapter<ModesRWAdapter.ModesViewHolder>() {
 
     class ModesViewHolder(private val binding: ItemModeBinding) : ViewHolder(binding.root) {
 
-        fun bind(mode: Mode) {
-           // binding.modeTitle.text = mode.title
+        fun bind(gameMode: GameModeUI) {
+            binding.modeTitle.text = gameMode.title
+            binding.layout.setOnClickListener() {
+                gameMode.onClick(gameMode.index)
+            }
         }
 
     }

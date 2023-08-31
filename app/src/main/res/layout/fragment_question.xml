@@ -101,7 +101,7 @@
         app:layout_constraintTop_toBottomOf="@+id/hdr_question" />
 
     <EditText
-        android:hint="@string/yourAnswer"
+        android:hint="@string/your_answer"
         android:id="@+id/edit_text_answer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
