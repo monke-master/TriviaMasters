@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.NavController
+import androidx.navigation.NavOptions
 import androidx.navigation.Navigation
 import com.monke.triviamasters.R
 import com.monke.triviamasters.databinding.FragmentSignInBinding
@@ -31,6 +32,7 @@ class SignInFragment : Fragment() {
         binding?.btnSignIn?.setOnClickListener {
             navController.navigate(R.id.action_signInFragment_to_mainFragment)
         }
+
     }
 
     override fun onDestroy() {

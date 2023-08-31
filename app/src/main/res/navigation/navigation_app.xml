@@ -56,6 +56,10 @@
         <action
             android:id="@+id/action_signInFragment_to_mainFragment"
             app:destination="@id/mainFragment"
+
+            app:popUpTo="@id/startScreenFragment"
+            app:popUpToInclusive="true"
+
             app:enterAnim="@android:anim/slide_in_left"
             app:exitAnim="@android:anim/slide_out_right" />
     </fragment>
@@ -68,6 +72,10 @@
         <action
             android:id="@+id/action_createPlayerFragment_to_mainFragment"
             app:destination="@id/mainFragment"
+
+            app:popUpTo="@id/startScreenFragment"
+            app:popUpToInclusive="true"
+
             app:enterAnim="@android:anim/slide_in_left"
             app:exitAnim="@android:anim/slide_out_right" />
     </fragment>
