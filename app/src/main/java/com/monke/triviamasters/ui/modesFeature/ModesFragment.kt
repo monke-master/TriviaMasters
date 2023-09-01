@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.os.bundleOf
 import androidx.navigation.NavController
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.monke.triviamasters.MainActivity
 import com.monke.triviamasters.R
@@ -35,13 +36,13 @@ class ModesFragment : Fragment() {
 
         setupModesRW()
         setupOwnGameFab()
-        mainNavController = (activity as MainActivity).mainNavController
+        mainNavController = view.findNavController()
     }
 
     private fun setupOwnGameFab() {
         binding?.btnOwnGame?.setOnClickListener {
             mainNavController.navigate(
-                R.id.action_mainFragment_to_descriptionFragment,
+                R.id.action_modesFragment_to_descriptionFragment,
                 bundleOf(Pair(
                     DescriptionFragment.BUNDLE_MODE_KEY,
                     GameMode.values().indexOf(GameMode.OwnGame)))
@@ -85,7 +86,7 @@ class ModesFragment : Fragment() {
     private fun getModes(): Array<GameModeUI> {
         val onClick: (Int) -> Unit = {
             mainNavController.navigate(
-                R.id.action_mainFragment_to_descriptionFragment,
+                R.id.action_modesFragment_to_descriptionFragment,
                 bundleOf(Pair(DescriptionFragment.BUNDLE_MODE_KEY, it))
             )
         }

@@ -18,6 +18,10 @@ import com.monke.triviamasters.databinding.FragmentMainBinding
 class MainFragment : Fragment() {
 
     private var binding: FragmentMainBinding? = null
+    private val mainDestinations = listOf(
+        R.id.modesFragment,
+        R.id.profileFragment
+    )
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -38,7 +42,6 @@ class MainFragment : Fragment() {
     ) {
         super.onViewCreated(view, savedInstanceState)
 
-
         val navHostFragment = childFragmentManager.findFragmentById(R.id.fragment_container)
 
         if (navHostFragment != null) {
@@ -46,12 +49,12 @@ class MainFragment : Fragment() {
             binding?.bottomNavigationView?.setupWithNavController(navController)
 
             navController.addOnDestinationChangedListener { controller, destination, bundle ->
-                if (destination.id == R.id.mainFragment) {
-                    binding?.bottomNavigationView?.visibility = View.GONE
-                    binding?.toolbar?.visibility = View.GONE
-                } else {
+                if (destination.id in mainDestinations) {
                     binding?.bottomNavigationView?.visibility = View.VISIBLE
                     binding?.toolbar?.visibility = View.VISIBLE
+                } else {
+                    binding?.bottomNavigationView?.visibility = View.GONE
+                    binding?.toolbar?.visibility = View.GONE
                 }
 
             }
