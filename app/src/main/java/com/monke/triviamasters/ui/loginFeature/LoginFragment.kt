@@ -27,7 +27,6 @@ class LoginFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         loginComponent = (activity?.application as App).appComponent.loginComponent().create()
-        loginComponent.inject(this)
         return inflater.inflate(R.layout.fragment_login, container, false)
     }
 

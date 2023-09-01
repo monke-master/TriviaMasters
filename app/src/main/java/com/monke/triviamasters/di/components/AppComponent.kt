@@ -3,11 +3,12 @@ package com.monke.triviamasters.di.components
 import android.app.Application
 import com.monke.triviamasters.di.AppScope
 import com.monke.triviamasters.di.modules.AppModule
+import com.monke.triviamasters.di.modules.PlayerModule
 import dagger.BindsInstance
 import dagger.Component
 
 
-@Component(modules = [AppModule::class])
+@Component(modules = [AppModule::class, PlayerModule::class])
 @AppScope
 interface AppComponent {
 

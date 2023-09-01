@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.monke.triviamasters.MainActivity
 import com.monke.triviamasters.R
 import com.monke.triviamasters.databinding.FragmentModesBinding
-import com.monke.triviamasters.domain.GameMode
+import com.monke.triviamasters.domain.models.GameMode
 import com.monke.triviamasters.ui.gameFeature.questionFeature.DescriptionFragment
 import com.monke.triviamasters.ui.modesFeature.ModesRWAdapter
 import com.monke.triviamasters.ui.recyclerViewUtils.VerticalSpaceItemDecoration

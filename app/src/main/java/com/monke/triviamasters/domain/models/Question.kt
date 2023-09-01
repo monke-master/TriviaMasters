@@ -1,4 +1,4 @@
-package com.monke.triviamasters.domain
+package com.monke.triviamasters.domain.models
 
 data class Question(
     val title: String,

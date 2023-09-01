@@ -1,6 +1,7 @@
 package com.monke.triviamasters.di.components
 
 import com.monke.triviamasters.di.LoginFragmentScope
+import com.monke.triviamasters.ui.createPlayerFeature.CreatePlayerFragment
 import com.monke.triviamasters.ui.loginFeature.LoginFragment
 import com.monke.triviamasters.ui.loginFeature.signInFeature.SignInFragment
 import com.monke.triviamasters.ui.signUpFeature.EmailFragment
@@ -18,7 +19,7 @@ interface LoginComponent {
 
     fun inject(passwordFragment: PasswordFragment)
 
-    fun inject(loginFragment: LoginFragment)
+    fun inject(createPlayerFragment: CreatePlayerFragment)
 
     @Subcomponent.Factory
     interface Factory {

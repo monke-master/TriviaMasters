@@ -6,12 +6,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.NavController
-import androidx.navigation.Navigation
 import androidx.navigation.findNavController
-import androidx.navigation.ui.setupWithNavController
 import com.monke.triviamasters.R
 import com.monke.triviamasters.databinding.FragmentDescriptionBinding
-import com.monke.triviamasters.domain.GameMode
+import com.monke.triviamasters.domain.models.GameMode
 import com.monke.triviamasters.ui.uiModels.GameModeUI
 
 

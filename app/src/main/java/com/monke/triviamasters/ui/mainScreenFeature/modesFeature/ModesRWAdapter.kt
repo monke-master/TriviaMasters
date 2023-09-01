@@ -5,7 +5,6 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.monke.triviamasters.databinding.ItemModeBinding
-import com.monke.triviamasters.domain.GameMode
 import com.monke.triviamasters.ui.uiModels.GameModeUI
 
 class ModesRWAdapter(
