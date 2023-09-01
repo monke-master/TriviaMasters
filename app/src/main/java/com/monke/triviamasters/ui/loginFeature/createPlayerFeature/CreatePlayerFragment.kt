@@ -5,7 +5,10 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.NavController
 import androidx.navigation.Navigation
+import androidx.navigation.fragment.NavHostFragment
+import com.monke.triviamasters.MainActivity
 import com.monke.triviamasters.R
 import com.monke.triviamasters.databinding.FragmentCreatePlayerBinding
 
@@ -25,10 +28,10 @@ class CreatePlayerFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val navController = Navigation.findNavController(view)
+        val navController = (activity as MainActivity).mainNavController
 
         binding?.btnSignIn?.setOnClickListener {
-            navController.navigate(R.id.action_createPlayerFragment_to_mainFragment)
+            navController.navigate(R.id.action_loginFragment_to_mainFragment)
         }
     }
 

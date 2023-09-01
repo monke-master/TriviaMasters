@@ -29,10 +29,7 @@ class DescriptionFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        val modeIndex = arguments?.getInt(BUNDLE_MODE_KEY)
-        modeIndex?.let {
-            gameMode = GameMode.values()[modeIndex]
-        }
+        gameMode = GameMode.OwnGame
     }
 
     override fun onCreateView(

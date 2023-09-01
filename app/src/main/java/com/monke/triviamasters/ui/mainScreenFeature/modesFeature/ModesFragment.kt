@@ -36,13 +36,13 @@ class ModesFragment : Fragment() {
 
         setupModesRW()
         setupOwnGameFab()
-        mainNavController = view.findNavController()
+        mainNavController = (activity as MainActivity).mainNavController
     }
 
     private fun setupOwnGameFab() {
         binding?.btnOwnGame?.setOnClickListener {
             mainNavController.navigate(
-                R.id.action_modesFragment_to_descriptionFragment,
+                R.id.action_mainFragment_to_gameFragment,
                 bundleOf(Pair(
                     DescriptionFragment.BUNDLE_MODE_KEY,
                     GameMode.values().indexOf(GameMode.OwnGame)))
@@ -85,10 +85,7 @@ class ModesFragment : Fragment() {
 
     private fun getModes(): Array<GameModeUI> {
         val onClick: (Int) -> Unit = {
-            mainNavController.navigate(
-                R.id.action_modesFragment_to_descriptionFragment,
-                bundleOf(Pair(DescriptionFragment.BUNDLE_MODE_KEY, it))
-            )
+            mainNavController.navigate(R.id.action_mainFragment_to_gameFragment)
         }
         return arrayOf(
             GameModeUI(

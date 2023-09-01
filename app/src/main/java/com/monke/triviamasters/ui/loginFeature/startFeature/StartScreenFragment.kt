@@ -1,4 +1,4 @@
-package com.monke.triviamasters.ui.startFeature
+package com.monke.triviamasters.ui.loginFeature.startFeature
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -7,8 +7,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.NavHostFragment
 import com.monke.triviamasters.R
 import com.monke.triviamasters.databinding.FragmentStartBinding
+import com.monke.triviamasters.ui.loginFeature.LoginFragment
 
 
 class StartScreenFragment : Fragment() {
@@ -28,7 +31,7 @@ class StartScreenFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        navController = Navigation.findNavController(view)
+        navController = view.findNavController()
 
         binding?.btnSignIn?.setOnClickListener {
             navController.navigate(R.id.action_startScreenFragment_to_signInFragment)
@@ -37,7 +40,6 @@ class StartScreenFragment : Fragment() {
         binding?.btnSignUp?.setOnClickListener {
             navController.navigate(R.id.action_startScreenFragment_to_emailFragment)
         }
-
 
         binding?.btnContinue?.setOnClickListener {
             navController.navigate(R.id.action_startScreenFragment_to_createPlayerFragment)

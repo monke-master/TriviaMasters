@@ -48,16 +48,6 @@ class MainFragment : Fragment() {
             val navController = (navHostFragment as NavHostFragment).navController
             binding?.bottomNavigationView?.setupWithNavController(navController)
 
-            navController.addOnDestinationChangedListener { controller, destination, bundle ->
-                if (destination.id in mainDestinations) {
-                    binding?.bottomNavigationView?.visibility = View.VISIBLE
-                    binding?.toolbar?.visibility = View.VISIBLE
-                } else {
-                    binding?.bottomNavigationView?.visibility = View.GONE
-                    binding?.toolbar?.visibility = View.GONE
-                }
-
-            }
         }
 
     }
