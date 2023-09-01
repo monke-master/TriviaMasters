@@ -1,4 +1,4 @@
-package com.monke.triviamasters.ui.modesFeature
+package com.monke.triviamasters.ui.mainScreenFeature.modesFeature
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -7,13 +7,13 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.os.bundleOf
 import androidx.navigation.NavController
-import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.monke.triviamasters.MainActivity
 import com.monke.triviamasters.R
 import com.monke.triviamasters.databinding.FragmentModesBinding
 import com.monke.triviamasters.domain.GameMode
-import com.monke.triviamasters.ui.questionFeature.DescriptionFragment
+import com.monke.triviamasters.ui.gameFeature.questionFeature.DescriptionFragment
+import com.monke.triviamasters.ui.modesFeature.ModesRWAdapter
 import com.monke.triviamasters.ui.recyclerViewUtils.VerticalSpaceItemDecoration
 import com.monke.triviamasters.ui.uiModels.GameModeUI
 

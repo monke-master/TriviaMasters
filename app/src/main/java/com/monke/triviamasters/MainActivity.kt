@@ -11,6 +11,7 @@ class MainActivity : AppCompatActivity() {
 
     lateinit var mainNavController: NavController
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)

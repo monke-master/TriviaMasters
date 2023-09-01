@@ -1,4 +1,4 @@
-package com.monke.triviamasters.ui.questionFeature
+package com.monke.triviamasters.ui.gameFeature.questionFeature
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment

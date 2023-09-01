@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/modesFragment"
-        android:name="com.monke.triviamasters.ui.modesFeature.ModesFragment"
+        android:name="com.monke.triviamasters.ui.mainScreenFeature.modesFeature.ModesFragment"
         android:label="fragment_modes"
         tools:layout="@layout/fragment_modes" />
     <fragment
