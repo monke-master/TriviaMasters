@@ -1,4 +1,4 @@
-package com.monke.triviamasters.ui.signIn
+package com.monke.triviamasters.ui.loginFeature.signIn
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
