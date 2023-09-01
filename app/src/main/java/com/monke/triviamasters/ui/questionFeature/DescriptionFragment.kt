@@ -5,7 +5,10 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.NavController
+import androidx.navigation.Navigation
 import androidx.navigation.findNavController
+import androidx.navigation.ui.setupWithNavController
 import com.monke.triviamasters.R
 import com.monke.triviamasters.databinding.FragmentDescriptionBinding
 import com.monke.triviamasters.domain.GameMode
@@ -16,6 +19,8 @@ class DescriptionFragment : Fragment() {
 
     private lateinit var gameMode: GameMode
     private var binding: FragmentDescriptionBinding? = null
+
+    private lateinit var navController: NavController
 
     companion object {
         const val BUNDLE_MODE_KEY = "mode index"
@@ -35,7 +40,6 @@ class DescriptionFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
         binding = FragmentDescriptionBinding.inflate(layoutInflater, container, false)
 
         return binding?.root
@@ -46,12 +50,20 @@ class DescriptionFragment : Fragment() {
         savedInstanceState: Bundle?
     ) {
         super.onViewCreated(view, savedInstanceState)
+        navController = view.findNavController()
 
-        binding?.toolbar?.title = GameModeUI.getTitle(gameMode, requireContext())
         binding?.txtDescription?.text = GameModeUI.getDescription(gameMode, requireContext())
         setupNextButton()
+        setupToolbar()
+
     }
 
+    private fun setupToolbar() {
+        binding?.toolbar?.setNavigationOnClickListener {
+            navController.popBackStack()
+        }
+        binding?.toolbar?.title = GameModeUI.getTitle(gameMode, requireContext())
+    }
 
     private fun setupNextButton() {
         binding?.btnStart?.setOnClickListener { view ->

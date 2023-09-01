@@ -1,5 +1,6 @@
 package com.monke.triviamasters.ui.mainScreenFeature
 
+import android.opengl.Visibility
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -7,7 +8,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.NavController
 import androidx.navigation.NavHost
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.monke.triviamasters.R
 import com.monke.triviamasters.databinding.FragmentMainBinding
@@ -38,10 +41,22 @@ class MainFragment : Fragment() {
 
         val navHostFragment = childFragmentManager.findFragmentById(R.id.fragment_container)
 
-        if (navHostFragment != null)
-            binding?.bottomNavigationView?.setupWithNavController(
-                (navHostFragment as NavHostFragment).navController
-            )
+        if (navHostFragment != null) {
+            val navController = (navHostFragment as NavHostFragment).navController
+            binding?.bottomNavigationView?.setupWithNavController(navController)
+
+            navController.addOnDestinationChangedListener { controller, destination, bundle ->
+                if (destination.id == R.id.mainFragment) {
+                    binding?.bottomNavigationView?.visibility = View.GONE
+                    binding?.toolbar?.visibility = View.GONE
+                } else {
+                    binding?.bottomNavigationView?.visibility = View.VISIBLE
+                    binding?.toolbar?.visibility = View.VISIBLE
+                }
+
+            }
+        }
+
     }
 
 
@@ -49,7 +64,5 @@ class MainFragment : Fragment() {
         super.onDestroy()
         binding = null
     }
-
-
 
 }
