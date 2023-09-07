@@ -1,5 +1,6 @@
 package com.monke.triviamasters.ui.signUpFeature
 
+import android.content.DialogInterface
 import android.opengl.Visibility
 import android.os.Bundle
 import android.text.Editable
@@ -27,7 +28,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 
-class EmailFragment : Fragment() {
+class EmailFragment : Fragment(), DialogInterface.OnDismissListener {
 
     @Inject
     lateinit var factory: EmailViewModel.Factory
@@ -54,6 +55,8 @@ class EmailFragment : Fragment() {
         setupEmailEditText()
     }
 
+
+
     private fun setupNextButton() {
         viewLifecycleOwner.lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
@@ -65,11 +68,7 @@ class EmailFragment : Fragment() {
         }
         binding?.btnNext?.setOnClickListener {
             viewModel.saveEmail()
-            showConfirmationDialog(
-                onDismiss = {
-                    navController.navigate(R.id.action_emailFragment_to_passwordFragment)
-                }
-            )
+            showConfirmationDialog()
         }
     }
 
@@ -89,25 +88,19 @@ class EmailFragment : Fragment() {
     }
 
 
-    private fun showConfirmationDialog(onDismiss: () -> Unit) {
+    private fun showConfirmationDialog() {
         val dialog = ConfirmEmailDialog()
         dialog.show(childFragmentManager, "")
-        viewLifecycleOwner.lifecycleScope.launch {
-            repeatOnLifecycle(Lifecycle.State.STARTED) {
-                viewModel.emailConfirmed.collect { isConfirmed ->
-                    if (isConfirmed) {
-                        dialog.dismiss()
-                        onDismiss()
-                    }
-                }
-            }
-        }
-
     }
+
 
     override fun onDestroy() {
         super.onDestroy()
         binding = null
+    }
+
+    override fun onDismiss(p0: DialogInterface?) {
+        navController.navigate(R.id.action_emailFragment_to_passwordFragment)
     }
 
 }

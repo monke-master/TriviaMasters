@@ -42,6 +42,11 @@ class EmailViewModel(
         }
     }
 
+    override fun onCleared() {
+        super.onCleared()
+        Log.d("CreatePlayerViewModel", "is cleared")
+    }
+
     class Factory @Inject constructor(
         private val saveEmailUseCase: SaveEmailUseCase,
         private val sendConfirmationLetterUseCase: SendConfirmationLetterUseCase,

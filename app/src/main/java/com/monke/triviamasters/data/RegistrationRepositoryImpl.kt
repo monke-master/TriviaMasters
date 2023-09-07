@@ -29,9 +29,10 @@ class RegistrationRepositoryImpl @Inject constructor(): RegistrationRepository {
     }
 
     override suspend fun sendConfirmationLetter(): Result {
+        emailConfirmed.value = false
         Log.d("RegistrationRepository", "email has been sent")
         withContext(Dispatchers.IO) {
-            delay(2000)
+            delay(5000)
             emailConfirmed.value = true
         }
 

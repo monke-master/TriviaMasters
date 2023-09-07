@@ -16,6 +16,10 @@ class CreatePlayerViewModel(
     private val _playerUsername = MutableStateFlow("")
     val playerUsername = _playerUsername.asStateFlow()
 
+    init {
+        Log.d("CreatePlayerViewModel", "init block")
+    }
+
     fun savePlayer() {
         createPlayerUseCase.execute(
             username = _playerUsername.value,
