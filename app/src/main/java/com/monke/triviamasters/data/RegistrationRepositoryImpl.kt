@@ -41,6 +41,7 @@ class RegistrationRepositoryImpl @Inject constructor(): RegistrationRepository {
 
     override fun savePassword(password: String?) {
         this.password = password
+        Log.d("RegistrationRepository", "password saved $password")
     }
 
     override fun getConfirmationStatus(): StateFlow<Boolean> = emailConfirmed

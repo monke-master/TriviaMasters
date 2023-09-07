@@ -44,7 +44,7 @@ class EmailViewModel(
 
     override fun onCleared() {
         super.onCleared()
-        Log.d("CreatePlayerViewModel", "is cleared")
+        Log.d("EmailViewModel", "is cleared")
     }
 
     class Factory @Inject constructor(
