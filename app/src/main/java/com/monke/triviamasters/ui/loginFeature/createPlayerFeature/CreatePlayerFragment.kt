@@ -56,29 +56,15 @@ class CreatePlayerFragment : Fragment() {
     private fun setupUsernameEditText() {
         binding?.editTextUsername?.setText( viewModel.playerUsername.value)
         binding?.editTextUsername?.addTextChangedListener(object : TextWatcher {
-            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
 
-            }
-
-            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-
-            }
+            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
 
             override fun afterTextChanged(text: Editable?) {
-
                 viewModel.setUsername(text?.toString() ?: "")
-
                 binding?.btnSignIn?.isEnabled = text?.toString()?.isNotEmpty() ?: false
             }
-
         })
-        binding?.editTextUsername?.setOnFocusChangeListener { _, hasFocus ->
-            if (!hasFocus) {
-                binding?.editTextUsername?.let {
-
-                }
-            }
-        }
     }
 
     private fun setupSignInButton() {

@@ -9,7 +9,7 @@ import kotlinx.coroutines.flow.asStateFlow
 import java.util.Calendar
 import javax.inject.Inject
 
-class CreatePlayerViewModel @Inject constructor(
+class CreatePlayerViewModel(
     private val createPlayerUseCase: CreatePlayerUseCase
 ): ViewModel() {
 

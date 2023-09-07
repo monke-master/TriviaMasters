@@ -36,9 +36,10 @@
     <string name="fully_random_description">In this mode you have to answer to random number of random questions from random categories. Sounds randomly!</string>
     <string name="extra_hard_description">In this mode you have to answer the hardest questions. Get ready!</string>
     <string name="own_game_description">Customize the game as you wish!</string>
+    <string name="waiting_for_confirmation">Waiting for confirmation...</string>
+    <string name="cancel">Cancel</string>
 
     <string name="mock_string">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua </string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+
 
 </resources>
