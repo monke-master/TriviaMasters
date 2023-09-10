@@ -5,7 +5,7 @@ import java.lang.Exception
 sealed class Result {
 
     data class Success(
-        val body: Any?
+        val body: Any? = null
     ): Result()
 
     data class Failure(

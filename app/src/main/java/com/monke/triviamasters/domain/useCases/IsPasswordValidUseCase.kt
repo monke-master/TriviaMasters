@@ -4,8 +4,8 @@ import javax.inject.Inject
 
 class IsPasswordValidUseCase  @Inject constructor() {
 
-    fun execute(password: String, repeatedPassword: String): Boolean {
-        return password.isNotEmpty() && repeatedPassword.isNotEmpty() && (password == repeatedPassword)
+    fun execute(password: String): Boolean {
+        return password.isNotEmpty()
     }
 
 }

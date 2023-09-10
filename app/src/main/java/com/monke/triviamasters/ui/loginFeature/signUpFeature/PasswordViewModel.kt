@@ -27,21 +27,19 @@ class PasswordViewModel @Inject constructor(
         Log.d("PasswordViewModel", "init block")
     }
 
-
     fun setPassword(password: String) {
         _password.value = password
-        _isPasswordValid.value = isPasswordValidUseCase.execute(
-            password = password,
-            repeatedPassword = _repeatedPassword.value
-        )
+        _isPasswordValid.value =
+            isPasswordValidUseCase.execute(_password.value) &&
+            _repeatedPassword.value == _password.value
+
     }
 
     fun setRepeatedPassword(repeatedPassword: String) {
         _repeatedPassword.value = repeatedPassword
-        _isPasswordValid.value = isPasswordValidUseCase.execute(
-            password = _password.value,
-            repeatedPassword = _repeatedPassword.value
-        )
+        _isPasswordValid.value =
+            isPasswordValidUseCase.execute(_password.value) &&
+            repeatedPassword == _password.value
     }
 
     fun savePassword() {

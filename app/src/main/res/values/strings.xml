@@ -38,6 +38,7 @@
     <string name="own_game_description">Customize the game as you wish!</string>
     <string name="waiting_for_confirmation">Waiting for confirmation...</string>
     <string name="cancel">Cancel</string>
+    <string name="incorrect_password">Incorrect password</string>
 
     <string name="mock_string">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua </string>
 
