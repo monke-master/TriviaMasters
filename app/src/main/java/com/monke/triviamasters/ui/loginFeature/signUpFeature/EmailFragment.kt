@@ -90,7 +90,7 @@ class EmailFragment : Fragment(), DialogInterface.OnDismissListener {
 
     private fun showConfirmationDialog() {
         val dialog = ConfirmEmailDialog()
-        dialog.show(childFragmentManager, "")
+        dialog.show(childFragmentManager, dialog.tag)
     }
 
 

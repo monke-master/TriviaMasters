@@ -18,6 +18,7 @@ import com.monke.triviamasters.MainActivity
 import com.monke.triviamasters.R
 import com.monke.triviamasters.databinding.FragmentSignInBinding
 import com.monke.triviamasters.domain.exceptions.IncorrectPasswordException
+import com.monke.triviamasters.ui.components.LoadingDialog
 import com.monke.triviamasters.ui.loginFeature.LoginFragment
 import com.monke.triviamasters.ui.uiModels.UiState
 import kotlinx.coroutines.flow.collect
@@ -54,10 +55,12 @@ class SignInFragment : Fragment() {
         setupEmailEditText()
         setupSignInButton()
 
+        // Подписывается на изменение состояния интерфейса
         viewLifecycleOwner.lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.uiState.collect { state ->
                     when (state) {
+                        // В случае ошибки показывает toast
                         is UiState.Error -> {
                             val message = when(state.exception) {
                                 is IncorrectPasswordException ->
@@ -66,17 +69,34 @@ class SignInFragment : Fragment() {
                             }
                             Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
                         }
+                        // В случае загрузки показывает диалог с прогрессом
                         UiState.Loading -> {
+                            showLoadingDialog()
                         }
+                        // В случае успеха переходит на следующий фрагмет
                         is UiState.Success -> {
                             navController.navigate(R.id.action_loginFragment_to_mainFragment)
                         }
-                        else -> {}
+                        // При отсутствующем состоянии ничего не делает
+                        null -> {}
                     }
                 }
             }
         }
 
+    }
+
+    private fun showLoadingDialog() {
+        val dialog = LoadingDialog()
+        dialog.show(parentFragmentManager, dialog.tag)
+        viewLifecycleOwner.lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.uiState.collect { state ->
+                    if (state !is UiState.Loading)
+                        dialog.dismiss()
+                }
+            }
+        }
     }
 
     private fun setupPasswordEditText() {
