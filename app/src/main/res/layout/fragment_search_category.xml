@@ -19,7 +19,7 @@
         app:title="@string/search_categories" />
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/edit_text_category"
+        android:id="@+id/edit_text_category_layout"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -33,6 +33,7 @@
 
         <com.google.android.material.textfield.TextInputEditText
 
+            android:id="@+id/edit_text_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/category_example" />
@@ -46,9 +47,9 @@
         android:layout_marginEnd="8dp"
         android:layout_weight="1"
         android:text="@string/done"
-        app:layout_constraintBottom_toBottomOf="@+id/edit_text_category"
+        app:layout_constraintBottom_toBottomOf="@+id/edit_text_category_layout"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/edit_text_category" />
+        app:layout_constraintTop_toTopOf="@+id/edit_text_category_layout" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_view_categories"
@@ -59,7 +60,7 @@
         android:layout_marginEnd="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edit_text_category"
+        app:layout_constraintTop_toBottomOf="@+id/edit_text_category_layout"
         tools:itemCount="40"
         tools:listitem="@layout/item_category" />
 

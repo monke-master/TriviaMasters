@@ -17,6 +17,8 @@ class SearchCategoryViewModel (
     private val _categories = MutableStateFlow(getCategoriesUseCase.execute())
     val categories = _categories.asStateFlow()
 
+    private val _selectedCategories = ArrayList<Category>()
+
     fun searchCategory(categoryTitle: String) {
         _categories.value = searchCategoriesUseCase.execute(categoryTitle)
     }

@@ -1,6 +1,8 @@
 package com.monke.triviamasters.ui.gameFeature.searchCategoryFeature
 
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -40,6 +42,20 @@ class SearchCategoryFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         setupCategoriesRecyclerView()
+        setupCategoryTitleEditText()
+    }
+
+    private fun setupCategoryTitleEditText() {
+        val titleEditText = binding?.editTextTitle
+        titleEditText?.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
+
+            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
+
+            override fun afterTextChanged(text: Editable?) {
+                text?.let { viewModel.searchCategory(it.toString()) }
+            }
+        })
 
     }
 
