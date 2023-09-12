@@ -1,9 +1,9 @@
 package com.monke.triviamasters.domain.models
 
 data class GameSettings(
-    private val gameMode: GameMode,
-    private val selectedCategories: List<Category>? = null,
-    private val valueMin: Int? = null,
-    private val valueMax: Int? = null,
-    private val questionsNumber: Int? = null
+    val gameMode: GameMode,
+    val selectedCategories: List<Category>? = null,
+    val valueMin: Int? = null,
+    val valueMax: Int? = null,
+    val questionsNumber: Int? = null
 )

@@ -12,16 +12,15 @@ import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.setupWithNavController
+import com.monke.triviamasters.App
 import com.monke.triviamasters.R
 import com.monke.triviamasters.databinding.FragmentMainBinding
+import com.monke.triviamasters.di.components.MainComponent
 
 class MainFragment : Fragment() {
 
     private var binding: FragmentMainBinding? = null
-    private val mainDestinations = listOf(
-        R.id.modesFragment,
-        R.id.profileFragment
-    )
+    lateinit var mainComponent: MainComponent
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -33,6 +32,7 @@ class MainFragment : Fragment() {
             container,
             false
         )
+        mainComponent = (activity?.application as App).appComponent.mainComponent().create()
         return binding?.root
     }
 
@@ -47,7 +47,6 @@ class MainFragment : Fragment() {
         if (navHostFragment != null) {
             val navController = (navHostFragment as NavHostFragment).navController
             binding?.bottomNavigationView?.setupWithNavController(navController)
-
         }
 
     }

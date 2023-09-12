@@ -8,8 +8,6 @@ import android.view.ViewGroup
 import com.monke.triviamasters.App
 import com.monke.triviamasters.R
 import com.monke.triviamasters.di.components.GameComponent
-import com.monke.triviamasters.domain.models.GameMode
-import com.monke.triviamasters.ui.gameFeature.questionFeature.ModeDescriptionFragment
 
 
 class GameFragment : Fragment() {

@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    tools:context=".ui.gameFeature.questionFeature.ModeDescriptionFragment">
+    tools:context=".ui.gameFeature.descriptionFeature.ModeDescriptionFragment">
 
     <com.google.android.material.appbar.MaterialToolbar
         android:id="@+id/toolbar"

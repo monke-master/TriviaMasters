@@ -8,8 +8,7 @@ import com.monke.triviamasters.domain.models.GameMode
 data class GameModeUI(
     val mode: GameMode,
     val title: String,
-    val onClick: (index: Int) -> Unit,
-    val index: Int
+    val onClick: (gameMode: GameMode) -> Unit,
 ) {
 
     companion object {

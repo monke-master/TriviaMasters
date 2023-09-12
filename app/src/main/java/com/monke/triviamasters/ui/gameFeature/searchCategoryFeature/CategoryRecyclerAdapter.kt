@@ -24,8 +24,12 @@ class CategoryRecyclerAdapter: RecyclerView.Adapter<CategoryRecyclerAdapter.Cate
         }
 
     class CategoryViewHolder(
-        binding: ItemCategoryBinding
+        private val binding: ItemCategoryBinding
     ) : RecyclerView.ViewHolder(binding.root) {
+
+        fun bind(category: Category) {
+            binding.textTitle.text = category.title
+        }
 
     }
 
@@ -37,11 +41,9 @@ class CategoryRecyclerAdapter: RecyclerView.Adapter<CategoryRecyclerAdapter.Cate
         return CategoryViewHolder(binding)
     }
 
-    override fun getItemCount(): Int {
-        TODO("Not yet implemented")
-    }
+    override fun getItemCount(): Int = categoriesList.size
 
     override fun onBindViewHolder(holder: CategoryViewHolder, position: Int) {
-        TODO("Not yet implemented")
+        holder.bind(categoriesList[position])
     }
 }

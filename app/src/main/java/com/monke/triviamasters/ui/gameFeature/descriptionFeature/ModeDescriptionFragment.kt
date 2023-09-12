@@ -1,16 +1,19 @@
-package com.monke.triviamasters.ui.gameFeature.questionFeature
+package com.monke.triviamasters.ui.gameFeature.descriptionFeature
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.viewModels
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import com.monke.triviamasters.R
 import com.monke.triviamasters.databinding.FragmentModeDescriptionBinding
 import com.monke.triviamasters.domain.models.GameMode
+import com.monke.triviamasters.ui.gameFeature.GameFragment
 import com.monke.triviamasters.ui.uiModels.GameModeUI
+import javax.inject.Inject
 
 
 class ModeDescriptionFragment : Fragment() {
@@ -20,6 +23,10 @@ class ModeDescriptionFragment : Fragment() {
 
     private lateinit var navController: NavController
 
+    @Inject
+    lateinit var factory: ModeDescriptionViewModel.Factory
+    private val viewModel: ModeDescriptionViewModel by viewModels { factory }
+
     companion object {
         const val BUNDLE_GAME_MODE_KEY = "mode index"
     }
@@ -27,7 +34,9 @@ class ModeDescriptionFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        //gameMode = GameMode.OwnGame
+        (parentFragment?.parentFragment as GameFragment).gameComponent.inject(this)
+
+        gameMode = viewModel.gameSettings.gameMode
 
     }
 

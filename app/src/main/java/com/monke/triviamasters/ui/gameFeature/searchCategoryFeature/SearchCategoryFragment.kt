@@ -61,6 +61,19 @@ class SearchCategoryFragment : Fragment() {
             }
         }
 
+        // Добавление декораторов
+//        var dividerItemDecoration = DividerItemDecoration(
+//            requireContext(),
+//            DividerItemDecoration.VERTICAL
+//        )
+//        dividerItemDecoration.setDrawable(
+//            resources.getDrawable(
+//                R.drawable.shape_divider,
+//                requireContext().theme
+//            )
+//        )
+//        recyclerView?.addItemDecoration(dividerItemDecoration)
+
     }
 
 
