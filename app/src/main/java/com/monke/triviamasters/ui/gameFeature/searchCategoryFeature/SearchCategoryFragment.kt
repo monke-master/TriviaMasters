@@ -7,16 +7,17 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.FragmentFactory
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.monke.triviamasters.R
 import com.monke.triviamasters.databinding.FragmentSearchCategoryBinding
 import com.monke.triviamasters.ui.gameFeature.GameFragment
-import kotlinx.coroutines.flow.collect
+import com.monke.triviamasters.ui.recyclerViewUtils.VerticalSpaceItemDecoration
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -60,8 +61,14 @@ class SearchCategoryFragment : Fragment() {
     }
 
     private fun setupCategoriesRecyclerView() {
+        // Инициализация адаптера
         val recyclerView = binding?.recyclerViewCategories
-        val adapter = CategoryRecyclerAdapter()
+        val adapter = CategoryRecyclerAdapter(onCategoryClicked = { categoryUi ->
+            viewModel.setCategorySelected(
+                categoryUi = categoryUi,
+                isSelected = !categoryUi.isSelected
+            )
+        })
         recyclerView?.adapter = adapter
         recyclerView?.layoutManager = LinearLayoutManager(
             requireContext(),
@@ -69,6 +76,27 @@ class SearchCategoryFragment : Fragment() {
             false
         )
 
+        // Добавление декораторов
+        val dividerItemDecoration = DividerItemDecoration(
+            requireContext(),
+            DividerItemDecoration.VERTICAL
+        )
+        ContextCompat.getDrawable(
+            requireContext(),
+            R.drawable.shape_divider
+        )?.let {
+            dividerItemDecoration.setDrawable(it)
+        }
+        recyclerView?.addItemDecoration(dividerItemDecoration)
+
+        // Добавление отступов между элементами
+        val verticalSpaceItemDecoration = VerticalSpaceItemDecoration(
+            verticalPadding = resources.getDimensionPixelSize(R.dimen.defaultListPadding),
+            horizontalPadding = resources.getDimensionPixelSize(R.dimen.defaultHorizontalMargin)
+        )
+        recyclerView?.addItemDecoration(verticalSpaceItemDecoration)
+
+        // Подписывается на изменение списка найденных категорий
         viewLifecycleOwner.lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.categories.collect { categories ->
@@ -76,22 +104,6 @@ class SearchCategoryFragment : Fragment() {
                 }
             }
         }
-
-        // Добавление декораторов
-//        var dividerItemDecoration = DividerItemDecoration(
-//            requireContext(),
-//            DividerItemDecoration.VERTICAL
-//        )
-//        dividerItemDecoration.setDrawable(
-//            resources.getDrawable(
-//                R.drawable.shape_divider,
-//                requireContext().theme
-//            )
-//        )
-//        recyclerView?.addItemDecoration(dividerItemDecoration)
-
     }
-
-
 
 }

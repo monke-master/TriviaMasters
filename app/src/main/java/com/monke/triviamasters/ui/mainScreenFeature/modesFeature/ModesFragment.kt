@@ -63,11 +63,9 @@ class ModesFragment : Fragment() {
         )
 
         // Добавление отступов между элементами
-        val verticalPadding = resources.getDimensionPixelSize(R.dimen.defaultListPadding)
-        val horizontalPadding = resources.getDimensionPixelSize(R.dimen.defaultHorizontalMargin)
-        var verticalSpaceItemDecoration = VerticalSpaceItemDecoration(
-            verticalPadding = verticalPadding,
-            horizontalPadding = horizontalPadding
+        val verticalSpaceItemDecoration = VerticalSpaceItemDecoration(
+            verticalPadding = resources.getDimensionPixelSize(R.dimen.defaultListPadding),
+            horizontalPadding = resources.getDimensionPixelSize(R.dimen.defaultHorizontalMargin)
         )
         recyclerView?.addItemDecoration(verticalSpaceItemDecoration)
     }
