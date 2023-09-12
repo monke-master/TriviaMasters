@@ -1,4 +1,4 @@
-package com.monke.triviamasters.domain.useCases
+package com.monke.triviamasters.domain.useCases.user
 
 import com.monke.triviamasters.domain.exceptions.IncorrectPasswordException
 import com.monke.triviamasters.domain.models.Result

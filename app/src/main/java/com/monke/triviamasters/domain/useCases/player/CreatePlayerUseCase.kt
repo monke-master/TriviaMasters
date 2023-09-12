@@ -1,4 +1,4 @@
-package com.monke.triviamasters.domain.useCases
+package com.monke.triviamasters.domain.useCases.player
 
 import com.monke.triviamasters.di.LoginFragmentScope
 import com.monke.triviamasters.domain.models.Player

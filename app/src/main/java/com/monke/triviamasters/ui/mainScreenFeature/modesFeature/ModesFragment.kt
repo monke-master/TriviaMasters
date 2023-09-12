@@ -12,8 +12,8 @@ import com.monke.triviamasters.MainActivity
 import com.monke.triviamasters.R
 import com.monke.triviamasters.databinding.FragmentModesBinding
 import com.monke.triviamasters.domain.models.GameMode
-import com.monke.triviamasters.ui.gameFeature.questionFeature.DescriptionFragment
-import com.monke.triviamasters.ui.modesFeature.ModesRWAdapter
+import com.monke.triviamasters.ui.gameFeature.questionFeature.ModeDescriptionFragment
+import com.monke.triviamasters.ui.modesFeature.ModesRecyclerAdapter
 import com.monke.triviamasters.ui.recyclerViewUtils.VerticalSpaceItemDecoration
 import com.monke.triviamasters.ui.uiModels.GameModeUI
 
@@ -44,7 +44,7 @@ class ModesFragment : Fragment() {
             mainNavController.navigate(
                 R.id.action_mainFragment_to_gameFragment,
                 bundleOf(Pair(
-                    DescriptionFragment.BUNDLE_MODE_KEY,
+                    ModeDescriptionFragment.BUNDLE_GAME_MODE_KEY,
                     GameMode.values().indexOf(GameMode.OwnGame)))
             )
         }
@@ -52,7 +52,7 @@ class ModesFragment : Fragment() {
 
     // Настройка recycler view с режимами игры
     private fun setupModesRW() {
-        val adapter = ModesRWAdapter(getModes())
+        val adapter = ModesRecyclerAdapter(getModes())
         val recyclerView = binding?.rwModes
         recyclerView?.adapter = adapter
         recyclerView?.layoutManager = LinearLayoutManager(
@@ -85,7 +85,10 @@ class ModesFragment : Fragment() {
 
     private fun getModes(): Array<GameModeUI> {
         val onClick: (Int) -> Unit = {
-            mainNavController.navigate(R.id.action_mainFragment_to_gameFragment)
+            mainNavController.navigate(
+                R.id.action_mainFragment_to_gameFragment,
+                bundleOf(Pair(ModeDescriptionFragment.BUNDLE_GAME_MODE_KEY, it))
+            )
         }
         return arrayOf(
             GameModeUI(

@@ -30,7 +30,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:navigationIcon="@drawable/ic_back"
-        app:title="Lorem ipsum" />
+        app:title="@string/own_game" />
 
     <TextView
         android:id="@+id/hdr_categories"

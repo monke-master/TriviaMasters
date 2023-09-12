@@ -1,4 +1,4 @@
-package com.monke.triviamasters.domain.useCases
+package com.monke.triviamasters.domain.useCases.password
 
 import com.monke.triviamasters.domain.repositories.RegistrationRepository
 import javax.inject.Inject

@@ -3,7 +3,7 @@ package com.monke.triviamasters.ui.loginFeature.createPlayerFeature
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.monke.triviamasters.domain.useCases.CreatePlayerUseCase
+import com.monke.triviamasters.domain.useCases.player.CreatePlayerUseCase
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import java.util.Calendar

@@ -1,4 +1,4 @@
-package com.monke.triviamasters.domain.useCases
+package com.monke.triviamasters.domain.useCases.email
 
 import javax.inject.Inject
 

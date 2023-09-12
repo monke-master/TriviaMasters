@@ -7,8 +7,8 @@
 
     <fragment
         android:id="@+id/descriptionFragment"
-        android:name="com.monke.triviamasters.ui.gameFeature.questionFeature.DescriptionFragment"
-        tools:layout="@layout/fragment_description"
+        android:name="com.monke.triviamasters.ui.gameFeature.questionFeature.ModeDescriptionFragment"
+        tools:layout="@layout/fragment_mode_description"
         android:label="fragment_description">
         <action
             android:id="@+id/action_descriptionFragment_to_searchCategoryFragment"
@@ -47,7 +47,7 @@
         android:label="fragment_question" />
     <fragment
         android:id="@+id/searchCategoryFragment"
-        android:name="com.monke.triviamasters.ui.searchCategoryFeature.SearchCategoryFragment"
+        android:name="com.monke.triviamasters.ui.gameFeature.searchCategoryFeature.SearchCategoryFragment"
         tools:layout="@layout/fragment_search_category"
         android:label="fragment_search_category" />
 </navigation>

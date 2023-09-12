@@ -7,9 +7,9 @@ import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.monke.triviamasters.databinding.ItemModeBinding
 import com.monke.triviamasters.ui.uiModels.GameModeUI
 
-class ModesRWAdapter(
+class ModesRecyclerAdapter(
     private val modesList: Array<GameModeUI>
-): RecyclerView.Adapter<ModesRWAdapter.ModesViewHolder>() {
+): RecyclerView.Adapter<ModesRecyclerAdapter.ModesViewHolder>() {
 
     class ModesViewHolder(private val binding: ItemModeBinding) : ViewHolder(binding.root) {
 

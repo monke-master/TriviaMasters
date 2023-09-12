@@ -8,26 +8,27 @@ import android.view.ViewGroup
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import com.monke.triviamasters.R
-import com.monke.triviamasters.databinding.FragmentDescriptionBinding
+import com.monke.triviamasters.databinding.FragmentModeDescriptionBinding
 import com.monke.triviamasters.domain.models.GameMode
 import com.monke.triviamasters.ui.uiModels.GameModeUI
 
 
-class DescriptionFragment : Fragment() {
+class ModeDescriptionFragment : Fragment() {
 
     private lateinit var gameMode: GameMode
-    private var binding: FragmentDescriptionBinding? = null
+    private var binding: FragmentModeDescriptionBinding? = null
 
     private lateinit var navController: NavController
 
     companion object {
-        const val BUNDLE_MODE_KEY = "mode index"
+        const val BUNDLE_GAME_MODE_KEY = "mode index"
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        gameMode = GameMode.OwnGame
+        //gameMode = GameMode.OwnGame
+
     }
 
     override fun onCreateView(
@@ -35,7 +36,7 @@ class DescriptionFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentDescriptionBinding.inflate(layoutInflater, container, false)
+        binding = FragmentModeDescriptionBinding.inflate(layoutInflater, container, false)
 
         return binding?.root
     }

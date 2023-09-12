@@ -3,8 +3,8 @@ package com.monke.triviamasters.ui.loginFeature.signUpFeature
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.monke.triviamasters.domain.useCases.IsPasswordValidUseCase
-import com.monke.triviamasters.domain.useCases.SavePasswordUseCase
+import com.monke.triviamasters.domain.useCases.password.IsPasswordValidUseCase
+import com.monke.triviamasters.domain.useCases.password.SavePasswordUseCase
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import javax.inject.Inject

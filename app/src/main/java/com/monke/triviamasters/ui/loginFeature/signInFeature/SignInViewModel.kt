@@ -4,11 +4,10 @@ import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
-import com.monke.triviamasters.di.LoginFragmentScope
 import com.monke.triviamasters.domain.models.Result
-import com.monke.triviamasters.domain.useCases.IsEmailValidUseCase
-import com.monke.triviamasters.domain.useCases.IsPasswordValidUseCase
-import com.monke.triviamasters.domain.useCases.SignInUseCase
+import com.monke.triviamasters.domain.useCases.email.IsEmailValidUseCase
+import com.monke.triviamasters.domain.useCases.password.IsPasswordValidUseCase
+import com.monke.triviamasters.domain.useCases.user.SignInUseCase
 import com.monke.triviamasters.ui.uiModels.UiState
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow

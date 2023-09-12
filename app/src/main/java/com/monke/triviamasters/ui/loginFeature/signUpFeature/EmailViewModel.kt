@@ -5,14 +5,12 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import com.monke.triviamasters.domain.repositories.RegistrationRepository
-import com.monke.triviamasters.domain.useCases.GetConfirmationStatusUseCase
-import com.monke.triviamasters.domain.useCases.SaveEmailUseCase
-import com.monke.triviamasters.domain.useCases.SendConfirmationLetterUseCase
+import com.monke.triviamasters.domain.useCases.email.GetConfirmationStatusUseCase
+import com.monke.triviamasters.domain.useCases.email.SaveEmailUseCase
+import com.monke.triviamasters.domain.useCases.email.SendConfirmationLetterUseCase
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
-import java.lang.Thread.State
 import javax.inject.Inject
 
 class EmailViewModel(
