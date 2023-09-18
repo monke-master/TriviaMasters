@@ -19,6 +19,7 @@
         <item name="chipBackgroundColor">@color/secondary</item>
         <item name="closeIconTint">@color/onSecondary</item>
         <item name="android:textColor">@color/onSecondary</item>
+        <item name="android:checkable">false</item>
     </style>
 
     <style name="DefaultButton" parent="Widget.MaterialComponents.Button">

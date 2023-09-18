@@ -37,7 +37,7 @@
     </fragment>
     <fragment
         android:id="@+id/ownGameFragment"
-        android:name="com.monke.triviamasters.ui.ownGameFeature.OwnGameFragment"
+        android:name="com.monke.triviamasters.ui.gameFeature.ownGameFeature.OwnGameFragment"
         tools:layout="@layout/fragment_own_game"
         android:label="fragment_own_game" />
     <fragment

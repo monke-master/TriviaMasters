@@ -13,6 +13,7 @@
 
         <item name="toolbarStyle">@style/Toolbar</item>
         <item name="android:textViewStyle">@style/DefaultText</item>
+        <item name="chipStyle">@style/CategoryChip</item>
     </style>
 
     <style name="Theme.TriviaMasters" parent="Base.Theme.TriviaMasters" />

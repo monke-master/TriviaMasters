@@ -29,6 +29,10 @@ class SearchCategoryFragment : Fragment() {
 
     private var binding: FragmentSearchCategoryBinding? = null
 
+
+
+
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -104,6 +108,7 @@ class SearchCategoryFragment : Fragment() {
                 }
             }
         }
+
     }
 
 }
