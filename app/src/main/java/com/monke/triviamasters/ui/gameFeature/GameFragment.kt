@@ -11,6 +11,10 @@ import com.monke.triviamasters.R
 import com.monke.triviamasters.di.components.GameComponent
 
 
+/**
+ * Главный фрагмент игры
+ * @property gameComponent
+ */
 class GameFragment : Fragment() {
 
     lateinit var gameComponent: GameComponent

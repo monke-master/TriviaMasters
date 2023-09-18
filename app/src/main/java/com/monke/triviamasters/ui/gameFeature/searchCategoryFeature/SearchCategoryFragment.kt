@@ -26,6 +26,11 @@ import com.monke.triviamasters.utils.toBundleString
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
+
+/**
+ * Фрагмент с поиском и выбором категорий
+ * возвращает результат через setFragmentResult
+ */
 class SearchCategoryFragment : Fragment() {
 
     @Inject

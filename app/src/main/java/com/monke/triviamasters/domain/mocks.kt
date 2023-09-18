@@ -2,6 +2,7 @@ package com.monke.triviamasters.domain
 
 import com.monke.triviamasters.domain.models.Category
 import com.monke.triviamasters.domain.models.Player
+import com.monke.triviamasters.domain.models.Question
 import com.monke.triviamasters.domain.models.Statistics
 import com.monke.triviamasters.domain.models.User
 import java.util.Calendar
@@ -29,7 +30,7 @@ val mockedCategories =  listOf(
     Category(6, "Computers"),
     Category(7, "USA"),
     Category(8, "Rome"),
-    Category(9, "Ancient Greek"),
+    Category(9, "Ancient Greece"),
     Category(10, "Guitars"),
     Category(11, "Android"),
     Category(12, "Games"),
@@ -37,4 +38,50 @@ val mockedCategories =  listOf(
     Category(14, "Geeks"),
     Category(15, "Wagner"),
     Category(16, "Biber and Dolik"),
+)
+
+val mockedQuestions = listOf(
+    Question(
+        id = 1,
+        title = "Russia's capital",
+        category = Category(2, "Russia"),
+        price = 200,
+        answer = "Moscow"
+    ),
+    Question(
+        id = 2,
+        title = "Russia's second capital",
+        category = Category(2, "Russia"),
+        price = 400,
+        answer = "Saint's Petersburg"
+    ),
+    Question(
+        id = 3,
+        title = "USA capital",
+        category = Category(7, "USA"),
+        price = 100,
+        answer = "Washington"
+    ),
+    Question(
+        id = 4,
+        title = "States amount",
+        category = Category(7, "USA"),
+        price = 500,
+        answer = "50"
+    ),
+    Question(
+        id = 5,
+        title = "First philosopher",
+        category = Category(9, "Ancient Greece"),
+        price = 700,
+        answer = "Phales from Milet"
+    ),
+    Question(
+        id = 6,
+        title = "Place, where spartans have been attacked by Persians",
+        category = Category(9, "Ancient Greece"),
+        price = 600,
+        answer = "Fermopiles"
+    ),
+
 )

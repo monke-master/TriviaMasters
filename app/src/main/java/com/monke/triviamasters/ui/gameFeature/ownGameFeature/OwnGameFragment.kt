@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.core.os.bundleOf
 import androidx.fragment.app.FragmentFactory
 import androidx.fragment.app.setFragmentResultListener
@@ -21,13 +22,19 @@ import com.google.android.material.chip.Chip
 import com.monke.triviamasters.R
 import com.monke.triviamasters.databinding.FragmentOwnGameBinding
 import com.monke.triviamasters.domain.models.Category
+import com.monke.triviamasters.ui.components.LoadingDialog
 import com.monke.triviamasters.ui.gameFeature.GameFragment
 import com.monke.triviamasters.ui.gameFeature.searchCategoryFeature.SearchCategoryFragment
+import com.monke.triviamasters.ui.uiModels.UiState
 import com.monke.triviamasters.utils.fromBundleString
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 
+/**
+ * Фрагмент с подробной настройкой игры
+ */
 class OwnGameFragment : Fragment() {
 
     @Inject
@@ -56,13 +63,48 @@ class OwnGameFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         (parentFragment?.parentFragment as GameFragment).gameComponent.inject(this)
+        collectUiState()
         setupCategoriesChips()
         setupAddCategoryBtn()
         setupMinPriceEditText()
         setupMaxPriceEditText()
         setupQuestionsAmountEditText()
+        setupStartButton()
     }
 
+    private fun collectUiState() {
+        viewLifecycleOwner.lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.uiState.collect { state ->
+                    when (state) {
+                        UiState.Loading -> showLoadingDialog()
+                        is UiState.Error ->
+                            Toast.makeText(
+                                requireContext(),
+                                state.exception.message,
+                                Toast.LENGTH_SHORT).
+                            show()
+                        is UiState.Success -> {}
+                        else -> {}
+                    }
+
+                }
+            }
+        }
+    }
+
+    private fun showLoadingDialog() {
+        val dialog = LoadingDialog()
+        dialog.show(parentFragmentManager, dialog.tag)
+        viewLifecycleOwner.lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.uiState.collect { state ->
+                    if (state !is UiState.Loading)
+                        dialog.dismiss()
+                }
+            }
+        }
+    }
 
     private fun setupCategoriesChips() {
         for (category in viewModel.selectedCategories) {
@@ -147,7 +189,7 @@ class OwnGameFragment : Fragment() {
     private fun setupQuestionsAmountEditText() {
         val editText = binding?.editTextQuestionsAmount
         editText?.setText(viewModel.questionsAmount.toString())
-        binding?.editTextMinPrice?.addTextChangedListener(object : TextWatcher {
+        binding?.editTextQuestionsAmount?.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
 
             override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
@@ -157,6 +199,12 @@ class OwnGameFragment : Fragment() {
                     viewModel.questionsAmount = text.toString().toInt()
             }
         })
+    }
+
+    private fun setupStartButton() {
+        binding?.btnStart?.setOnClickListener {
+            viewModel.createGame()
+        }
     }
 
 
