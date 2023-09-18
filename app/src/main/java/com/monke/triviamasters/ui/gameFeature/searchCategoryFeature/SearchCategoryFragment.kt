@@ -38,7 +38,9 @@ class SearchCategoryFragment : Fragment() {
 
     companion object {
 
+        // Bundle-ключ для ключа запроса результата фрагмента
         const val REQUEST_KEY_BUNDLE = "request_key_bundle"
+        // Bundle-ключ для передачи результата
         const val CATEGORIES_LIST_KEY = "categories_list_key"
 
     }
@@ -124,17 +126,17 @@ class SearchCategoryFragment : Fragment() {
     }
 
     private fun setupDoneButton() {
-        binding?.btnDone?.setOnClickListener {
-            requestKey?.let {
+        binding?.btnDone?.setOnClickListener { btn ->
+            requestKey?.let { key ->
                 setFragmentResult(
-                    requestKey = it,
+                    requestKey = key,
                     result = bundleOf(
                         CATEGORIES_LIST_KEY to
                                 viewModel.selectedCategories().map { it.toBundleString() }
                     )
                 )
             }
-            it.findNavController().popBackStack()
+            btn.findNavController().popBackStack()
         }
     }
 

@@ -3,6 +3,7 @@ package com.monke.triviamasters.ui.gameFeature.ownGameFeature
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.monke.triviamasters.domain.models.Category
+import com.monke.triviamasters.domain.models.QUESTIONS_AMOUNT_HINT
 import javax.inject.Inject
 
 class OwnGameViewModel : ViewModel() {
@@ -12,7 +13,7 @@ class OwnGameViewModel : ViewModel() {
 
     var maxPrice: Int? = null
     var minPrice: Int? = null
-    var questionsAmount: Int? = null
+    var questionsAmount: Int = QUESTIONS_AMOUNT_HINT
 
     init {
         _selectedCategories.add(Category(12, "Kudj Kobain"))

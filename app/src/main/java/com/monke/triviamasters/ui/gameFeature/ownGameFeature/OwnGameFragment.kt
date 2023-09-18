@@ -2,6 +2,8 @@ package com.monke.triviamasters.ui.gameFeature.ownGameFeature
 
 import android.os.Bundle
 import android.support.v4.os.IResultReceiver._Parcel
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.ContextThemeWrapper
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -36,11 +38,10 @@ class OwnGameFragment : Fragment() {
 
     companion object {
 
-        val REQUEST_CATEGORIES_KEY = "own_game_request"
-
+        // Ключ для запроса результата выбора категорий
+        const val REQUEST_CATEGORIES_KEY = "own_game_request"
 
     }
-
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -57,7 +58,11 @@ class OwnGameFragment : Fragment() {
         (parentFragment?.parentFragment as GameFragment).gameComponent.inject(this)
         setupCategoriesChips()
         setupAddCategoryBtn()
+        setupMinPriceEditText()
+        setupMaxPriceEditText()
+        setupQuestionsAmountEditText()
     }
+
 
     private fun setupCategoriesChips() {
         for (category in viewModel.selectedCategories) {
@@ -65,6 +70,7 @@ class OwnGameFragment : Fragment() {
         }
     }
 
+    // Кнопка добавление категории
     private fun setupAddCategoryBtn() {
         binding?.btnAddCategory?.setOnClickListener {
             it.findNavController().navigate(
@@ -72,6 +78,7 @@ class OwnGameFragment : Fragment() {
                 args = bundleOf(
                     SearchCategoryFragment.REQUEST_KEY_BUNDLE to REQUEST_CATEGORIES_KEY)
             )
+            // Обработка результата выбора категории
             setFragmentResultListener(
                 requestKey = REQUEST_CATEGORIES_KEY
             ) { _, result ->
@@ -86,13 +93,14 @@ class OwnGameFragment : Fragment() {
         }
     }
 
+    // Добавление несколько чипов с категориями
     private fun addCategoryChips(categories: List<Category>) {
         for (category in categories) {
             addCategoryChip(category)
         }
     }
 
-
+    // Добавление чипа с категорией
     private fun addCategoryChip(category: Category) {
         val chip = Chip(activity)
         chip.text = category.title
@@ -103,6 +111,53 @@ class OwnGameFragment : Fragment() {
         }
     }
 
+    // Ввод максимальной цены вопроса
+    private fun setupMaxPriceEditText() {
+        val editText = binding?.editTextMaxPrice
+        editText?.setText(viewModel.maxPrice?.toString() ?: "")
+        editText?.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
+
+            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
+
+            override fun afterTextChanged(text: Editable?) {
+                if (!text.isNullOrBlank())
+                    viewModel.maxPrice = text.toString().toInt()
+            }
+        })
+    }
+
+    // Ввод минимальной цены вопроса
+    private fun setupMinPriceEditText() {
+        val editText = binding?.editTextMinPrice
+        editText?.setText(viewModel.minPrice?.toString() ?: "")
+        binding?.editTextMinPrice?.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
+
+            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
+
+            override fun afterTextChanged(text: Editable?) {
+                if (!text.isNullOrBlank())
+                    viewModel.minPrice = text.toString().toInt()
+            }
+        })
+    }
+
+    // Ввод количества вопросов
+    private fun setupQuestionsAmountEditText() {
+        val editText = binding?.editTextQuestionsAmount
+        editText?.setText(viewModel.questionsAmount.toString())
+        binding?.editTextMinPrice?.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
+
+            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
+
+            override fun afterTextChanged(text: Editable?) {
+                if (!text.isNullOrBlank())
+                    viewModel.questionsAmount = text.toString().toInt()
+            }
+        })
+    }
 
 
 }
