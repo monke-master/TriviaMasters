@@ -39,7 +39,24 @@
         android:id="@+id/ownGameFragment"
         android:name="com.monke.triviamasters.ui.gameFeature.ownGameFeature.OwnGameFragment"
         tools:layout="@layout/fragment_own_game"
-        android:label="fragment_own_game" />
+        android:label="fragment_own_game" >
+        <action
+            android:id="@+id/action_ownGameFragment_to_searchCategoryFragment"
+            app:destination="@id/searchCategoryFragment"
+
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+        <action
+            android:id="@+id/action_ownGameFragment_to_questionFragment"
+            app:destination="@id/questionFragment"
+
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim"/>
+    </fragment>
     <fragment
         android:id="@+id/questionFragment"
         android:name="com.monke.triviamasters.ui.questionFeature.QuestionFragment"
@@ -49,5 +66,14 @@
         android:id="@+id/searchCategoryFragment"
         android:name="com.monke.triviamasters.ui.gameFeature.searchCategoryFeature.SearchCategoryFragment"
         tools:layout="@layout/fragment_search_category"
-        android:label="fragment_search_category" />
+        android:label="fragment_search_category" >
+        <action
+            android:id="@+id/action_searchCategoryFragment_to_questionFragment"
+            app:destination="@id/questionFragment"
+
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim"/>
+    </fragment>
 </navigation>

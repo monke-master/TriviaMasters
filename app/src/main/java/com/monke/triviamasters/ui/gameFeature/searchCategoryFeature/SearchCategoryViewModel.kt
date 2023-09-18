@@ -42,6 +42,8 @@ class SearchCategoryViewModel (
         )
     }
 
+    fun selectedCategories(): Collection<Category> = selectedCategories.values
+
     class Factory @Inject constructor(
         private val getCategoriesUseCase: GetCategoriesUseCase,
         private val searchCategoriesUseCase: SearchCategoriesUseCase,

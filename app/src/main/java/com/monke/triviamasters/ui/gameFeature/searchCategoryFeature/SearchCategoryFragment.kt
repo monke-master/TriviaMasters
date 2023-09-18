@@ -8,16 +8,21 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
+import androidx.core.os.bundleOf
+import androidx.fragment.app.setFragmentResult
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.monke.triviamasters.R
 import com.monke.triviamasters.databinding.FragmentSearchCategoryBinding
 import com.monke.triviamasters.ui.gameFeature.GameFragment
+import com.monke.triviamasters.ui.gameFeature.ownGameFeature.OwnGameFragment
 import com.monke.triviamasters.ui.recyclerViewUtils.VerticalSpaceItemDecoration
+import com.monke.triviamasters.utils.toBundleString
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -29,9 +34,14 @@ class SearchCategoryFragment : Fragment() {
 
     private var binding: FragmentSearchCategoryBinding? = null
 
+    private var requestKey: String? = null
 
+    companion object {
 
+        const val REQUEST_KEY_BUNDLE = "request_key_bundle"
+        const val CATEGORIES_LIST_KEY = "categories_list_key"
 
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -40,6 +50,7 @@ class SearchCategoryFragment : Fragment() {
     ): View? {
         binding = FragmentSearchCategoryBinding.inflate(inflater, container, false)
         (parentFragment?.parentFragment as GameFragment).gameComponent.inject(this)
+        requestKey = arguments?.getString(REQUEST_KEY_BUNDLE)
         return binding?.root
     }
 
@@ -48,6 +59,7 @@ class SearchCategoryFragment : Fragment() {
 
         setupCategoriesRecyclerView()
         setupCategoryTitleEditText()
+        setupDoneButton()
     }
 
     private fun setupCategoryTitleEditText() {
@@ -109,6 +121,21 @@ class SearchCategoryFragment : Fragment() {
             }
         }
 
+    }
+
+    private fun setupDoneButton() {
+        binding?.btnDone?.setOnClickListener {
+            requestKey?.let {
+                setFragmentResult(
+                    requestKey = it,
+                    result = bundleOf(
+                        CATEGORIES_LIST_KEY to
+                                viewModel.selectedCategories().map { it.toBundleString() }
+                    )
+                )
+            }
+            it.findNavController().popBackStack()
+        }
     }
 
 }
