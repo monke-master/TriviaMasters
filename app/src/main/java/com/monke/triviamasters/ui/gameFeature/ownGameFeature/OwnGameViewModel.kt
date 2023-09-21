@@ -8,21 +8,28 @@ import com.monke.triviamasters.domain.models.GameMode
 import com.monke.triviamasters.domain.models.GameSettings
 import com.monke.triviamasters.domain.models.QUESTIONS_AMOUNT_DEFAULT
 import com.monke.triviamasters.domain.models.Result
+import com.monke.triviamasters.domain.useCases.category.RemoveSelectedCategoryUseCase
 import com.monke.triviamasters.domain.useCases.game.CreateGameUseCase
+import com.monke.triviamasters.domain.useCases.game.GetGameSettingsUseCase
 import com.monke.triviamasters.domain.useCases.game.SaveGameSettingsUseCase
 import com.monke.triviamasters.ui.uiModels.UiState
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class OwnGameViewModel(
     private val saveGameSettingsUseCase: SaveGameSettingsUseCase,
-    private val createGameUseCase: CreateGameUseCase
+    private val createGameUseCase: CreateGameUseCase,
+    private val getGameSettingsUseCase: GetGameSettingsUseCase,
+    private val removeSelectedCategoryUseCase: RemoveSelectedCategoryUseCase
 ) : ViewModel() {
 
-    private val _selectedCategories = ArrayList<Category>()
-    val selectedCategories: List<Category> = _selectedCategories
+    private val gameSettings = getGameSettingsUseCase.execute()
+
+    private val _selectedCategories = MutableStateFlow<List<Category>?>(null)
+    val selectedCategories = _selectedCategories.asStateFlow()
 
     private val _uiState = MutableStateFlow<UiState?>(null)
     val uiState = _uiState.asStateFlow()
@@ -31,13 +38,20 @@ class OwnGameViewModel(
     var minPrice: Int? = null
     var questionsAmount: Int = QUESTIONS_AMOUNT_DEFAULT
 
-    fun removeCategory(category: Category) {
-        _selectedCategories.remove(category)
+    init {
+        viewModelScope.launch {
+            gameSettings.collect {
+                _selectedCategories.value = it.selectedCategories
+            }
+        }
     }
 
-    fun addCategories(categories: List<Category>) {
-        _selectedCategories.addAll(categories)
+    fun removeCategory(category: Category) {
+        viewModelScope.launch {
+            removeSelectedCategoryUseCase.execute(category)
+        }
     }
+
 
     /**
      * Создание игры с заданными настройками
@@ -47,7 +61,7 @@ class OwnGameViewModel(
         viewModelScope.launch {
             _uiState.value = UiState.Loading
             val gameSettings = GameSettings(
-                selectedCategories = if (_selectedCategories.isEmpty()) null else _selectedCategories,
+                selectedCategories = _selectedCategories.value,
                 gameMode = GameMode.OwnGame,
                 minPrice = minPrice,
                 maxPrice = maxPrice,
@@ -65,13 +79,17 @@ class OwnGameViewModel(
 
     class Factory @Inject constructor(
         private val saveGameSettingsUseCase: SaveGameSettingsUseCase,
-        private val createGameUseCase: CreateGameUseCase
+        private val createGameUseCase: CreateGameUseCase,
+        private val getGameSettingsUseCase: GetGameSettingsUseCase,
+        private val removeSelectedCategoryUseCase: RemoveSelectedCategoryUseCase
     ): ViewModelProvider.Factory {
 
         override fun <T : ViewModel> create(modelClass: Class<T>): T {
             return OwnGameViewModel(
                 saveGameSettingsUseCase = saveGameSettingsUseCase,
-                createGameUseCase = createGameUseCase
+                createGameUseCase = createGameUseCase,
+                getGameSettingsUseCase = getGameSettingsUseCase,
+                removeSelectedCategoryUseCase = removeSelectedCategoryUseCase
             ) as T
         }
 

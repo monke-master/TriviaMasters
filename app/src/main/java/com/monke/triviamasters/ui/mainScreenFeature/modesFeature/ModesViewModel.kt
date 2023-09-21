@@ -2,8 +2,10 @@ package com.monke.triviamasters.ui.mainScreenFeature.modesFeature
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.viewModelScope
 import com.monke.triviamasters.domain.models.GameMode
 import com.monke.triviamasters.domain.useCases.game.SaveGameModeUseCase
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class ModesViewModel(
@@ -11,7 +13,7 @@ class ModesViewModel(
 ): ViewModel() {
 
     fun saveGameMode(gameMode: GameMode) {
-        saveGameModeUseCase.execute(gameMode)
+        viewModelScope.launch{ saveGameModeUseCase.execute(gameMode) }
     }
 
     class Factory @Inject constructor(

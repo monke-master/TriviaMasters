@@ -2,23 +2,27 @@ package com.monke.triviamasters.ui.gameFeature.searchCategoryFeature
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.viewModelScope
 import com.monke.triviamasters.domain.models.Category
-import com.monke.triviamasters.domain.useCases.category.GetCategoriesUseCase
+import com.monke.triviamasters.domain.useCases.category.GetAvailableCategoriesUseCase
+import com.monke.triviamasters.domain.useCases.category.SaveSelectedCategoriesUseCase
 import com.monke.triviamasters.domain.useCases.category.SearchCategoriesUseCase
 import com.monke.triviamasters.domain.useCases.category.SelectCategoryUseCase
 import com.monke.triviamasters.ui.uiModels.CategoryUi
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class SearchCategoryViewModel (
-    private val getCategoriesUseCase: GetCategoriesUseCase,
+    private val getAvailableCategoriesUseCase: GetAvailableCategoriesUseCase,
     private val searchCategoriesUseCase: SearchCategoriesUseCase,
-    private val selectCategoryUseCase: SelectCategoryUseCase
+    private val selectCategoryUseCase: SelectCategoryUseCase,
+    private val saveSelectedCategoriesUseCase: SaveSelectedCategoriesUseCase
 ): ViewModel() {
 
-    private val _categories = MutableStateFlow(
-        getCategoriesUseCase.execute().map { CategoryUi(it, false) })
+    private val _categories = MutableStateFlow(getAvailableCategoriesUseCase
+        .execute().map { CategoryUi(it, false) })
     val categories = _categories.asStateFlow()
 
     private val selectedCategories = HashMap<Int, Category>()
@@ -42,19 +46,25 @@ class SearchCategoryViewModel (
         )
     }
 
-    fun selectedCategories(): Collection<Category> = selectedCategories.values
+    fun saveCategories() {
+        viewModelScope.launch {
+            saveSelectedCategoriesUseCase.execute(selectedCategories.values)
+        }
+    }
 
     class Factory @Inject constructor(
-        private val getCategoriesUseCase: GetCategoriesUseCase,
+        private val getAvailableCategoriesUseCase: GetAvailableCategoriesUseCase,
         private val searchCategoriesUseCase: SearchCategoriesUseCase,
-        private val selectCategoryUseCase: SelectCategoryUseCase
+        private val selectCategoryUseCase: SelectCategoryUseCase,
+        private val saveSelectedCategoriesUseCase: SaveSelectedCategoriesUseCase
     ): ViewModelProvider.Factory {
 
         override fun <T : ViewModel> create(modelClass: Class<T>): T {
             return SearchCategoryViewModel(
-                getCategoriesUseCase = getCategoriesUseCase,
+                getAvailableCategoriesUseCase = getAvailableCategoriesUseCase,
                 searchCategoriesUseCase = searchCategoriesUseCase,
-                selectCategoryUseCase = selectCategoryUseCase
+                selectCategoryUseCase = selectCategoryUseCase,
+                saveSelectedCategoriesUseCase = saveSelectedCategoriesUseCase
             ) as T
         }
     }

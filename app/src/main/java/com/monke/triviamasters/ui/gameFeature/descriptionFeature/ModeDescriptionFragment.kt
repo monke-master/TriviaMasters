@@ -36,7 +36,7 @@ class ModeDescriptionFragment : Fragment() {
 
         (parentFragment?.parentFragment as GameFragment).gameComponent.inject(this)
 
-        gameMode = viewModel.gameSettings.gameMode
+        gameMode = viewModel.gameMode
 
     }
 

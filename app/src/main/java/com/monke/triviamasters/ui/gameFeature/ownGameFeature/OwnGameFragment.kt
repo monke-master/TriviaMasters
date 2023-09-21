@@ -107,8 +107,14 @@ class OwnGameFragment : Fragment() {
     }
 
     private fun setupCategoriesChips() {
-        for (category in viewModel.selectedCategories) {
-            addCategoryChip(category)
+        viewLifecycleOwner.lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.selectedCategories.collect { categories ->
+                    categories?.let {
+                        addCategoryChips(categories)
+                    }
+                }
+            }
         }
     }
 
@@ -120,18 +126,6 @@ class OwnGameFragment : Fragment() {
                 args = bundleOf(
                     SearchCategoryFragment.REQUEST_KEY_BUNDLE to REQUEST_CATEGORIES_KEY)
             )
-            // Обработка результата выбора категории
-            setFragmentResultListener(
-                requestKey = REQUEST_CATEGORIES_KEY
-            ) { _, result ->
-                result.getStringArrayList(SearchCategoryFragment.CATEGORIES_LIST_KEY)?.let { list ->
-                    val selectedCategories = list.map {
-                            categoryStr -> Category.fromBundleString(categoryStr)
-                    }
-                    viewModel.addCategories(selectedCategories)
-                    addCategoryChips(selectedCategories)
-                }
-            }
         }
     }
 

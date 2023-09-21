@@ -29,7 +29,6 @@ import javax.inject.Inject
 
 /**
  * Фрагмент с поиском и выбором категорий
- * возвращает результат через setFragmentResult
  */
 class SearchCategoryFragment : Fragment() {
 
@@ -43,10 +42,8 @@ class SearchCategoryFragment : Fragment() {
 
     companion object {
 
-        // Bundle-ключ для ключа запроса результата фрагмента
+        // Ключ запроса
         const val REQUEST_KEY_BUNDLE = "request_key_bundle"
-        // Bundle-ключ для передачи результата
-        const val CATEGORIES_LIST_KEY = "categories_list_key"
 
     }
 
@@ -131,17 +128,13 @@ class SearchCategoryFragment : Fragment() {
     }
 
     private fun setupDoneButton() {
+
         binding?.btnDone?.setOnClickListener { btn ->
-            requestKey?.let { key ->
-                setFragmentResult(
-                    requestKey = key,
-                    result = bundleOf(
-                        CATEGORIES_LIST_KEY to
-                                viewModel.selectedCategories().map { it.toBundleString() }
-                    )
-                )
+            viewModel.saveCategories()
+            when(requestKey) {
+                OwnGameFragment.REQUEST_CATEGORIES_KEY -> btn.findNavController().popBackStack()
+                else -> {}
             }
-            btn.findNavController().popBackStack()
         }
     }
 

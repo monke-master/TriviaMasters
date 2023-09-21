@@ -8,7 +8,7 @@ class GetGameSettingsUseCase  @Inject constructor(
     private val gameRepository: GameRepository
 ){
 
-    fun execute(): GameSettings = gameRepository.getGameSettings()
+    fun execute() = gameRepository.getGameSettings()
 
 
 }
