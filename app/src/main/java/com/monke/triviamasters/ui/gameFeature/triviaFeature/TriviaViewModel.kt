@@ -10,8 +10,14 @@ class TriviaViewModel(
 ) : ViewModel() {
 
     val game = getGameUseCase.execute()
+    var answer = ""
 
-
+    fun answerQuestion(): Boolean {
+        game.value?.let {
+            return it.currentQuestion.answer == answer
+        }
+        return false
+    }
 
 
     class Factory @Inject constructor(

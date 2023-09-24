@@ -15,5 +15,7 @@
     <color name="red">#FFEE2C2C</color>
     <color name="divider">#FFB3B3B3</color>
     <color name="primaryDark">#3E2C1B</color>
+    <color name="green">#02BD2B</color>
+    <color name="error">#FFEE2C2C</color>
 
 </resources>

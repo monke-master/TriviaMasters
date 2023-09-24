@@ -41,6 +41,9 @@
     <string name="incorrect_password">Incorrect password</string>
     <string name="done">Done</string>
     <string name="questions_count">Question</string>
+    <string name="wrong_answer">Wrong answer</string>
+    <string name="time_out">Time out</string>
+    <string name="right_answer">Right answer</string>
 
     <string name="mock_string">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua </string>
 
