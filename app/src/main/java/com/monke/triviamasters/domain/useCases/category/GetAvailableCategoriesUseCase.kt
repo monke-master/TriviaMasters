@@ -16,7 +16,7 @@ class GetAvailableCategoriesUseCase @Inject constructor(
         gameRepository.getSelectedCategories()?.let {
             categories.removeAll(it)
         }
-        return categories
+        return categories.sortedBy { it.title }
     }
 
 }

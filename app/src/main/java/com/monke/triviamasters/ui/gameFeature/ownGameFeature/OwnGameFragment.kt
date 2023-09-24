@@ -11,6 +11,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.os.bundleOf
+import androidx.core.view.allViews
 import androidx.fragment.app.FragmentFactory
 import androidx.fragment.app.setFragmentResultListener
 import androidx.fragment.app.viewModels
@@ -110,9 +111,7 @@ class OwnGameFragment : Fragment() {
         viewLifecycleOwner.lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.selectedCategories.collect { categories ->
-                    categories?.let {
-                        addCategoryChips(categories)
-                    }
+                    categories?.let { setCategoryChips(it) }
                 }
             }
         }
@@ -126,6 +125,13 @@ class OwnGameFragment : Fragment() {
                 args = bundleOf(
                     SearchCategoryFragment.REQUEST_KEY_BUNDLE to REQUEST_CATEGORIES_KEY)
             )
+        }
+    }
+
+    private fun setCategoryChips(categories: List<Category>) {
+        binding?.chipsCategories?.let {
+            it.removeViews(0, it.childCount - 1)
+            addCategoryChips(categories)
         }
     }
 
