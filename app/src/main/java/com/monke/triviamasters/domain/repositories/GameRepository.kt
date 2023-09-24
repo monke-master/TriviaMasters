@@ -5,6 +5,7 @@ import com.monke.triviamasters.domain.models.Game
 import com.monke.triviamasters.domain.models.GameMode
 import com.monke.triviamasters.domain.models.GameSettings
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.StateFlow
 
 interface GameRepository {
 
@@ -15,4 +16,6 @@ interface GameRepository {
     fun getSelectedCategories(): List<Category>?
 
     fun createGame(game: Game)
+
+    fun getGame(): StateFlow<Game?>
 }

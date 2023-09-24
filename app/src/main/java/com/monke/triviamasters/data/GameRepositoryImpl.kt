@@ -11,6 +11,7 @@ import com.monke.triviamasters.domain.models.Result
 import com.monke.triviamasters.domain.repositories.GameRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 import javax.inject.Inject
 
 @AppScope
@@ -20,7 +21,7 @@ class GameRepositoryImpl @Inject constructor(
 {
 
     private var gameSettings = MutableStateFlow(GameSettings(GameMode.OwnGame))
-    private var game: Game? = null
+    private var game: MutableStateFlow<Game?> = MutableStateFlow(null)
 
     override fun getGameSettings(): Flow<GameSettings> {
         return gameSettings
@@ -34,7 +35,10 @@ class GameRepositoryImpl @Inject constructor(
     override fun getSelectedCategories(): List<Category>? = gameSettings.value.selectedCategories
 
     override fun createGame(game: Game) {
-        this.game = game
+        this.game.value = game
         Log.d("GameRepository", "questions: ${game.questionsList.joinToString(separator = " ")}" )
     }
+
+    override fun getGame(): StateFlow<Game?> = game
+
 }

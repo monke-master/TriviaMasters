@@ -7,6 +7,7 @@ import com.monke.triviamasters.ui.gameFeature.fullyRandomFeature.FullyRandomFrag
 
 import com.monke.triviamasters.ui.gameFeature.ownGameFeature.OwnGameFragment
 import com.monke.triviamasters.ui.gameFeature.searchCategoryFeature.SearchCategoryFragment
+import com.monke.triviamasters.ui.gameFeature.triviaFeature.TriviaFragment
 import dagger.Subcomponent
 
 @GameFragmentScope
@@ -21,6 +22,7 @@ interface GameComponent {
 
     fun inject(extraHardFragment: ExtraHardFragment)
 
+    fun inject(triviaFragment: TriviaFragment)
 
     @Subcomponent.Factory
     interface Factory {

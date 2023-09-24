@@ -29,8 +29,8 @@
     </fragment>
     <fragment
         android:id="@+id/questionFragment"
-        android:name="com.monke.triviamasters.ui.questionFeature.QuestionFragment"
-        tools:layout="@layout/fragment_question"
+        android:name="com.monke.triviamasters.ui.gameFeature.triviaFeature.TriviaFragment"
+        tools:layout="@layout/fragment_trivia"
         android:label="fragment_question" />
     <fragment
         android:id="@+id/searchCategoryFragment"

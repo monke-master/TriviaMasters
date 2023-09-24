@@ -42,5 +42,4 @@ class QuestionsRepositoryImpl @Inject constructor(): QuestionRepository {
         return Result.Success(body = mockedQuestions)
     }
 
-
 }
