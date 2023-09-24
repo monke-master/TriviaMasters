@@ -32,8 +32,8 @@ class QuestionsRepositoryImpl @Inject constructor(): QuestionRepository {
     override suspend fun getRandomQuestions(count: Int): Result {
         delay(2000)
 
-        val questions = mockedQuestions.subList(0, count)
-        return Result.Success(body = questions)
+        //val questions = mockedQuestions.subList(0, count)
+        return Result.Success(body = mockedQuestions)
     }
 
 

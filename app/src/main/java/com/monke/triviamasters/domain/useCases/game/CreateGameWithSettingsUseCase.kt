@@ -32,10 +32,7 @@ class CreateGameWithSettingsUseCase @Inject constructor(
             if (questionsList.isEmpty())
                 return@withContext Result.Failure(NoQuestionsException())
             // Создание игры
-            val game = Game(
-                questionsList = questionsList,
-                currentQuestion = questionsList[0]
-            )
+            val game = Game(questionsList = questionsList)
             gameRepository.createGame(game)
             return@withContext Result.Success()
         }

@@ -42,9 +42,8 @@ class GameFragment : Fragment() {
         binding = FragmentGameBinding.inflate(inflater, container, false)
         // Устанавливает стартовый фрагмент
         arguments?.getInt(START_DESTINATION_BUNDLE)?.let {
-            val navGraph = childFragmentManager
+            childFragmentManager
                 .findFragmentById(R.id.fragment_container)?.findNavController()?.navigate(it)
-            //navGraph?.setStartDestination(it)
         }
         return binding?.root
     }
