@@ -36,5 +36,11 @@ class QuestionsRepositoryImpl @Inject constructor(): QuestionRepository {
         return Result.Success(body = mockedQuestions)
     }
 
+    override suspend fun getHardestQuestions(count: Int): Result {
+        delay(2000)
+
+        return Result.Success(body = mockedQuestions)
+    }
+
 
 }

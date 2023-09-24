@@ -73,4 +73,13 @@
             android:id="@+id/action_fullyRandomFragment_to_questionFragment"
             app:destination="@id/questionFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/extraHardFragment"
+        android:name="com.monke.triviamasters.ui.gameFeature.extraHardFeature.ExtraHardFragment"
+        android:label="fragment_extra_hard"
+        tools:layout="@layout/fragment_extra_hard" >
+        <action
+            android:id="@+id/action_extraHardFragment_to_questionFragment"
+            app:destination="@id/questionFragment" />
+    </fragment>
 </navigation>

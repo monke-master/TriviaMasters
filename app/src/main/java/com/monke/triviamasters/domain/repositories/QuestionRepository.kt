@@ -9,4 +9,6 @@ interface QuestionRepository {
 
     suspend fun getRandomQuestions(count: Int): Result
 
+    suspend fun getHardestQuestions(count: Int): Result
+
 }

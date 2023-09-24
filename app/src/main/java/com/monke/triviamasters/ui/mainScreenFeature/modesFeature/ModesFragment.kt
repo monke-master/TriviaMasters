@@ -91,7 +91,7 @@ class ModesFragment : Fragment() {
                 mode = GameMode.ExtraHard,
                 title = getString(R.string.extra_hard),
                 onClick = onClick,
-                destination = R.id.searchCategoryFragment
+                destination = R.id.extraHardFragment
             ),
             GameModeUI(
                 mode = GameMode.FullyRandom,

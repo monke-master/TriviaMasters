@@ -1,5 +1,6 @@
-package com.monke.triviamasters.ui.gameFeature.fullyRandomFeature
+package com.monke.triviamasters.ui.gameFeature.extraHardFeature
 
+import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -10,35 +11,33 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
-import androidx.navigation.Navigation
 import androidx.navigation.findNavController
 import com.monke.triviamasters.R
-import com.monke.triviamasters.databinding.FragmentFullyRandomBinding
+import com.monke.triviamasters.databinding.FragmentExtraHardBinding
 import com.monke.triviamasters.ui.components.LoadingDialog
 import com.monke.triviamasters.ui.gameFeature.GameFragment
 import com.monke.triviamasters.ui.uiModels.UiState
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-class FullyRandomFragment : Fragment() {
-
+class ExtraHardFragment : Fragment() {
 
     @Inject
-    lateinit var factory: FullyRandomViewModel.Factory
-    private val viewModel: FullyRandomViewModel by viewModels { factory }
+    lateinit var factory: ExtraHardViewModel.Factory
+    private val viewModel: ExtraHardViewModel by viewModels { factory }
 
-    private var binding: FragmentFullyRandomBinding? = null
+    private var binding: FragmentExtraHardBinding? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentFullyRandomBinding.inflate(inflater, container, false)
+        binding = FragmentExtraHardBinding.inflate(inflater, container, false)
         (parentFragment?.parentFragment as GameFragment).gameComponent.inject(this)
         return binding?.root
     }
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         viewLifecycleOwner.lifecycleScope.launch {
@@ -52,7 +51,7 @@ class FullyRandomFragment : Fragment() {
                             Toast.LENGTH_SHORT
                         ).show()
                         is UiState.Success -> view.findNavController()
-                            .navigate(R.id.action_fullyRandomFragment_to_questionFragment)
+                            .navigate(R.id.action_extraHardFragment_to_questionFragment)
                         else -> {}
                     }
                 }
@@ -75,6 +74,5 @@ class FullyRandomFragment : Fragment() {
             }
         }
     }
-
 
 }

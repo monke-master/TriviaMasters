@@ -2,6 +2,7 @@ package com.monke.triviamasters.di.components
 
 import com.monke.triviamasters.di.GameFragmentScope
 import com.monke.triviamasters.di.modules.GameModule
+import com.monke.triviamasters.ui.gameFeature.extraHardFeature.ExtraHardFragment
 import com.monke.triviamasters.ui.gameFeature.fullyRandomFeature.FullyRandomFragment
 
 import com.monke.triviamasters.ui.gameFeature.ownGameFeature.OwnGameFragment
@@ -18,7 +19,7 @@ interface GameComponent {
 
     fun inject(fullyRandomFragment: FullyRandomFragment)
 
-
+    fun inject(extraHardFragment: ExtraHardFragment)
 
 
     @Subcomponent.Factory
