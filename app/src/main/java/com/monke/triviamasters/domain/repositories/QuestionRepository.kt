@@ -7,4 +7,6 @@ interface QuestionRepository {
 
     suspend fun getQuestionsBySettings(gameSettings: GameSettings): Result
 
+    suspend fun getRandomQuestions(count: Int): Result
+
 }

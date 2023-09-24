@@ -1,0 +1,34 @@
+package com.monke.triviamasters.ui.gameFeature.ownGameFeature
+
+import android.os.Bundle
+import androidx.fragment.app.Fragment
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import androidx.navigation.findNavController
+import com.monke.triviamasters.R
+import com.monke.triviamasters.databinding.FragmentOwnGameBinding
+import com.monke.triviamasters.databinding.FragmentOwnGameDescriptionBinding
+
+
+class OwnGameDescriptionFragment : Fragment() {
+
+    private var binding: FragmentOwnGameDescriptionBinding? = null
+
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        binding = FragmentOwnGameDescriptionBinding.inflate(inflater, container, false)
+        return binding?.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        binding?.btnStart?.setOnClickListener {
+            it.findNavController()
+                .navigate(R.id.action_ownGameDescriptionFragment_to_ownGameFragment)
+        }
+    }
+
+}

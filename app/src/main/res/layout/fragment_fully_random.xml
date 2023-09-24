@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".ui.gameFeature.ownGameFeature.OwnGameDescriptionFragment">
+    tools:context=".ui.gameFeature.fullyRandomFeature.FullyRandomFragment">
 
     <com.google.android.material.appbar.MaterialToolbar
         android:id="@+id/toolbar"
@@ -16,7 +16,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:navigationIcon="@drawable/ic_back"
-        app:title="@string/own_game" />
+        app:title="@string/fully_random" />
 
     <TextView
         android:id="@+id/txt_description"
@@ -29,7 +29,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbar"
-        android:text="@string/own_game_description" />
+        android:text="@string/fully_random_description" />
 
     <Button
         android:id="@+id/btn_start"

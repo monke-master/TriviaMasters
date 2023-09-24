@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
 import androidx.fragment.app.viewModels
 import androidx.navigation.NavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -12,6 +13,7 @@ import com.monke.triviamasters.MainActivity
 import com.monke.triviamasters.R
 import com.monke.triviamasters.databinding.FragmentModesBinding
 import com.monke.triviamasters.domain.models.GameMode
+import com.monke.triviamasters.ui.gameFeature.GameFragment
 import com.monke.triviamasters.ui.mainScreenFeature.MainFragment
 import com.monke.triviamasters.ui.modesFeature.ModesRecyclerAdapter
 import com.monke.triviamasters.ui.recyclerViewUtils.VerticalSpaceItemDecoration
@@ -71,30 +73,37 @@ class ModesFragment : Fragment() {
     }
 
     private fun getModes(): Array<GameModeUI> {
-        val onClick: (GameMode) -> Unit = { gameMode ->
-            mainNavController.navigate(R.id.action_mainFragment_to_gameFragment)
-            viewModel.saveGameMode(gameMode)
+        val onClick: (GameMode, Int) -> Unit = { mode, destination ->
+            mainNavController.navigate(
+                R.id.action_mainFragment_to_gameFragment,
+                args = bundleOf(GameFragment.START_DESTINATION_BUNDLE to destination )
+            )
+            viewModel.saveGameMode(mode)
         }
         return arrayOf(
             GameModeUI(
                 mode = GameMode.Category,
                 title = getString(R.string.search_categories),
-                onClick = onClick
+                onClick = onClick,
+                destination = R.id.searchCategoryDescriptionFragment
             ),
             GameModeUI(
                 mode = GameMode.ExtraHard,
                 title = getString(R.string.extra_hard),
-                onClick = onClick
+                onClick = onClick,
+                destination = R.id.searchCategoryFragment
             ),
             GameModeUI(
                 mode = GameMode.FullyRandom,
                 title = getString(R.string.fully_random),
-                onClick = onClick
+                onClick = onClick,
+                destination = R.id.fullyRandomFragment
             ),
             GameModeUI(
                 mode = GameMode.OwnGame,
                 title = getString(R.string.own_game),
-                onClick = onClick
+                onClick = onClick,
+                destination = R.id.ownGameDescriptionFragment
             ),
         )
     }

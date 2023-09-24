@@ -15,7 +15,7 @@ import javax.inject.Inject
 /**
  * Создание игры с заданными настройками
  */
-class CreateGameUseCase @Inject constructor(
+class CreateGameWithSettingsUseCase @Inject constructor(
     private val gameRepository: GameRepository,
     private val questionRepository: QuestionRepository
 ) {

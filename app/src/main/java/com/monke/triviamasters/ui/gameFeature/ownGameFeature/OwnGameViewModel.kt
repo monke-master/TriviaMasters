@@ -6,22 +6,21 @@ import androidx.lifecycle.viewModelScope
 import com.monke.triviamasters.domain.models.Category
 import com.monke.triviamasters.domain.models.GameMode
 import com.monke.triviamasters.domain.models.GameSettings
-import com.monke.triviamasters.domain.models.QUESTIONS_AMOUNT_DEFAULT
+import com.monke.triviamasters.domain.models.QUESTIONS_COUNT_DEFAULT
 import com.monke.triviamasters.domain.models.Result
 import com.monke.triviamasters.domain.useCases.category.RemoveSelectedCategoryUseCase
-import com.monke.triviamasters.domain.useCases.game.CreateGameUseCase
+import com.monke.triviamasters.domain.useCases.game.CreateGameWithSettingsUseCase
 import com.monke.triviamasters.domain.useCases.game.GetGameSettingsUseCase
 import com.monke.triviamasters.domain.useCases.game.SaveGameSettingsUseCase
 import com.monke.triviamasters.ui.uiModels.UiState
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class OwnGameViewModel(
     private val saveGameSettingsUseCase: SaveGameSettingsUseCase,
-    private val createGameUseCase: CreateGameUseCase,
+    private val createGameWithSettingsUseCase: CreateGameWithSettingsUseCase,
     private val getGameSettingsUseCase: GetGameSettingsUseCase,
     private val removeSelectedCategoryUseCase: RemoveSelectedCategoryUseCase
 ) : ViewModel() {
@@ -36,7 +35,7 @@ class OwnGameViewModel(
 
     var maxPrice: Int? = null
     var minPrice: Int? = null
-    var questionsAmount: Int = QUESTIONS_AMOUNT_DEFAULT
+    var questionsAmount: Int = QUESTIONS_COUNT_DEFAULT
 
     init {
         viewModelScope.launch {
@@ -65,9 +64,9 @@ class OwnGameViewModel(
                 gameMode = GameMode.OwnGame,
                 minPrice = minPrice,
                 maxPrice = maxPrice,
-                questionsAmount = questionsAmount
+                questionsCount = questionsAmount
             )
-            val response = createGameUseCase.execute(gameSettings)
+            val response = createGameWithSettingsUseCase.execute(gameSettings)
             if (response is Result.Failure) {
                 _uiState.value = UiState.Error(response.exception)
                 return@launch
@@ -79,7 +78,7 @@ class OwnGameViewModel(
 
     class Factory @Inject constructor(
         private val saveGameSettingsUseCase: SaveGameSettingsUseCase,
-        private val createGameUseCase: CreateGameUseCase,
+        private val createGameWithSettingsUseCase: CreateGameWithSettingsUseCase,
         private val getGameSettingsUseCase: GetGameSettingsUseCase,
         private val removeSelectedCategoryUseCase: RemoveSelectedCategoryUseCase
     ): ViewModelProvider.Factory {
@@ -87,7 +86,7 @@ class OwnGameViewModel(
         override fun <T : ViewModel> create(modelClass: Class<T>): T {
             return OwnGameViewModel(
                 saveGameSettingsUseCase = saveGameSettingsUseCase,
-                createGameUseCase = createGameUseCase,
+                createGameWithSettingsUseCase = createGameWithSettingsUseCase,
                 getGameSettingsUseCase = getGameSettingsUseCase,
                 removeSelectedCategoryUseCase = removeSelectedCategoryUseCase
             ) as T

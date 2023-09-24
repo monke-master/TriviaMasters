@@ -2,7 +2,6 @@ package com.monke.triviamasters.data
 
 import com.monke.triviamasters.domain.mockedQuestions
 import com.monke.triviamasters.domain.models.GameSettings
-import com.monke.triviamasters.domain.models.Question
 import com.monke.triviamasters.domain.models.Result
 import com.monke.triviamasters.domain.repositories.QuestionRepository
 import kotlinx.coroutines.delay
@@ -25,9 +24,17 @@ class QuestionsRepositoryImpl @Inject constructor(): QuestionRepository {
                 questions = questions.filter { it.category in selectedCategories }
         }
 
-        questions = questions.subList(0, min(gameSettings.questionsAmount, questions.size))
+        questions = questions.subList(0, min(gameSettings.questionsCount, questions.size))
 
         return Result.Success(body = questions)
     }
+
+    override suspend fun getRandomQuestions(count: Int): Result {
+        delay(2000)
+
+        val questions = mockedQuestions.subList(0, count)
+        return Result.Success(body = questions)
+    }
+
 
 }

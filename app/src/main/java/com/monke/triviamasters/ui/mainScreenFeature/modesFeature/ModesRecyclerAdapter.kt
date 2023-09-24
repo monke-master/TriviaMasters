@@ -16,7 +16,7 @@ class ModesRecyclerAdapter(
         fun bind(gameMode: GameModeUI) {
             binding.modeTitle.text = gameMode.title
             binding.layout.setOnClickListener() {
-                gameMode.onClick(gameMode.mode)
+                gameMode.onClick(gameMode.mode, gameMode.destination)
             }
         }
 
