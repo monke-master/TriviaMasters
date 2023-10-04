@@ -1,5 +1,6 @@
 package com.monke.triviamasters.ui.gameFeature.triviaFeature
 
+import android.content.DialogInterface
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -22,7 +23,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 
-class TriviaFragment : Fragment() {
+class TriviaFragment : Fragment(), DialogInterface.OnDismissListener {
 
     @Inject
     lateinit var factory: TriviaViewModel.Factory
@@ -44,7 +45,20 @@ class TriviaFragment : Fragment() {
         viewLifecycleOwner.lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.game.collect { game ->
-                    game?.let { setupQuestionDescription(game) }
+                    game?.let {
+                        setupQuestionDescription(game)
+                        viewModel.startQuestionTime()
+                        binding?.editTextAnswer?.setText("")
+                    }
+
+                }
+            }
+        }
+        // Конец игры
+        viewLifecycleOwner.lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.endOfGame.collect {
+
                 }
             }
         }
@@ -65,19 +79,19 @@ class TriviaFragment : Fragment() {
     private fun setupProgressBar() {
         viewLifecycleOwner.lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
-                binding?.progressBar?.let { view ->
-                    while (view.progress > 0) {
-                        delay(QUESTION_TIME_MILLIS / 100)
-                        view.progress -= 1
+                viewModel.time.collect { time ->
+                    if (time == 0L) {
+                        val dialog = AnswerDialog.newInstance(AnswerUi.TimeOut)
+                        dialog.show(childFragmentManager, dialog.tag)
                     }
-                    val dialog = AnswerDialog.newInstance(AnswerUi.TimeOut)
-                    dialog.show(parentFragmentManager, dialog.tag)
+                    binding?.progressBar?.progress = (time.toFloat() / QUESTION_TIME_MILLIS * 100).toInt()
                 }
             }
         }
     }
 
     private fun setupAnswerEditText() {
+        binding?.editTextAnswer?.setText(viewModel.answer)
         binding?.editTextAnswer?.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
 
@@ -96,7 +110,12 @@ class TriviaFragment : Fragment() {
             val isAnswerCorrect = viewModel.answerQuestion()
             val answerUi = if (isAnswerCorrect) AnswerUi.Right else AnswerUi.Wrong
             val dialog = AnswerDialog.newInstance(answerUi)
-            dialog.show(parentFragmentManager, dialog.tag)
+            dialog.show(childFragmentManager, dialog.tag)
+
         }
+    }
+
+    override fun onDismiss(p0: DialogInterface?) {
+        viewModel.nextQuestion()
     }
 }

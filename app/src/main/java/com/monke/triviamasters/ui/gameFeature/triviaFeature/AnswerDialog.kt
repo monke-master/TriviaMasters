@@ -1,5 +1,6 @@
 package com.monke.triviamasters.ui.gameFeature.triviaFeature
 
+import android.content.DialogInterface
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -11,6 +12,9 @@ import com.monke.triviamasters.R
 import com.monke.triviamasters.databinding.DialogAnswerBinding
 import com.monke.triviamasters.ui.uiModels.AnswerUi
 
+/**
+ * Диалог с результатом ответа
+ */
 class AnswerDialog: DialogFragment() {
 
     private var binding: DialogAnswerBinding? = null
@@ -64,6 +68,16 @@ class AnswerDialog: DialogFragment() {
             }
             else -> {}
         }
+
+        binding?.btnContinue?.setOnClickListener {
+            dismiss()
+        }
+    }
+
+
+    override fun onDismiss(dialog: DialogInterface) {
+        super.onDismiss(dialog)
+        (parentFragment as? DialogInterface.OnDismissListener)?.onDismiss(dialog)
     }
 
 }
