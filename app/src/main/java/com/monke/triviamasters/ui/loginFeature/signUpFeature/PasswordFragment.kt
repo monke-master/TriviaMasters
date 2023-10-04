@@ -1,4 +1,4 @@
-package com.monke.triviamasters.ui.signUpFeature
+package com.monke.triviamasters.ui.loginFeature.signUpFeature
 
 import android.os.Bundle
 import android.text.Editable
@@ -13,13 +13,11 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
+import com.monke.triviamasters.MainActivity
 import com.monke.triviamasters.R
 import com.monke.triviamasters.databinding.FragmentPasswordBinding
-import com.monke.triviamasters.ui.loginFeature.LoginFragment
-import com.monke.triviamasters.ui.loginFeature.signUpFeature.PasswordViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
-import kotlin.math.sign
 
 
 class PasswordFragment : Fragment() {
@@ -36,7 +34,7 @@ class PasswordFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentPasswordBinding.inflate(layoutInflater, container, false)
-        (parentFragment?.parentFragment as LoginFragment).loginComponent.inject(this)
+        (activity as MainActivity).loginComponent.inject(this)
         return binding?.root
     }
 

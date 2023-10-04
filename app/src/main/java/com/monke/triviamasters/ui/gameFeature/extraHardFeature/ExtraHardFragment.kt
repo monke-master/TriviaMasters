@@ -12,10 +12,10 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.findNavController
+import com.monke.triviamasters.MainActivity
 import com.monke.triviamasters.R
 import com.monke.triviamasters.databinding.FragmentExtraHardBinding
 import com.monke.triviamasters.ui.components.LoadingDialog
-import com.monke.triviamasters.ui.gameFeature.GameFragment
 import com.monke.triviamasters.ui.uiModels.UiState
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -34,7 +34,7 @@ class ExtraHardFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentExtraHardBinding.inflate(inflater, container, false)
-        (parentFragment?.parentFragment as GameFragment).gameComponent.inject(this)
+        (activity as MainActivity).gameComponent.inject(this)
         return binding?.root
     }
 

@@ -2,42 +2,188 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/navigation_app"
-    app:startDestination="@id/loginFragment">
+    app:startDestination="@id/navigation_login"
+    android:id="@+id/navigation_app">
 
-    <fragment
-        android:id="@+id/loginFragment"
-        android:name="com.monke.triviamasters.ui.loginFeature.LoginFragment"
-        android:label="fragment_login"
-        tools:layout="@layout/fragment_login">
+    <navigation android:id="@+id/navigation_login"
+        app:startDestination="@id/startScreenFragment">
         <action
-            android:id="@+id/action_loginFragment_to_mainFragment"
-            app:destination="@id/mainFragment"
+            android:id="@+id/action_login_to_main_fragment"
+            app:destination="@id/navigation3"
+            app:popUpTo="@id/startScreenFragment"
+            app:popUpToInclusive="true"
+            />
+        <fragment
+            android:id="@+id/passwordFragment"
+            android:name="com.monke.triviamasters.ui.loginFeature.signUpFeature.PasswordFragment"
+            android:label="fragment_password"
+            tools:layout="@layout/fragment_password">
+            <action
+                android:id="@+id/action_passwordFragment_to_createPlayerFragment"
+                app:destination="@id/createPlayerFragment"
+                app:enterAnim="@anim/nav_default_enter_anim"
+                app:exitAnim="@anim/nav_default_exit_anim"
+                app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+                app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+        </fragment>
+        <fragment
+            android:id="@+id/createPlayerFragment"
+            android:name="com.monke.triviamasters.ui.loginFeature.createPlayerFeature.CreatePlayerFragment"
+            android:label="fragment_create_player"
+            tools:layout="@layout/fragment_create_player" />
+        <fragment
+            android:id="@+id/startScreenFragment"
+            android:name="com.monke.triviamasters.ui.loginFeature.startFeature.StartScreenFragment"
+            android:label="fragment_start"
+            tools:layout="@layout/fragment_start">
+            <action
+                android:id="@+id/action_startScreenFragment_to_emailFragment"
+                app:destination="@id/emailFragment"
+                app:enterAnim="@anim/nav_default_enter_anim"
+                app:exitAnim="@anim/nav_default_exit_anim"
+                app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+                app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+            <action
+                android:id="@+id/action_startScreenFragment_to_signInFragment"
+                app:destination="@id/signInFragment"
+                app:enterAnim="@anim/nav_default_enter_anim"
+                app:exitAnim="@anim/nav_default_exit_anim"
+                app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+                app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+            <action
+                android:id="@+id/action_startScreenFragment_to_createPlayerFragment"
+                app:destination="@id/createPlayerFragment"
+                app:enterAnim="@anim/nav_default_enter_anim"
+                app:exitAnim="@anim/nav_default_exit_anim"
+                app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+                app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+        </fragment>
+        <fragment
+            android:id="@+id/emailFragment"
+            android:name="com.monke.triviamasters.ui.loginFeature.signUpFeature.EmailFragment"
+            android:label="fragment_email"
+            tools:layout="@layout/fragment_email">
+            <action
+                android:id="@+id/action_emailFragment_to_passwordFragment"
+                app:destination="@id/passwordFragment"
+                app:enterAnim="@anim/nav_default_enter_anim"
+                app:exitAnim="@anim/nav_default_exit_anim"
+                app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+                app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+        </fragment>
+        <fragment
+            android:id="@+id/signInFragment"
+            android:name="com.monke.triviamasters.ui.loginFeature.signInFeature.SignInFragment"
+            android:label="fragment_sign_in"
+            tools:layout="@layout/fragment_sign_in" />
 
+    </navigation>
+    <navigation android:id="@+id/navigation3"
+        app:startDestination="@id/mainFragment">
+        <fragment
+            android:id="@+id/triviaResultFragment"
+            android:name="com.monke.triviamasters.ui.gameFeature.triviaFeature.result.TriviaResultFragment"
+            android:label="fragment_trivia_result"
+            tools:layout="@layout/fragment_trivia_result" />
+        <fragment
+            android:id="@+id/fullyRandomFragment"
+            android:name="com.monke.triviamasters.ui.gameFeature.fullyRandomFeature.FullyRandomFragment"
+            android:label="fragment_fully_random"
+            tools:layout="@layout/fragment_fully_random">
+            <action
+                android:id="@+id/action_fullyRandomFragment_to_questionFragment"
+                app:destination="@id/questionFragment" />
+        </fragment>
+        <fragment
+            android:id="@+id/searchCategoryDescriptionFragment"
+            android:name="com.monke.triviamasters.ui.gameFeature.searchCategoryFeature.SearchCategoryDescriptionFragment"
+            android:label="fragment_search_category_description"
+            tools:layout="@layout/fragment_search_category_description">
+            <action
+                android:id="@+id/action_searchCategoryDescriptionFragment_to_searchCategoryFragment"
+                app:destination="@id/searchCategoryFragment" />
+        </fragment>
+        <fragment
+            android:id="@+id/ownGameFragment"
+            android:name="com.monke.triviamasters.ui.gameFeature.ownGameFeature.OwnGameFragment"
+            android:label="fragment_own_game"
+            tools:layout="@layout/fragment_own_game">
+            <action
+                android:id="@+id/action_ownGameFragment_to_searchCategoryFragment"
+                app:destination="@id/searchCategoryFragment"
 
-            app:enterAnim="@android:anim/slide_in_left"
-            app:exitAnim="@android:anim/slide_out_right"
-            app:popUpTo="@id/loginFragment"
-            app:popUpToInclusive="true" />
-    </fragment>
+                app:enterAnim="@anim/nav_default_enter_anim"
+                app:exitAnim="@anim/nav_default_exit_anim"
+                app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+                app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+            <action
+                android:id="@+id/action_ownGameFragment_to_questionFragment"
+                app:destination="@id/questionFragment"
 
-    <fragment
-        android:id="@+id/mainFragment"
-        android:name="com.monke.triviamasters.ui.mainScreenFeature.MainFragment"
-        android:label="fragment_main"
-        tools:layout="@layout/fragment_main" >
-        <action
-            android:id="@+id/action_mainFragment_to_gameFragment"
-            app:destination="@id/gameFragment"
-            app:enterAnim="@android:anim/slide_in_left"
-            app:exitAnim="@android:anim/slide_out_right"
-            app:popEnterAnim="@android:anim/slide_in_left"
-            app:popExitAnim="@android:anim/slide_out_right" />
-    </fragment>
-    <fragment
-        android:id="@+id/gameFragment"
-        android:name="com.monke.triviamasters.ui.gameFeature.GameFragment"
-        android:label="fragment_game"
-        tools:layout="@layout/fragment_game" />
+                app:enterAnim="@anim/nav_default_enter_anim"
+                app:exitAnim="@anim/nav_default_exit_anim"
+                app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+                app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+        </fragment>
+        <fragment
+            android:id="@+id/ownGameDescriptionFragment"
+            android:name="com.monke.triviamasters.ui.gameFeature.ownGameFeature.OwnGameDescriptionFragment"
+            android:label="fragment_own_game_description"
+            tools:layout="@layout/fragment_own_game_description">
+            <action
+                android:id="@+id/action_ownGameDescriptionFragment_to_ownGameFragment"
+                app:destination="@id/ownGameFragment" />
+        </fragment>
+        <fragment
+            android:id="@+id/extraHardFragment"
+            android:name="com.monke.triviamasters.ui.gameFeature.extraHardFeature.ExtraHardFragment"
+            android:label="fragment_extra_hard"
+            tools:layout="@layout/fragment_extra_hard">
+            <action
+                android:id="@+id/action_extraHardFragment_to_questionFragment"
+                app:destination="@id/questionFragment" />
+        </fragment>
+        <fragment
+            android:id="@+id/searchCategoryFragment"
+            android:name="com.monke.triviamasters.ui.gameFeature.searchCategoryFeature.SearchCategoryFragment"
+            android:label="fragment_search_category"
+            tools:layout="@layout/fragment_search_category">
+            <action
+                android:id="@+id/action_searchCategoryFragment_to_questionFragment"
+                app:destination="@id/questionFragment"
+
+                app:enterAnim="@anim/nav_default_enter_anim"
+                app:exitAnim="@anim/nav_default_exit_anim"
+                app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+                app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+        </fragment>
+        <fragment
+            android:id="@+id/mainFragment"
+            android:name="com.monke.triviamasters.ui.mainScreenFeature.MainFragment"
+            android:label="fragment_main"
+            tools:layout="@layout/fragment_main">
+            <action
+                android:id="@+id/action_mainFragment_to_ownGameDescriptionFragment"
+                app:destination="@id/ownGameDescriptionFragment" />
+            <action
+                android:id="@+id/action_mainFragment_to_searchCategoryDescriptionFragment"
+                app:destination="@id/searchCategoryDescriptionFragment" />
+            <action
+                android:id="@+id/action_mainFragment_to_extraHardFragment"
+                app:destination="@id/extraHardFragment" />
+            <action
+                android:id="@+id/action_mainFragment_to_fullyRandomFragment"
+                app:destination="@id/fullyRandomFragment" />
+        </fragment>
+        <fragment
+            android:id="@+id/questionFragment"
+            android:name="com.monke.triviamasters.ui.gameFeature.triviaFeature.TriviaFragment"
+            android:label="fragment_question"
+            tools:layout="@layout/fragment_trivia">
+            <action
+                android:id="@+id/action_questionFragment_to_triviaResultFragment"
+                app:destination="@id/triviaResultFragment" />
+        </fragment>
+    </navigation>
 
 </navigation>

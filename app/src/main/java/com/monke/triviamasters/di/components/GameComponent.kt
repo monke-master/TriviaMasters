@@ -9,6 +9,7 @@ import com.monke.triviamasters.ui.gameFeature.ownGameFeature.OwnGameFragment
 import com.monke.triviamasters.ui.gameFeature.searchCategoryFeature.SearchCategoryFragment
 import com.monke.triviamasters.ui.gameFeature.triviaFeature.TriviaFragment
 import com.monke.triviamasters.ui.gameFeature.triviaFeature.result.TriviaResultFragment
+import com.monke.triviamasters.ui.mainScreenFeature.modesFeature.ModesFragment
 import dagger.Subcomponent
 
 @GameFragmentScope
@@ -26,6 +27,8 @@ interface GameComponent {
     fun inject(triviaFragment: TriviaFragment)
 
     fun inject(resultFragment: TriviaResultFragment)
+
+    fun inject(modesFragment: ModesFragment)
 
     @Subcomponent.Factory
     interface Factory {

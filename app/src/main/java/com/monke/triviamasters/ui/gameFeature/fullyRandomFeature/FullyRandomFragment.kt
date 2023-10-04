@@ -1,23 +1,21 @@
 package com.monke.triviamasters.ui.gameFeature.fullyRandomFeature
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
-import androidx.navigation.Navigation
 import androidx.navigation.findNavController
+import com.monke.triviamasters.MainActivity
 import com.monke.triviamasters.R
 import com.monke.triviamasters.databinding.FragmentFullyRandomBinding
 import com.monke.triviamasters.ui.components.LoadingDialog
-import com.monke.triviamasters.ui.gameFeature.GameFragment
 import com.monke.triviamasters.ui.uiModels.UiState
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -36,7 +34,7 @@ class FullyRandomFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentFullyRandomBinding.inflate(inflater, container, false)
-        (parentFragment?.parentFragment as GameFragment).gameComponent.inject(this)
+        (activity as MainActivity).gameComponent.inject(this)
         return binding?.root
     }
 

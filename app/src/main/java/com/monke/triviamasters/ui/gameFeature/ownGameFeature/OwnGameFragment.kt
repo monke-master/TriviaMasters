@@ -1,34 +1,27 @@
 package com.monke.triviamasters.ui.gameFeature.ownGameFeature
 
 import android.os.Bundle
-import android.support.v4.os.IResultReceiver._Parcel
 import android.text.Editable
 import android.text.TextWatcher
-import android.view.ContextThemeWrapper
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.os.bundleOf
-import androidx.core.view.allViews
-import androidx.fragment.app.FragmentFactory
-import androidx.fragment.app.setFragmentResultListener
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.findNavController
 import com.google.android.material.chip.Chip
+import com.monke.triviamasters.MainActivity
 import com.monke.triviamasters.R
 import com.monke.triviamasters.databinding.FragmentOwnGameBinding
 import com.monke.triviamasters.domain.models.Category
 import com.monke.triviamasters.ui.components.LoadingDialog
-import com.monke.triviamasters.ui.gameFeature.GameFragment
 import com.monke.triviamasters.ui.gameFeature.searchCategoryFeature.SearchCategoryFragment
 import com.monke.triviamasters.ui.uiModels.UiState
-import com.monke.triviamasters.utils.fromBundleString
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -63,7 +56,7 @@ class OwnGameFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        (parentFragment?.parentFragment as GameFragment).gameComponent.inject(this)
+        (activity as MainActivity).gameComponent.inject(this)
         collectUiState()
         setupCategoriesChips()
         setupAddCategoryBtn()

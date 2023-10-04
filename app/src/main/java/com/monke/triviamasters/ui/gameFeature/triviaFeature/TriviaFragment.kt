@@ -14,13 +14,12 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
+import com.monke.triviamasters.MainActivity
 import com.monke.triviamasters.R
 import com.monke.triviamasters.databinding.FragmentTriviaBinding
 import com.monke.triviamasters.domain.models.Game
 import com.monke.triviamasters.domain.models.QUESTION_TIME_MILLIS
-import com.monke.triviamasters.ui.gameFeature.GameFragment
 import com.monke.triviamasters.ui.uiModels.AnswerUi
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -40,7 +39,7 @@ class TriviaFragment : Fragment(), DialogInterface.OnDismissListener {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentTriviaBinding.inflate(inflater, container, false)
-        (parentFragment?.parentFragment as GameFragment).gameComponent.inject(this)
+        (activity as MainActivity).gameComponent.inject(this)
         return binding?.root
     }
 

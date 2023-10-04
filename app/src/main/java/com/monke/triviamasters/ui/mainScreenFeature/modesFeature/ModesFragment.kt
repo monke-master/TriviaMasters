@@ -1,11 +1,10 @@
 package com.monke.triviamasters.ui.mainScreenFeature.modesFeature
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.os.bundleOf
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.NavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -13,8 +12,6 @@ import com.monke.triviamasters.MainActivity
 import com.monke.triviamasters.R
 import com.monke.triviamasters.databinding.FragmentModesBinding
 import com.monke.triviamasters.domain.models.GameMode
-import com.monke.triviamasters.ui.gameFeature.GameFragment
-import com.monke.triviamasters.ui.mainScreenFeature.MainFragment
 import com.monke.triviamasters.ui.modesFeature.ModesRecyclerAdapter
 import com.monke.triviamasters.ui.recyclerViewUtils.VerticalSpaceItemDecoration
 import com.monke.triviamasters.ui.uiModels.GameModeUI
@@ -35,7 +32,7 @@ class ModesFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentModesBinding.inflate(inflater, container, false)
-        (parentFragment?.parentFragment as MainFragment).mainComponent.inject(this)
+        (activity as MainActivity).gameComponent.inject(this)
         return binding?.root
     }
 
@@ -74,10 +71,7 @@ class ModesFragment : Fragment() {
 
     private fun getModes(): Array<GameModeUI> {
         val onClick: (GameMode, Int) -> Unit = { mode, destination ->
-            mainNavController.navigate(
-                R.id.action_mainFragment_to_gameFragment,
-                args = bundleOf(GameFragment.START_DESTINATION_BUNDLE to destination )
-            )
+            mainNavController.navigate(destination)
             viewModel.saveGameMode(mode)
         }
         return arrayOf(

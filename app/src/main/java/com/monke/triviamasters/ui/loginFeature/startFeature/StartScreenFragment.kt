@@ -6,12 +6,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.NavController
-import androidx.navigation.Navigation
 import androidx.navigation.findNavController
-import androidx.navigation.fragment.NavHostFragment
 import com.monke.triviamasters.R
 import com.monke.triviamasters.databinding.FragmentStartBinding
-import com.monke.triviamasters.ui.loginFeature.LoginFragment
 
 
 class StartScreenFragment : Fragment() {

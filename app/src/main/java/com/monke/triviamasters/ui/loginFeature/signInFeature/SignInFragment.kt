@@ -8,20 +8,16 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
-import androidx.navigation.Navigation
 import com.monke.triviamasters.MainActivity
 import com.monke.triviamasters.R
 import com.monke.triviamasters.databinding.FragmentSignInBinding
 import com.monke.triviamasters.domain.exceptions.IncorrectPasswordException
 import com.monke.triviamasters.ui.components.LoadingDialog
-import com.monke.triviamasters.ui.loginFeature.LoginFragment
 import com.monke.triviamasters.ui.uiModels.UiState
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -42,7 +38,7 @@ class SignInFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentSignInBinding.inflate(layoutInflater, container, false)
-        (parentFragment?.parentFragment as LoginFragment).loginComponent.inject(this)
+        (activity as MainActivity).loginComponent.inject(this)
         return binding?.root
     }
 
@@ -75,7 +71,7 @@ class SignInFragment : Fragment() {
                         }
                         // В случае успеха переходит на следующий фрагмет
                         is UiState.Success -> {
-                            navController.navigate(R.id.action_loginFragment_to_mainFragment)
+                            navController.navigate(R.id.action_login_to_main_fragment)
                         }
                         // При отсутствующем состоянии ничего не делает
                         null -> {}

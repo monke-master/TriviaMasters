@@ -21,7 +21,6 @@ interface AppComponent {
 
     fun gameComponent(): GameComponent.Factory
 
-    fun mainComponent(): MainComponent.Factory
 
     @Component.Builder
     interface Builder {

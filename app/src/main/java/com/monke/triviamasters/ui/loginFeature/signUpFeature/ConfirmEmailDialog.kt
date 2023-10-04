@@ -11,10 +11,7 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import com.monke.triviamasters.databinding.DialogConfirmEmailBinding
-import com.monke.triviamasters.ui.signUpFeature.EmailFragment
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
-import javax.inject.Inject
 
 class ConfirmEmailDialog: DialogFragment() {
 

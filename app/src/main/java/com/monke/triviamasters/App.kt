@@ -7,6 +7,7 @@ class App: Application() {
 
     val appComponent = DaggerAppComponent.builder().context(this).build()
 
+
     override fun onCreate() {
         super.onCreate()
     }
