@@ -31,7 +31,11 @@
         android:id="@+id/questionFragment"
         android:name="com.monke.triviamasters.ui.gameFeature.triviaFeature.TriviaFragment"
         tools:layout="@layout/fragment_trivia"
-        android:label="fragment_question" />
+        android:label="fragment_question" >
+        <action
+            android:id="@+id/action_questionFragment_to_triviaResultFragment"
+            app:destination="@id/triviaResultFragment" />
+    </fragment>
     <fragment
         android:id="@+id/searchCategoryFragment"
         android:name="com.monke.triviamasters.ui.gameFeature.searchCategoryFeature.SearchCategoryFragment"
@@ -82,4 +86,9 @@
             android:id="@+id/action_extraHardFragment_to_questionFragment"
             app:destination="@id/questionFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/triviaResultFragment"
+        android:name="com.monke.triviamasters.ui.gameFeature.triviaFeature.result.TriviaResultFragment"
+        android:label="fragment_trivia_result"
+        tools:layout="@layout/fragment_trivia_result" />
 </navigation>

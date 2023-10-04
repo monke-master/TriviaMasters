@@ -83,26 +83,22 @@ class TriviaResultFragment : Fragment() {
         )
         recyclerView?.addItemDecoration(verticalSpaceItemDecoration)
 
-        viewLifecycleOwner.lifecycleScope.launch {
-            repeatOnLifecycle(Lifecycle.State.STARTED) {
-                val resultItems = ArrayList<ItemResultUI>()
-                resultItems.add(
-                    ItemResultUI(
-                        title = getString(R.string.right_answers),
-                        value = viewModel.game.correctAnswers
-                    )
-                )
-                adapter.resultItemsList = resultItems
-                delay(500)
-                resultItems.add(
-                    ItemResultUI(
-                        title = getString(R.string.time_spent),
-                        value = (viewModel.game.timeSpent / 1000).toInt()
-                    )
-                )
-                adapter.resultItemsList = resultItems
-            }
-        }
+        val resultItems = arrayOf(
+            ItemResultUI(
+                title = getString(R.string.right_answers),
+                value = viewModel.game.correctAnswers
+            ),
+            ItemResultUI(
+                title = getString(R.string.time_spent),
+                value = (viewModel.game.timeSpent / 1000).toInt()
+            ),
+            ItemResultUI(
+                title = getString(R.string.points_earned),
+                value = viewModel.game.pointsEarned
+            ),
+        )
+        adapter.resultItemsList = resultItems.toList()
+
     }
 
 }

@@ -12,13 +12,19 @@ class UpdateCurrentGameUseCase @Inject constructor() {
         nextQuestionNumber: Int
     ): Game {
         var pointsEarned = 0
-        if (answerIsCorrect)
+        var correctAnswers = 0
+        if (answerIsCorrect) {
             pointsEarned += game.currentQuestion.price
+            correctAnswers++
+        }
+
+
         return game.copy(
             currentQuestion = game.questionsList[nextQuestionNumber],
             currentQuestionNumber = game.currentQuestionNumber + 1,
             timeSpent = game.timeSpent + timeSpent,
-            pointsEarned = game.pointsEarned + pointsEarned
+            pointsEarned = game.pointsEarned + pointsEarned,
+            correctAnswers = game.correctAnswers + correctAnswers
         )
     }
 }

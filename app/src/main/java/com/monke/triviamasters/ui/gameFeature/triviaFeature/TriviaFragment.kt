@@ -12,6 +12,8 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.navigation.NavController
+import androidx.navigation.findNavController
 import com.monke.triviamasters.R
 import com.monke.triviamasters.databinding.FragmentTriviaBinding
 import com.monke.triviamasters.domain.models.Game
@@ -30,6 +32,7 @@ class TriviaFragment : Fragment(), DialogInterface.OnDismissListener {
     private val viewModel: TriviaViewModel by viewModels { factory }
 
     private var binding: FragmentTriviaBinding? = null
+    private lateinit var navController: NavController
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -58,7 +61,8 @@ class TriviaFragment : Fragment(), DialogInterface.OnDismissListener {
         viewLifecycleOwner.lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.endOfGame.collect {
-
+                    if (it)
+                        navController.navigate(R.id.action_questionFragment_to_triviaResultFragment)
                 }
             }
         }
@@ -111,11 +115,12 @@ class TriviaFragment : Fragment(), DialogInterface.OnDismissListener {
             val answerUi = if (isAnswerCorrect) AnswerUi.Right else AnswerUi.Wrong
             val dialog = AnswerDialog.newInstance(answerUi)
             dialog.show(childFragmentManager, dialog.tag)
-
+            navController = it.findNavController()
         }
     }
 
     override fun onDismiss(p0: DialogInterface?) {
         viewModel.nextQuestion()
+
     }
 }

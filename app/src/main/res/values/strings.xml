@@ -47,6 +47,8 @@
     <string name="result">Result</string>
     <string name="right_answers">Right answers:</string>
     <string name="time_spent">Time spent in seconds:</string>
+    <string name="points_earned">Points earned:</string>
+    <string name="finish">Finish</string>
 
     <string name="mock_string">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua </string>
 
