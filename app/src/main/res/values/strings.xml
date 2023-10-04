@@ -44,6 +44,9 @@
     <string name="wrong_answer">Wrong answer</string>
     <string name="time_out">Time out</string>
     <string name="right_answer">Right answer</string>
+    <string name="result">Result</string>
+    <string name="right_answers">Right answers:</string>
+    <string name="time_spent">Time spent in seconds:</string>
 
     <string name="mock_string">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua </string>
 

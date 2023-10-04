@@ -5,7 +5,9 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import com.monke.triviamasters.domain.models.Game
 import com.monke.triviamasters.domain.models.QUESTION_TIME_MILLIS
+import com.monke.triviamasters.domain.useCases.trivia.AddPlayedGameUseCase
 import com.monke.triviamasters.domain.useCases.game.GetGameUseCase
+import com.monke.triviamasters.domain.useCases.trivia.UpdateCurrentGameUseCase
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -14,7 +16,9 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class TriviaViewModel(
-    private val getGameUseCase: GetGameUseCase
+    private val getGameUseCase: GetGameUseCase,
+    private val updateCurrentGameUseCase: UpdateCurrentGameUseCase,
+    private val addPlayedGameUseCase: AddPlayedGameUseCase
 ) : ViewModel() {
 
     private val _endOfGame = MutableStateFlow(false)
@@ -26,6 +30,7 @@ class TriviaViewModel(
     private val _time = MutableStateFlow(QUESTION_TIME_MILLIS)
     val time = _time.asStateFlow()
 
+    private var answerIsCorrect = false
     var answer = ""
 
     private lateinit var timeJob: Job
@@ -37,20 +42,23 @@ class TriviaViewModel(
     fun answerQuestion(): Boolean {
         timeJob.cancel()
         game.value?.let {
-            return it.currentQuestion.answer.strip().lowercase() == answer.lowercase().strip()
+            answerIsCorrect =
+                it.currentQuestion.answer.strip().lowercase() ==
+                        answer.lowercase().strip()
         }
-        return false
+        return answerIsCorrect
     }
 
     fun nextQuestion() {
         if (game.value?.currentQuestionNumber == game.value?.questionsList?.size)
-            _endOfGame.value = true
+            finishGame()
         else {
-            val mGame = game.value
-            mGame?.let {
-                _game.value = mGame.copy(
-                    currentQuestion = mGame.questionsList[mGame.currentQuestionNumber],
-                    currentQuestionNumber = mGame.currentQuestionNumber + 1
+            game.value?.let { game ->
+                _game.value = updateCurrentGameUseCase.execute(
+                    game = game,
+                    timeSpent = QUESTION_TIME_MILLIS - _time.value,
+                    answerIsCorrect = answerIsCorrect,
+                    nextQuestionNumber = game.currentQuestionNumber
                 )
             }
             answer = ""
@@ -69,14 +77,30 @@ class TriviaViewModel(
         }
     }
 
+    private fun finishGame() {
+        _endOfGame.value = true
+        game.value?.let { game ->
+            _game.value = updateCurrentGameUseCase.execute(
+                game = game,
+                timeSpent = QUESTION_TIME_MILLIS - _time.value,
+                answerIsCorrect = answerIsCorrect,
+                nextQuestionNumber = game.currentQuestionNumber - 1
+            )
+            viewModelScope.launch { addPlayedGameUseCase.execute(game) }
+        }
+    }
 
     class Factory @Inject constructor(
-        private val getGameUseCase: GetGameUseCase
+        private val getGameUseCase: GetGameUseCase,
+        private val updateCurrentGameUseCase: UpdateCurrentGameUseCase,
+        private val addPlayedGameUseCase: AddPlayedGameUseCase
     ): ViewModelProvider.Factory {
 
         override fun <T : ViewModel> create(modelClass: Class<T>): T {
             return TriviaViewModel(
-                getGameUseCase = getGameUseCase
+                getGameUseCase = getGameUseCase,
+                updateCurrentGameUseCase = updateCurrentGameUseCase,
+                addPlayedGameUseCase = addPlayedGameUseCase
             ) as T
         }
     }

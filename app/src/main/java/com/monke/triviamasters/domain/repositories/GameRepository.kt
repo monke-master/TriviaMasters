@@ -18,4 +18,8 @@ interface GameRepository {
     fun createGame(game: Game)
 
     fun getGame(): StateFlow<Game?>
+
+    suspend fun addPlayedGame(game: Game): Result<Any?>
+
+    fun getPlayedGames(): List<Game>
 }
