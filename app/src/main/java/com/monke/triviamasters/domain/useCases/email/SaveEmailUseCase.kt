@@ -8,7 +8,7 @@ class SaveEmailUseCase @Inject constructor(
 ) {
 
     fun execute(email: String) {
-        registrationRepository.saveEmail(email)
+        registrationRepository.email = email
     }
 
 }

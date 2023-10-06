@@ -15,7 +15,7 @@ interface GameRepository {
 
     fun getSelectedCategories(): List<Category>?
 
-    fun createGame(game: Game)
+    fun createGame(game: Game?)
 
     fun getGame(): StateFlow<Game?>
 

@@ -13,11 +13,14 @@ import javax.inject.Inject
 @AppScope
 class UserRepositoryImpl @Inject constructor() : UserRepository{
 
-    private val user = MutableStateFlow<User?>(null)
+    private var user: User? = null
 
-    override fun getUser(): Flow<User?> {
-        TODO("Not yet implemented")
+    override suspend fun setUser(user: User): kotlin.Result<Any?> {
+        this.user = user
+        return kotlin.Result.success(null)
     }
+
+    override fun getUser(): User? = user
 
     override suspend fun getUserByEmail(email: String): Result  {
         delay(1000)

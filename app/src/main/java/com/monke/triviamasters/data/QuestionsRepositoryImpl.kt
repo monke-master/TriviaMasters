@@ -1,5 +1,6 @@
 package com.monke.triviamasters.data
 
+import com.monke.triviamasters.di.AppScope
 import com.monke.triviamasters.domain.mockedQuestions
 import com.monke.triviamasters.domain.models.GameSettings
 import com.monke.triviamasters.domain.models.Result
@@ -8,6 +9,7 @@ import kotlinx.coroutines.delay
 import java.lang.Integer.min
 import javax.inject.Inject
 
+@AppScope
 class QuestionsRepositoryImpl @Inject constructor(): QuestionRepository {
 
     override suspend fun getQuestionsBySettings(gameSettings: GameSettings): Result {

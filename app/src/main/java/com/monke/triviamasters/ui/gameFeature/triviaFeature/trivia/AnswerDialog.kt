@@ -1,4 +1,4 @@
-package com.monke.triviamasters.ui.gameFeature.triviaFeature
+package com.monke.triviamasters.ui.gameFeature.triviaFeature.trivia
 
 import android.content.DialogInterface
 import android.os.Bundle

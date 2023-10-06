@@ -19,8 +19,10 @@ class SignInUseCase @Inject constructor(
             val reposResult = userRepository.getUserByEmail(email)
             if (reposResult is Result.Success) {
                 val user = reposResult.body as User
-                if (user.password == password)
+                if (user.password == password) {
+                    userRepository.setUser(user)
                     return@withContext Result.Success()
+                }
                 return@withContext Result.Failure(exception = IncorrectPasswordException())
             } else {
                 return@withContext reposResult

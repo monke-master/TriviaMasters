@@ -33,9 +33,12 @@ class GameRepositoryImpl @Inject constructor(
 
     override fun getSelectedCategories(): List<Category>? = gameSettings.value.selectedCategories
 
-    override fun createGame(game: Game) {
+    override fun createGame(game: Game?) {
         this.game.value = game
-        Log.d("GameRepository", "questions: ${game.questionsList.joinToString(separator = " ")}" )
+        Log.d(
+            "GameRepository",
+            "questions: ${game?.questionsList?.joinToString(separator = " ")}"
+        )
     }
 
     override fun getGame(): StateFlow<Game?> = game

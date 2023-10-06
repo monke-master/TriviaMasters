@@ -7,7 +7,7 @@ import com.monke.triviamasters.ui.gameFeature.fullyRandomFeature.FullyRandomFrag
 
 import com.monke.triviamasters.ui.gameFeature.ownGameFeature.OwnGameFragment
 import com.monke.triviamasters.ui.gameFeature.searchCategoryFeature.SearchCategoryFragment
-import com.monke.triviamasters.ui.gameFeature.triviaFeature.TriviaFragment
+import com.monke.triviamasters.ui.gameFeature.triviaFeature.trivia.TriviaFragment
 import com.monke.triviamasters.ui.gameFeature.triviaFeature.result.TriviaResultFragment
 import com.monke.triviamasters.ui.mainScreenFeature.modesFeature.ModesFragment
 import dagger.Subcomponent

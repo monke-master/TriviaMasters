@@ -1,4 +1,4 @@
-package com.monke.triviamasters.ui.gameFeature.triviaFeature
+package com.monke.triviamasters.ui.gameFeature.triviaFeature.trivia
 
 
 // TODO реализовать класс, если останется время

@@ -6,7 +6,9 @@ import kotlinx.coroutines.flow.Flow
 
 interface UserRepository {
 
-    fun getUser() : Flow<User?>
+    suspend fun setUser(user: User): kotlin.Result<Any?>
+
+    fun getUser() : User?
 
     suspend fun getUserByEmail(email: String): Result
 }

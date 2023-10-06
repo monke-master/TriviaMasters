@@ -177,7 +177,7 @@
         </fragment>
         <fragment
             android:id="@+id/questionFragment"
-            android:name="com.monke.triviamasters.ui.gameFeature.triviaFeature.TriviaFragment"
+            android:name="com.monke.triviamasters.ui.gameFeature.triviaFeature.trivia.TriviaFragment"
             android:label="fragment_question"
             tools:layout="@layout/fragment_trivia">
             <action

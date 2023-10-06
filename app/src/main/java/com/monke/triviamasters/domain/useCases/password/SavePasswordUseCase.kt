@@ -8,6 +8,6 @@ class SavePasswordUseCase @Inject constructor(
 ){
 
     fun execute(password: String) {
-        registrationRepository.savePassword(password)
+        registrationRepository.password = password
     }
 }

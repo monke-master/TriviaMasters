@@ -1,4 +1,4 @@
-package com.monke.triviamasters.ui.gameFeature.triviaFeature
+package com.monke.triviamasters.ui.gameFeature.triviaFeature.trivia
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
@@ -7,6 +7,8 @@ import com.monke.triviamasters.domain.models.Game
 import com.monke.triviamasters.domain.models.QUESTION_TIME_MILLIS
 import com.monke.triviamasters.domain.useCases.trivia.AddPlayedGameUseCase
 import com.monke.triviamasters.domain.useCases.game.GetGameUseCase
+import com.monke.triviamasters.domain.useCases.trivia.FinishGameUseCase
+import com.monke.triviamasters.domain.useCases.trivia.TriviaUseCases
 import com.monke.triviamasters.domain.useCases.trivia.UpdateCurrentGameUseCase
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
@@ -16,10 +18,14 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class TriviaViewModel(
-    private val getGameUseCase: GetGameUseCase,
-    private val updateCurrentGameUseCase: UpdateCurrentGameUseCase,
-    private val addPlayedGameUseCase: AddPlayedGameUseCase
+    triviaUseCases: TriviaUseCases
 ) : ViewModel() {
+
+    private val getGameUseCase = triviaUseCases.getGameUseCase
+    private val updateCurrentGameUseCase = triviaUseCases.updateCurrentGameUseCase
+    private val addPlayedGameUseCase = triviaUseCases.addPlayedGameUseCase
+    private val finishGameUseCase = triviaUseCases.finishGameUseCase
+    private val saveStatsUseCase = triviaUseCases.saveStatsUseCase
 
     private val _endOfGame = MutableStateFlow(false)
     val endOfGame = _endOfGame.asStateFlow()
@@ -86,22 +92,20 @@ class TriviaViewModel(
                 answerIsCorrect = answerIsCorrect,
                 nextQuestionNumber = game.currentQuestionNumber - 1
             )
-            viewModelScope.launch { addPlayedGameUseCase.execute(game) }
+            finishGameUseCase.execute()
+            viewModelScope.launch {
+                addPlayedGameUseCase.execute(game)
+                saveStatsUseCase.execute(game)
+            }
         }
     }
 
     class Factory @Inject constructor(
-        private val getGameUseCase: GetGameUseCase,
-        private val updateCurrentGameUseCase: UpdateCurrentGameUseCase,
-        private val addPlayedGameUseCase: AddPlayedGameUseCase
+        private val triviaUseCases: TriviaUseCases
     ): ViewModelProvider.Factory {
 
         override fun <T : ViewModel> create(modelClass: Class<T>): T {
-            return TriviaViewModel(
-                getGameUseCase = getGameUseCase,
-                updateCurrentGameUseCase = updateCurrentGameUseCase,
-                addPlayedGameUseCase = addPlayedGameUseCase
-            ) as T
+            return TriviaViewModel(triviaUseCases) as T
         }
     }
 }
