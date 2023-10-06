@@ -84,7 +84,11 @@
             android:id="@+id/triviaResultFragment"
             android:name="com.monke.triviamasters.ui.gameFeature.triviaFeature.result.TriviaResultFragment"
             android:label="fragment_trivia_result"
-            tools:layout="@layout/fragment_trivia_result" />
+            tools:layout="@layout/fragment_trivia_result" >
+            <action
+                android:id="@+id/action_triviaResultFragment_to_mainFragment"
+                app:destination="@id/mainFragment" />
+        </fragment>
         <fragment
             android:id="@+id/fullyRandomFragment"
             android:name="com.monke.triviamasters.ui.gameFeature.fullyRandomFeature.FullyRandomFragment"

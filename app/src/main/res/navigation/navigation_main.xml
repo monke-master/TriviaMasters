@@ -12,7 +12,7 @@
         tools:layout="@layout/fragment_modes" />
     <fragment
         android:id="@+id/profileFragment"
-        android:name="com.monke.triviamasters.ui.profileFeature.ProfileFragment"
+        android:name="com.monke.triviamasters.ui.mainScreenFeature.profileFeature.ProfileFragment"
         android:label="fragment_profile"
         tools:layout="@layout/fragment_profile" />
 </navigation>

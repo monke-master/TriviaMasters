@@ -1,4 +1,4 @@
-package com.monke.triviamasters.ui.gameFeature.triviaFeature.result
+package com.monke.triviamasters.ui.components
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

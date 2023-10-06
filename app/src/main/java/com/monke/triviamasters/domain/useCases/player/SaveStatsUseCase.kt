@@ -17,7 +17,7 @@ class SaveStatsUseCase @Inject constructor(
             val oldStats = player.statistics
             val newStats = oldStats.copy(
                 score = oldStats.score + playedGame.pointsEarned,
-                triviaCompleted = oldStats.triviaCompleted + 1,
+                gamesPlayed = oldStats.gamesPlayed + 1,
                 correctAnswers = oldStats.correctAnswers + playedGame.correctAnswers,
                 questionsAnswered = oldStats.questionsAnswered + playedGame.questionsList.size
             )

@@ -7,11 +7,13 @@ import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.monke.triviamasters.MainActivity
 import com.monke.triviamasters.R
 import com.monke.triviamasters.databinding.FragmentTriviaResultBinding
+import com.monke.triviamasters.ui.components.ResultRecyclerAdapter
 import com.monke.triviamasters.ui.recyclerViewUtils.VerticalSpaceItemDecoration
 import com.monke.triviamasters.ui.uiModels.ItemResultUI
 import javax.inject.Inject
@@ -40,6 +42,13 @@ class TriviaResultFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         setupRecyclerView()
+        setupFinishBtn()
+    }
+
+    private fun setupFinishBtn() {
+        binding?.btnFinish?.setOnClickListener {
+            it.findNavController().navigate(R.id.action_triviaResultFragment_to_mainFragment)
+        }
     }
 
 
@@ -76,7 +85,7 @@ class TriviaResultFragment : Fragment() {
 
         val resultItems = arrayOf(
             ItemResultUI(
-                title = getString(R.string.right_answers),
+                title = getString(R.string.correct_answers),
                 value = viewModel.game.correctAnswers
             ),
             ItemResultUI(
