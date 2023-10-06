@@ -76,7 +76,7 @@ class TriviaFragment : Fragment(), DialogInterface.OnDismissListener {
         binding?.toolbar?.title = title
         binding?.chipCategory?.text = game.currentQuestion.category.title
         binding?.chipPrice?.text = game.currentQuestion.price.toString()
-        binding?.txtQuestion?.text = game.currentQuestion.title
+        binding?.txtQuestion?.text = game.currentQuestion.question
     }
 
     private fun setupProgressBar() {

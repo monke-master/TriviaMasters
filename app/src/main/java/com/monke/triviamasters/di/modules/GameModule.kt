@@ -1,8 +1,8 @@
 package com.monke.triviamasters.di.modules
 
-import com.monke.triviamasters.data.CategoryRepositoryImpl
-import com.monke.triviamasters.data.GameRepositoryImpl
-import com.monke.triviamasters.data.QuestionsRepositoryImpl
+import com.monke.triviamasters.data.repository.CategoryRepositoryImpl
+import com.monke.triviamasters.data.repository.GameRepositoryImpl
+import com.monke.triviamasters.data.repository.QuestionsRepositoryImpl
 import com.monke.triviamasters.domain.repositories.CategoryRepository
 import com.monke.triviamasters.domain.repositories.GameRepository
 import com.monke.triviamasters.domain.repositories.QuestionRepository

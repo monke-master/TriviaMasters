@@ -3,6 +3,7 @@ package com.monke.triviamasters.ui.gameFeature.fullyRandomFeature
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
+import com.monke.triviamasters.domain.exceptions.NoQuestionsException
 import com.monke.triviamasters.domain.models.Result
 import com.monke.triviamasters.domain.useCases.game.CreateRandomGameUseCase
 import com.monke.triviamasters.ui.uiModels.UiState
@@ -22,10 +23,11 @@ class FullyRandomViewModel (
         viewModelScope.launch {
             _uiState.value = UiState.Loading
             val result = createRandomGameUseCase.execute()
-            when (result) {
-                is Result.Success -> _uiState.value = UiState.Success()
-                is Result.Failure -> _uiState.value = UiState.Error(result.exception)
-            }
+            if (result.isSuccess)
+                _uiState.value = UiState.Success()
+//            else
+//                result.exceptionOrNull()?.let { //_uiState.value = UiState.Error(it) }
+
         }
     }
 

@@ -2,6 +2,7 @@ package com.monke.triviamasters.di.components
 
 import com.monke.triviamasters.di.GameFragmentScope
 import com.monke.triviamasters.di.modules.GameModule
+import com.monke.triviamasters.di.modules.TriviaApiModule
 import com.monke.triviamasters.ui.gameFeature.extraHardFeature.ExtraHardFragment
 import com.monke.triviamasters.ui.gameFeature.fullyRandomFeature.FullyRandomFragment
 
@@ -14,7 +15,10 @@ import com.monke.triviamasters.ui.mainScreenFeature.profileFeature.ProfileFragme
 import dagger.Subcomponent
 
 @GameFragmentScope
-@Subcomponent(modules = [GameModule::class])
+@Subcomponent(modules = [
+    GameModule::class,
+    TriviaApiModule::class
+])
 interface GameComponent {
 
     fun inject(searchCategoryFragment: SearchCategoryFragment)

@@ -1,5 +1,6 @@
 package com.monke.triviamasters.domain.useCases.game
 
+import com.monke.triviamasters.domain.exceptions.NoQuestionsException
 import com.monke.triviamasters.domain.models.Game
 import com.monke.triviamasters.domain.models.Question
 import com.monke.triviamasters.domain.models.Result
@@ -15,15 +16,19 @@ class CreateRandomGameUseCase @Inject constructor(
     private val gameRepository: GameRepository
 ) {
 
-    suspend fun execute(): Result = withContext(Dispatchers.IO) {
+    suspend fun execute(): kotlin.Result<Any?> = withContext(Dispatchers.IO) {
         val count = Random.nextInt(1, 101)
         val repoResult = questionRepository.getRandomQuestions(count)
-        if (repoResult is Result.Failure)
+        if (repoResult.isFailure)
             return@withContext repoResult
-        val questions = (repoResult as Result.Success).body as List<Question>
-        val game = Game(questionsList = questions)
-        gameRepository.createGame(game)
-        return@withContext Result.Success()
+        val questions = repoResult.getOrNull()
+        questions?.let {
+            val game = Game(questionsList = questions)
+            gameRepository.createGame(game)
+            return@withContext kotlin.Result.success(null)
+        }
+        return@withContext kotlin.Result.failure(NoQuestionsException())
+
     }
 
 }

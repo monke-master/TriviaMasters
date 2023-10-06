@@ -1,4 +1,4 @@
-package com.monke.triviamasters.data
+package com.monke.triviamasters.data.repository
 
 import com.monke.triviamasters.di.AppScope
 import com.monke.triviamasters.domain.mockedCategories

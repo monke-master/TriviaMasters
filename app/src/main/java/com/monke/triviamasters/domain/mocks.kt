@@ -43,42 +43,42 @@ val mockedCategories =  listOf(
 val mockedQuestions = listOf(
     Question(
         id = 1,
-        title = "Russia's capital",
+        question = "Russia's capital",
         category = Category(2, "Russia"),
         price = 200,
         answer = "Moscow"
     ),
     Question(
         id = 2,
-        title = "Russia's second capital",
+        question = "Russia's second capital",
         category = Category(2, "Russia"),
         price = 400,
         answer = "Saint's Petersburg"
     ),
     Question(
         id = 3,
-        title = "USA capital",
+        question = "USA capital",
         category = Category(7, "USA"),
         price = 100,
         answer = "Washington"
     ),
     Question(
         id = 4,
-        title = "States amount",
+        question = "States amount",
         category = Category(7, "USA"),
         price = 500,
         answer = "50"
     ),
     Question(
         id = 5,
-        title = "First philosopher",
+        question = "First philosopher",
         category = Category(9, "Ancient Greece"),
         price = 700,
         answer = "Phales from Milet"
     ),
     Question(
         id = 6,
-        title = "Place, where spartans have been attacked by Persians",
+        question = "Place, where spartans have been attacked by Persians",
         category = Category(9, "Ancient Greece"),
         price = 600,
         answer = "Fermopiles"

@@ -2,7 +2,6 @@ package com.monke.triviamasters.domain.models
 
 data class Category(
     val id: Int,
-    val title: String
-) {
-    companion object
-}
+    val title: String,
+    val questionsCount: Int = 0
+)

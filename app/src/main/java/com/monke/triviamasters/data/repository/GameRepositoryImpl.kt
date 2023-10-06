@@ -1,4 +1,4 @@
-package com.monke.triviamasters.data
+package com.monke.triviamasters.data.repository
 
 import android.util.Log
 import com.monke.triviamasters.di.AppScope

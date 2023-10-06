@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools" >
 
+    <uses-permission android:name="android.permission.INTERNET"/>
+
     <application
         android:name=".App"
         android:allowBackup="true"
@@ -13,9 +15,6 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.TriviaMasters"
         tools:targetApi="31" >
-        <activity
-            android:name=".ui.loginFeature.LoginActivity"
-            android:exported="false" />
         <activity
             android:name=".MainActivity"
             android:exported="true" >
