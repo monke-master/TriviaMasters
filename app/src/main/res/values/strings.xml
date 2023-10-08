@@ -13,7 +13,7 @@
     <string name="questions_price">Questions price</string>
     <string name="from">From</string>
     <string name="to">to</string>
-    <string name="questions_number">Questions number</string>
+    <string name="questions_number">Max questions number</string>
     <string name="question">Question:</string>
     <string name="answer">Answer</string>
     <string name="your_answer">Your answer</string>

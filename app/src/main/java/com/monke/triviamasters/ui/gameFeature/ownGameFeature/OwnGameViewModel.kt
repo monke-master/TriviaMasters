@@ -33,8 +33,7 @@ class OwnGameViewModel(
     private val _uiState = MutableStateFlow<UiState?>(null)
     val uiState = _uiState.asStateFlow()
 
-    var maxPrice: Int? = null
-    var minPrice: Int? = null
+    var price: Int? = null
     var questionsAmount: Int = QUESTIONS_COUNT_DEFAULT
 
     init {
@@ -62,13 +61,14 @@ class OwnGameViewModel(
             val gameSettings = GameSettings(
                 selectedCategories = _selectedCategories.value,
                 gameMode = GameMode.OwnGame,
-                minPrice = minPrice,
-                maxPrice = maxPrice,
+                price = price,
                 questionsCount = questionsAmount
             )
             val response = createGameWithSettingsUseCase.execute(gameSettings)
-            if (response is Result.Failure) {
-                _uiState.value = UiState.Error(response.exception)
+            if (response.isFailure) {
+                response.exceptionOrNull()?.let {
+                    _uiState.value = UiState.Error(it)
+                }
                 return@launch
             }
             saveGameSettingsUseCase.execute(gameSettings)

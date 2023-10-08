@@ -60,8 +60,7 @@ class OwnGameFragment : Fragment() {
         collectUiState()
         setupCategoriesChips()
         setupAddCategoryBtn()
-        setupMinPriceEditText()
-        setupMaxPriceEditText()
+        setupPriceEditText()
         setupQuestionsAmountEditText()
         setupStartButton()
     }
@@ -78,7 +77,10 @@ class OwnGameFragment : Fragment() {
                                 state.exception.message,
                                 Toast.LENGTH_SHORT).
                             show()
-                        is UiState.Success -> {}
+                        is UiState.Success -> {
+                            binding?.root?.findNavController()
+                                ?.navigate(R.id.action_ownGameFragment_to_questionFragment)
+                        }
                         else -> {}
                     }
 
@@ -146,10 +148,10 @@ class OwnGameFragment : Fragment() {
         }
     }
 
-    // Ввод максимальной цены вопроса
-    private fun setupMaxPriceEditText() {
-        val editText = binding?.editTextMaxPrice
-        editText?.setText(viewModel.maxPrice?.toString() ?: "")
+    // Ввод цены вопроса
+    private fun setupPriceEditText() {
+        val editText = binding?.editTextPrice
+        editText?.setText(viewModel.price?.toString() ?: "")
         editText?.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
 
@@ -157,26 +159,11 @@ class OwnGameFragment : Fragment() {
 
             override fun afterTextChanged(text: Editable?) {
                 if (!text.isNullOrBlank())
-                    viewModel.maxPrice = text.toString().toInt()
+                    viewModel.price = text.toString().toInt()
             }
         })
     }
 
-    // Ввод минимальной цены вопроса
-    private fun setupMinPriceEditText() {
-        val editText = binding?.editTextMinPrice
-        editText?.setText(viewModel.minPrice?.toString() ?: "")
-        binding?.editTextMinPrice?.addTextChangedListener(object : TextWatcher {
-            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
-
-            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
-
-            override fun afterTextChanged(text: Editable?) {
-                if (!text.isNullOrBlank())
-                    viewModel.minPrice = text.toString().toInt()
-            }
-        })
-    }
 
     // Ввод количества вопросов
     private fun setupQuestionsAmountEditText() {

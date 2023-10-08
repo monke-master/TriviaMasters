@@ -1,5 +1,6 @@
 package com.monke.triviamasters.data.repository
 
+import android.util.Log
 import com.monke.triviamasters.data.converters.toDomain
 import com.monke.triviamasters.data.remote.TriviaApi
 import com.monke.triviamasters.di.GameFragmentScope
@@ -19,24 +20,6 @@ class QuestionsRepositoryImpl @Inject constructor(
     private val apiDataSource: TriviaApi
 ): QuestionRepository {
 
-    override suspend fun getQuestionsBySettings(gameSettings: GameSettings): Result {
-        delay(2000)
-        var questions = mockedQuestions
-        gameSettings.maxPrice?.let { maxPrice ->
-            questions = questions.filter { it.price <= maxPrice }
-        }
-        gameSettings.minPrice?.let { minPrice ->
-            questions = questions.filter { it.price >= minPrice }
-        }
-        gameSettings.selectedCategories?.let { selectedCategories ->
-            if (selectedCategories.isNotEmpty())
-                questions = questions.filter { it.category in selectedCategories }
-        }
-
-        questions = questions.subList(0, min(gameSettings.questionsCount, questions.size))
-
-        return Result.Success(body = questions)
-    }
 
     override suspend fun getRandomQuestions(count: Int): kotlin.Result<List<Question>> {
         try {
@@ -64,12 +47,16 @@ class QuestionsRepositoryImpl @Inject constructor(
             )
             if (response.isSuccessful) {
                 var questionsList = response.body()
-                count?.let { questionsList = questionsList?.subList(0, count)}
+                if (count != null && questionsList != null) {
+                    questionsList = questionsList?.subList(0, min(count, questionsList.size))
+                }
                 return kotlin.Result.success(
                     questionsList?.map { it.toDomain() } ?: ArrayList())
             }
+            Log.d("Question repository", "${response.message()} ${response.code()}")
             return kotlin.Result.failure(HttpException(response))
         } catch (e: Exception) {
+            e.printStackTrace()
             return kotlin.Result.failure(e)
         }
     }

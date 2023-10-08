@@ -7,7 +7,6 @@ import com.monke.triviamasters.domain.models.Result
 
 interface QuestionRepository {
 
-    suspend fun getQuestionsBySettings(gameSettings: GameSettings): Result
 
     suspend fun getRandomQuestions(count: Int): kotlin.Result<List<Question>>
 
