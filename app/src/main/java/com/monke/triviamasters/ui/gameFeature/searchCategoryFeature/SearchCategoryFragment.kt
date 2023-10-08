@@ -6,6 +6,7 @@ import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -18,8 +19,10 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.monke.triviamasters.MainActivity
 import com.monke.triviamasters.R
 import com.monke.triviamasters.databinding.FragmentSearchCategoryBinding
+import com.monke.triviamasters.ui.components.LoadingDialog
 import com.monke.triviamasters.ui.gameFeature.ownGameFeature.OwnGameFragment
 import com.monke.triviamasters.ui.recyclerViewUtils.VerticalSpaceItemDecoration
+import com.monke.triviamasters.ui.uiModels.UiState
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -60,6 +63,43 @@ class SearchCategoryFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         setupCategoriesRecyclerView()
+        collectUiState()
+    }
+
+    private fun collectUiState() {
+        viewLifecycleOwner.lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.uiState.collect { state ->
+                    when (state) {
+                        UiState.Loading -> showLoadingDialog()
+                        is UiState.Error ->
+                            Toast.makeText(
+                                requireContext(),
+                                state.exception.message,
+                                Toast.LENGTH_SHORT).
+                            show()
+                        is UiState.Success -> {
+                            binding?.root?.findNavController()
+                                ?.navigate(R.id.action_searchCategoryFragment_to_questionFragment)
+                        }
+                        else -> {}
+                    }
+                }
+            }
+        }
+    }
+
+    private fun showLoadingDialog() {
+        val dialog = LoadingDialog()
+        dialog.show(parentFragmentManager, dialog.tag)
+        viewLifecycleOwner.lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.uiState.collect { state ->
+                    if (state !is UiState.Loading)
+                        dialog.dismiss()
+                }
+            }
+        }
     }
 
 
@@ -72,6 +112,7 @@ class SearchCategoryFragment : Fragment() {
                 when (requestKey) {
                     OwnGameFragment.REQUEST_CATEGORIES_KEY ->
                         binding?.root?.findNavController()?.popBackStack()
+                    else -> viewModel.createGame()
                 }
             }
         )
@@ -103,7 +144,7 @@ class SearchCategoryFragment : Fragment() {
         )
         recyclerView?.addItemDecoration(verticalSpaceItemDecoration)
 
-        // Подписывается на изменение списка найденных категорий
+        // Подписывается на изменение списка категорий
         viewLifecycleOwner.lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.categories.collectLatest { categories ->
