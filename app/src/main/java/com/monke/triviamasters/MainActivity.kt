@@ -14,6 +14,7 @@ import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import kotlin.random.Random
 
 class MainActivity : AppCompatActivity() {
 
@@ -44,11 +45,11 @@ class MainActivity : AppCompatActivity() {
         val triviaApi = retrofit.create(TriviaApi::class.java)
 
         lifecycleScope.launch {
-            val res = triviaApi.getRandomQuestions(100)
+            val res = triviaApi.getQuestionsBySettings(value = 1000, offset = Random.nextInt(0, 100))
             Log.d("ROMAN EMPIRE", res.code().toString())
             if (res.isSuccessful)
                 res.body()?.let {
-                    Log.d("ALALALALAL", "questions: ${it.map { it.category.toString() }}")
+                    Log.d("ALALALALAL", "questions: ${it.map { it.category.id.toString() }}")
                     Log.d("ALALALALAL", "questions: ${it.size}")
                 }
 

@@ -10,5 +10,12 @@ interface TriviaApi {
     @GET("/api/random")
     suspend fun getRandomQuestions(@Query("count") count: Int): Response<List<QuestionRemote>>
 
+    @GET("/api/clues")
+    suspend fun getQuestionsBySettings(
+        @Query("value") value: Int? = null,
+        @Query("offset") offset: Int? = null,
+        @Query("category") categoryId: Int? = null
+    ): Response<List<QuestionRemote>>
+
 
 }

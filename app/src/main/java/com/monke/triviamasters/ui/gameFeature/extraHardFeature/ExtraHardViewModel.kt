@@ -22,13 +22,13 @@ class ExtraHardViewModel(
         viewModelScope.launch {
             _uiState.value = UiState.Loading
             val result = createExtraHardGameUseCase.execute()
-            when (result) {
-                is Result.Success -> _uiState.value = UiState.Success()
-                is Result.Failure -> _uiState.value = UiState.Error(result.exception)
+            if (result.isSuccess)
+                _uiState.value = UiState.Success()
+            else {
+               result.exceptionOrNull()?.let {  _uiState.value = UiState.Error(it) }
             }
         }
     }
-
 
     class Factory @Inject constructor(
         private val createExtraHardGameUseCase: CreateExtraHardGameUseCase

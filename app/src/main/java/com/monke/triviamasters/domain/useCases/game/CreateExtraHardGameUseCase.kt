@@ -1,9 +1,10 @@
 package com.monke.triviamasters.domain.useCases.game
 
-import com.monke.triviamasters.domain.models.Category
+import com.monke.triviamasters.domain.exceptions.NoQuestionsException
 import com.monke.triviamasters.domain.models.Game
-import com.monke.triviamasters.domain.models.Question
-import com.monke.triviamasters.domain.models.Result
+import com.monke.triviamasters.domain.models.MAX_EXTRA_HARD_GAME_OFFSET
+import com.monke.triviamasters.domain.models.MAX_QUESTIONS_COUNT
+import com.monke.triviamasters.domain.models.MAX_QUESTION_PRICE
 import com.monke.triviamasters.domain.repositories.GameRepository
 import com.monke.triviamasters.domain.repositories.QuestionRepository
 import kotlinx.coroutines.Dispatchers
@@ -16,13 +17,20 @@ class CreateExtraHardGameUseCase @Inject constructor(
     private val gameRepository: GameRepository
 ) {
 
-    suspend fun execute(): Result = withContext(Dispatchers.IO) {
-        val count = Random.nextInt(1, 100)
-        val repoResult = questionRepository.getHardestQuestions(count)
-        if (repoResult is Result.Failure)
+    suspend fun execute(): Result<Any?> = withContext(Dispatchers.IO) {
+        val count = Random.nextInt(1, MAX_QUESTIONS_COUNT)
+        val offset = Random.nextInt(0, MAX_EXTRA_HARD_GAME_OFFSET)
+        val repoResult = questionRepository.getQuestionsBySettings(
+            count = count,
+            offset = offset,
+            value = MAX_QUESTION_PRICE
+        )
+        if (repoResult.isFailure)
             return@withContext repoResult
-        val questions = (repoResult as Result.Success).body as List<Question>
-        gameRepository.createGame(Game(questionsList = questions))
-        return@withContext Result.Success()
+        val body = repoResult.getOrNull()
+        if (body.isNullOrEmpty())
+            return@withContext Result.failure(NoQuestionsException())
+        gameRepository.createGame(Game(questionsList = body))
+        return@withContext Result.success(null)
     }
 }

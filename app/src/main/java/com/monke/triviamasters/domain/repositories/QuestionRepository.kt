@@ -11,6 +11,11 @@ interface QuestionRepository {
 
     suspend fun getRandomQuestions(count: Int): kotlin.Result<List<Question>>
 
-    suspend fun getHardestQuestions(count: Int): Result
+    suspend fun getQuestionsBySettings(
+        count: Int? = null,
+        offset: Int? = null,
+        categoryId: Int? = null,
+        value: Int? = null
+    ): kotlin.Result<List<Question>>
 
 }
