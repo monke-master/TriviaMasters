@@ -2,7 +2,7 @@ package com.monke.triviamasters.ui.gameFeature.triviaFeature.result
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.monke.triviamasters.domain.useCases.trivia.GetLastGame
+import com.monke.triviamasters.ui.gameFeature.triviaFeature.trivia.GetLastGame
 import javax.inject.Inject
 
 class TriviaResultViewModel(

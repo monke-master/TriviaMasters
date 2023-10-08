@@ -20,6 +20,7 @@ import com.monke.triviamasters.R
 import com.monke.triviamasters.databinding.FragmentSearchCategoryBinding
 import com.monke.triviamasters.ui.gameFeature.ownGameFeature.OwnGameFragment
 import com.monke.triviamasters.ui.recyclerViewUtils.VerticalSpaceItemDecoration
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -59,33 +60,21 @@ class SearchCategoryFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         setupCategoriesRecyclerView()
-        setupCategoryTitleEditText()
-        setupDoneButton()
     }
 
-    private fun setupCategoryTitleEditText() {
-        val titleEditText = binding?.editTextTitle
-        titleEditText?.addTextChangedListener(object : TextWatcher {
-            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
-
-            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
-
-            override fun afterTextChanged(text: Editable?) {
-                text?.let { viewModel.searchCategory(it.toString()) }
-            }
-        })
-
-    }
 
     private fun setupCategoriesRecyclerView() {
         // Инициализация адаптера
         val recyclerView = binding?.recyclerViewCategories
-        val adapter = CategoryRecyclerAdapter(onCategoryClicked = { categoryUi ->
-            viewModel.setCategorySelected(
-                categoryUi = categoryUi,
-                isSelected = !categoryUi.isSelected
-            )
-        })
+        val adapter = CategoryRecyclerAdapter(
+            onCategoryClicked = { category ->
+                viewModel.selectCategory(category)
+                when (requestKey) {
+                    OwnGameFragment.REQUEST_CATEGORIES_KEY ->
+                        binding?.root?.findNavController()?.popBackStack()
+                }
+            }
+        )
         recyclerView?.adapter = adapter
         recyclerView?.layoutManager = LinearLayoutManager(
             requireContext(),
@@ -106,6 +95,7 @@ class SearchCategoryFragment : Fragment() {
         }
         recyclerView?.addItemDecoration(dividerItemDecoration)
 
+
         // Добавление отступов между элементами
         val verticalSpaceItemDecoration = VerticalSpaceItemDecoration(
             verticalPadding = resources.getDimensionPixelSize(R.dimen.defaultListPadding),
@@ -116,23 +106,12 @@ class SearchCategoryFragment : Fragment() {
         // Подписывается на изменение списка найденных категорий
         viewLifecycleOwner.lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
-                viewModel.categories.collect { categories ->
-                    adapter.categoriesList = categories
+                viewModel.categories.collectLatest { categories ->
+                    adapter.submitData(categories)
                 }
             }
         }
-
     }
 
-    private fun setupDoneButton() {
-
-        binding?.btnDone?.setOnClickListener { btn ->
-            viewModel.saveCategories()
-            when(requestKey) {
-                OwnGameFragment.REQUEST_CATEGORIES_KEY -> btn.findNavController().popBackStack()
-                else -> {}
-            }
-        }
-    }
 
 }

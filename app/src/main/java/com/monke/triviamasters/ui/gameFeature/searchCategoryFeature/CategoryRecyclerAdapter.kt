@@ -3,43 +3,37 @@ package com.monke.triviamasters.ui.gameFeature.searchCategoryFeature
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.monke.triviamasters.databinding.ItemCategoryBinding
-import com.monke.triviamasters.ui.recyclerViewUtils.DiffUtilCallback
-import com.monke.triviamasters.ui.uiModels.CategoryUi
+import com.monke.triviamasters.domain.models.Category
+
 
 class CategoryRecyclerAdapter(
-    private val onCategoryClicked: (category: CategoryUi) -> Unit
-): RecyclerView.Adapter<CategoryRecyclerAdapter.CategoryViewHolder>() {
+    private val onCategoryClicked: (category: Category) -> Unit
+): PagingDataAdapter<Category, CategoryRecyclerAdapter.CategoryViewHolder>(CategoryDiffUtil()) {
 
-    var categoriesList: List<CategoryUi> = ArrayList()
-        set(value) {
-            val diffCallback = DiffUtilCallback<CategoryUi>(
-                oldList = field,
-                newList = value,
-                areContentsSame = { oldItem, newItem -> oldItem.category.id == newItem.category.id },
-                areItemsSame = { oldItem, newItem -> oldItem == newItem },
-            )
-            val diffResult = DiffUtil.calculateDiff(diffCallback)
-            field = value
-            diffResult.dispatchUpdatesTo(this)
+    class CategoryDiffUtil : DiffUtil.ItemCallback<Category>() {
+        override fun areItemsTheSame(oldItem: Category, newItem: Category): Boolean {
+            return oldItem.id == newItem.id
         }
+
+        override fun areContentsTheSame(oldItem: Category, newItem: Category): Boolean {
+            return oldItem == newItem
+        }
+    }
 
     class CategoryViewHolder(
         private val binding: ItemCategoryBinding,
-        private val onCategoryClicked: (category: CategoryUi) -> Unit
+        private val onCategoryClicked: (category: Category) -> Unit
     ) : RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(categoryUi: CategoryUi) {
-            binding.textTitle.text = categoryUi.category.title
-            if (categoryUi.isSelected) {
-                binding.icPicked.visibility = View.VISIBLE
-            } else {
-                binding.icPicked.visibility = View.GONE
+        fun bind(category: Category?) {
+            category?.let {
+                binding.textTitle.text = category.title
+                binding.root.setOnClickListener { onCategoryClicked(category) }
             }
-            binding.root.setOnClickListener { onCategoryClicked(categoryUi) }
-
         }
 
     }
@@ -52,9 +46,8 @@ class CategoryRecyclerAdapter(
         return CategoryViewHolder(binding, onCategoryClicked)
     }
 
-    override fun getItemCount(): Int = categoriesList.size
-
     override fun onBindViewHolder(holder: CategoryViewHolder, position: Int) {
-        holder.bind(categoriesList[position])
+        holder.bind(getItem(position))
     }
 }
+

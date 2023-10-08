@@ -1,5 +1,6 @@
 package com.monke.triviamasters.data.remote
 
+import com.monke.triviamasters.data.remote.dto.CategoryRemote
 import com.monke.triviamasters.data.remote.dto.QuestionRemote
 import retrofit2.Response
 import retrofit2.http.GET
@@ -16,6 +17,12 @@ interface TriviaApi {
         @Query("offset") offset: Int? = null,
         @Query("category") categoryId: Int? = null
     ): Response<List<QuestionRemote>>
+
+    @GET("/api/categories")
+    suspend fun getCategories(
+        @Query("count") count: Int? = null,
+        @Query("offset") offset: Int? = null
+    ): Response<List<CategoryRemote>>
 
 
 }

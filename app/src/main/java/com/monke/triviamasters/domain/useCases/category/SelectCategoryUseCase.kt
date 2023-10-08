@@ -1,17 +1,19 @@
 package com.monke.triviamasters.domain.useCases.category
 
-import com.monke.triviamasters.ui.uiModels.CategoryUi
+import com.monke.triviamasters.domain.models.Category
+import com.monke.triviamasters.domain.repositories.GameRepository
+import kotlinx.coroutines.flow.first
 import javax.inject.Inject
 
-class SelectCategoryUseCase @Inject constructor() {
+class SelectCategoryUseCase @Inject constructor(
+    private val gameRepository: GameRepository
+) {
 
-    fun execute(
-        categoriesList: List<CategoryUi>,
-        categoryUi: CategoryUi,
-        isSelected: Boolean
-    ): List<CategoryUi> {
-        val copiedList = categoriesList.toMutableList()
-        copiedList[categoriesList.indexOf(categoryUi)] = categoryUi.copy(isSelected = isSelected)
-        return copiedList
+    suspend fun execute(category: Category) {
+        val gameSettings = gameRepository.getGameSettings().first()
+        val categoriesList = gameSettings.selectedCategories?.toMutableList() ?: ArrayList()
+        if (category !in categoriesList)
+            categoriesList.add(category)
+        gameRepository.saveGameSettings(gameSettings.copy(selectedCategories = categoriesList))
     }
 }

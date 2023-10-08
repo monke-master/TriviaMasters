@@ -16,17 +16,5 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:text="Russia" />
 
-    <ImageView
-        android:id="@+id/ic_picked"
-        android:layout_width="18dp"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:visibility="gone"
-        tools:visibility="visible"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_pick" />
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>
