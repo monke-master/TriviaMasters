@@ -41,8 +41,7 @@ class RegistrationRepositoryImpl @Inject constructor(
                 email,
                 rawPassword
             ).await()
-            val user = result.user ?: return Result.failure(NoUserException())
-            user.sendEmailVerification().await()
+            result?.user?.sendEmailVerification()?.await()
             return Result.success(null)
         } catch (exception: Exception) {
             exception.printStackTrace()
@@ -53,17 +52,22 @@ class RegistrationRepositoryImpl @Inject constructor(
 
     override fun getConfirmationStatus(): StateFlow<Boolean> = emailConfirmed
 
-    override suspend fun createUser(user: User): Result<String> {
-
-        return Result.success(UUID.randomUUID().toString())
+    override suspend fun createUser(user: User): Result<String?> {
+        try {
+            firebaseAuth.currentUser?.updatePassword(user.password)?.await()
+            return Result.success(firebaseAuth.currentUser?.uid)
+        } catch (exception: Exception) {
+            exception.printStackTrace()
+            return Result.failure(exception)
+        }
     }
 
     override suspend fun startCheckingConfirmationStatus(): Result<Any?> {
         while (true) {
             try {
                 firebaseAuth.signInWithEmailAndPassword(email, rawPassword).await()
-                val user = firebaseAuth.currentUser ?: return Result.failure(NoUserException())
-                if (user.isEmailVerified) {
+                val user = firebaseAuth.currentUser
+                if (user?.isEmailVerified != false) {
                     emailConfirmed.value = true
                     return Result.success(null)
                 }
@@ -72,7 +76,6 @@ class RegistrationRepositoryImpl @Inject constructor(
                 exception.printStackTrace()
                 return Result.failure(exception)
             }
-
         }
     }
 

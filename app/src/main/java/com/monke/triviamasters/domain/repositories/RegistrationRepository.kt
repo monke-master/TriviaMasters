@@ -15,7 +15,7 @@ interface RegistrationRepository {
     fun getConfirmationStatus(): StateFlow<Boolean>
 
 
-    suspend fun createUser(user: User): Result<String>
+    suspend fun createUser(user: User): Result<String?>
 
 
     suspend fun startCheckingConfirmationStatus(): Result<Any?>
