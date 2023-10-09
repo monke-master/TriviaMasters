@@ -17,4 +17,6 @@ interface RegistrationRepository {
 
     suspend fun createUser(user: User): Result<String>
 
+
+    suspend fun startCheckingConfirmationStatus(): Result<Any?>
 }

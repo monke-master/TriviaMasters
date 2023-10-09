@@ -3,6 +3,7 @@ package com.monke.triviamasters.di.components
 import android.app.Application
 import com.monke.triviamasters.di.AppScope
 import com.monke.triviamasters.di.modules.AppModule
+import com.monke.triviamasters.di.modules.FirebaseModule
 import com.monke.triviamasters.di.modules.PlayerModule
 import com.monke.triviamasters.di.modules.UserModule
 import dagger.BindsInstance
@@ -12,7 +13,8 @@ import dagger.Component
 @Component(modules = [
     AppModule::class,
     PlayerModule::class,
-    UserModule::class
+    UserModule::class,
+    FirebaseModule::class
 ])
 @AppScope
 interface AppComponent {

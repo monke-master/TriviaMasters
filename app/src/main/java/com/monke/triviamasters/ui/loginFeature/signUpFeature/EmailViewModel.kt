@@ -36,7 +36,6 @@ class EmailViewModel(
         saveEmailUseCase.execute(_email.value)
         viewModelScope.launch {
             sendConfirmationLetterUseCase.execute()
-
         }
     }
 
