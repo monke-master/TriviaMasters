@@ -2,17 +2,14 @@ package com.monke.triviamasters.data.repository
 
 import android.util.Log
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
 import com.monke.triviamasters.di.LoginFragmentScope
-import com.monke.triviamasters.domain.exceptions.NoUserException
 import com.monke.triviamasters.domain.models.User
 import com.monke.triviamasters.domain.repositories.RegistrationRepository
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.tasks.await
-import kotlinx.coroutines.withContext
-import retrofit2.HttpException
 import java.lang.Exception
 import java.util.UUID
 import javax.inject.Inject
@@ -32,7 +29,7 @@ class RegistrationRepositoryImpl @Inject constructor(
     }
 
     override suspend fun sendConfirmationLetter(): Result<Any?> {
-        emailConfirmed.value = false
+        emailConfirmed.value = true
         Log.d("RegistrationRepository", "email has been sent")
         try {
             // Создает пробную запись, чтобы потом отправить письмо с подтверждением
@@ -41,7 +38,7 @@ class RegistrationRepositoryImpl @Inject constructor(
                 email,
                 rawPassword
             ).await()
-            result?.user?.sendEmailVerification()?.await()
+            //result?.user?.sendEmailVerification()?.await()
             return Result.success(null)
         } catch (exception: Exception) {
             exception.printStackTrace()
@@ -52,7 +49,7 @@ class RegistrationRepositoryImpl @Inject constructor(
 
     override fun getConfirmationStatus(): StateFlow<Boolean> = emailConfirmed
 
-    override suspend fun createUser(user: User): Result<String?> {
+    override suspend fun signUp(user: User): Result<String?> {
         try {
             firebaseAuth.currentUser?.updatePassword(user.password)?.await()
             return Result.success(firebaseAuth.currentUser?.uid)
@@ -61,6 +58,7 @@ class RegistrationRepositoryImpl @Inject constructor(
             return Result.failure(exception)
         }
     }
+
 
     override suspend fun startCheckingConfirmationStatus(): Result<Any?> {
         while (true) {

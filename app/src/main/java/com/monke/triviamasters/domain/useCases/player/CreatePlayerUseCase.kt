@@ -14,12 +14,13 @@ class CreatePlayerUseCase @Inject constructor(
     fun execute(
         startedPlayingDate: Long,
         username: String
-    ) {
-       val player = Player(
-           startedPlayingDate = startedPlayingDate,
-           username = username,
-           statistics = Statistics()
-       )
+    ): Player {
+        val player = Player(
+            startedPlayingDate = startedPlayingDate,
+            username = username,
+            statistics = Statistics()
+        )
         playerRepository.setPlayer(player)
+        return player
     }
 }

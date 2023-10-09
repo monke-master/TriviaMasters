@@ -7,6 +7,7 @@ import androidx.lifecycle.viewModelScope
 import com.monke.triviamasters.domain.useCases.email.GetConfirmationStatusUseCase
 import com.monke.triviamasters.domain.useCases.player.CreatePlayerUseCase
 import com.monke.triviamasters.domain.useCases.user.SignUpUseCase
+import com.monke.triviamasters.ui.uiModels.UiState
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
@@ -22,20 +23,32 @@ class CreatePlayerViewModel(
     private val _playerUsername = MutableStateFlow("")
     val playerUsername = _playerUsername.asStateFlow()
 
+    private val _uiState = MutableStateFlow<UiState?>(null)
+    val uiState = _uiState.asStateFlow()
+
     init {
         Log.d("CreatePlayerViewModel", "init block")
     }
 
     fun savePlayer() {
-        createPlayerUseCase.execute(
+        val player = createPlayerUseCase.execute(
             username = _playerUsername.value,
             startedPlayingDate = Calendar.getInstance().timeInMillis
         )
         viewModelScope.launch {
-            if (getConfirmationStatusUseCase.execute().value)
-                signUpUseCase.execute()
+            if (getConfirmationStatusUseCase.execute().value) {
+                _uiState.value = UiState.Loading
+                val res = signUpUseCase.execute(player)
+                if (res.isFailure) {
+                    res.exceptionOrNull()?.let { _uiState.value = UiState.Error(it) }
+                    return@launch
+                }
+                _uiState.value = UiState.Success()
+            } else
+                _uiState.value = UiState.Success()
         }
     }
+
 
     fun setUsername(username: String) {
         _playerUsername.value = username

@@ -1,13 +1,13 @@
 {
   "project_info": {
-    "project_number": "886461564326",
-    "project_id": "triviamasters-66d46",
-    "storage_bucket": "triviamasters-66d46.appspot.com"
+    "project_number": "474661663210",
+    "project_id": "triviamasters-9c96d",
+    "storage_bucket": "triviamasters-9c96d.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:886461564326:android:ef980a1e12ea2e6b193b67",
+        "mobilesdk_app_id": "1:474661663210:android:219bbda339057dfe5e4293",
         "android_client_info": {
           "package_name": "com.monke.triviamasters"
         }
@@ -15,7 +15,7 @@
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyChdEOY18LsF2F9_Qy65JSgaWrSJIEc9fU"
+          "current_key": "AIzaSyCPT-Q0yiZTWJBCfP1eWDPgM-7_FQmoMls"
         }
       ],
       "services": {

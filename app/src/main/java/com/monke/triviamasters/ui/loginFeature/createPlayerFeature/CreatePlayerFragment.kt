@@ -7,11 +7,19 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.NavController
+import androidx.navigation.findNavController
 import com.monke.triviamasters.MainActivity
 import com.monke.triviamasters.R
 import com.monke.triviamasters.databinding.FragmentCreatePlayerBinding
+import com.monke.triviamasters.ui.components.LoadingDialog
+import com.monke.triviamasters.ui.uiModels.UiState
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 
@@ -40,6 +48,7 @@ class CreatePlayerFragment : Fragment() {
 
         setupSignInButton()
         setupUsernameEditText()
+        collectUiState()
     }
 
     private fun setupUsernameEditText() {
@@ -56,9 +65,43 @@ class CreatePlayerFragment : Fragment() {
         })
     }
 
+    private fun collectUiState() {
+        viewLifecycleOwner.lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.uiState.collect { state ->
+                    when (state) {
+                        UiState.Loading -> showLoadingDialog()
+                        is UiState.Error ->
+                            Toast.makeText(
+                                requireContext(),
+                                state.exception.message,
+                                Toast.LENGTH_SHORT).
+                            show()
+                        is UiState.Success -> {
+                            navController.navigate(R.id.action_login_to_main_fragment)
+                        }
+                        else -> {}
+                    }
+                }
+            }
+        }
+    }
+
+    private fun showLoadingDialog() {
+        val dialog = LoadingDialog()
+        dialog.show(parentFragmentManager, dialog.tag)
+        viewLifecycleOwner.lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.uiState.collect { state ->
+                    if (state !is UiState.Loading)
+                        dialog.dismiss()
+                }
+            }
+        }
+    }
+
     private fun setupSignInButton() {
         binding?.btnSignIn?.setOnClickListener {
-            navController.navigate(R.id.action_login_to_main_fragment)
             viewModel.savePlayer()
         }
         binding?.btnSignIn?.isEnabled = viewModel.playerUsername.value.isNotEmpty()

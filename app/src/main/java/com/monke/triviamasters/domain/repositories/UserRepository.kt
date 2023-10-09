@@ -10,4 +10,8 @@ interface UserRepository {
     fun getUser() : User?
 
     suspend fun getUserByEmail(email: String): Result<User?>
+
+    suspend fun signIn(email: String, password: String): Result<User?>
+
+    suspend fun createUser(user: User): Result<Any?>
 }
