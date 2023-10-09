@@ -1,8 +1,6 @@
 package com.monke.triviamasters.domain.repositories
 
-import com.monke.triviamasters.domain.models.Result
 import com.monke.triviamasters.domain.models.User
-import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.StateFlow
 
 interface RegistrationRepository {
@@ -11,12 +9,12 @@ interface RegistrationRepository {
 
     var password: String
 
-    suspend fun sendConfirmationLetter(): Result
+    suspend fun sendConfirmationLetter(): Result<Any?>
 
 
     fun getConfirmationStatus(): StateFlow<Boolean>
 
 
-    suspend fun createUser(user: User): kotlin.Result<String>
+    suspend fun createUser(user: User): Result<String>
 
 }

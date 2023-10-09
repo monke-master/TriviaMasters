@@ -4,7 +4,6 @@ import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
-import com.monke.triviamasters.domain.models.Result
 import com.monke.triviamasters.domain.useCases.email.IsEmailValidUseCase
 import com.monke.triviamasters.domain.useCases.password.IsPasswordValidUseCase
 import com.monke.triviamasters.domain.useCases.user.SignInUseCase
@@ -54,10 +53,13 @@ class SignInViewModel @Inject constructor(
         _uiState.value = UiState.Loading
         viewModelScope.launch {
             val result = signInUseCase.execute(email = _email.value, password = _password.value)
-            if (result is Result.Failure)
-                _uiState.value = UiState.Error(result.exception)
-            else
-                _uiState.value = UiState.Success()
+            if (result.isFailure) {
+                result.exceptionOrNull()?.let {
+                    _uiState.value = UiState.Error(it)
+                }
+                return@launch
+            }
+            _uiState.value = UiState.Success()
         }
     }
 

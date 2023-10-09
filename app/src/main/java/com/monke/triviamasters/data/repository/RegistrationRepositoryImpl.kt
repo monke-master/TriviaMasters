@@ -2,12 +2,9 @@ package com.monke.triviamasters.data.repository
 
 import android.util.Log
 import com.monke.triviamasters.di.LoginFragmentScope
-import com.monke.triviamasters.domain.models.Result
 import com.monke.triviamasters.domain.models.User
 import com.monke.triviamasters.domain.repositories.RegistrationRepository
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.withContext
@@ -25,14 +22,14 @@ class RegistrationRepositoryImpl @Inject constructor(): RegistrationRepository {
         Log.d("RegistrationRepository", "init block")
     }
 
-    override suspend fun sendConfirmationLetter(): Result {
+    override suspend fun sendConfirmationLetter(): Result<Any?> {
         emailConfirmed.value = false
         Log.d("RegistrationRepository", "email has been sent")
         withContext(Dispatchers.IO) {
             emailConfirmed.value = true
         }
 
-        return Result.Success(null)
+        return Result.success(null)
     }
 
     override fun getConfirmationStatus(): StateFlow<Boolean> = emailConfirmed

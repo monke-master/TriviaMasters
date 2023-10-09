@@ -3,8 +3,6 @@ package com.monke.triviamasters.ui.gameFeature.fullyRandomFeature
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
-import com.monke.triviamasters.domain.exceptions.NoQuestionsException
-import com.monke.triviamasters.domain.models.Result
 import com.monke.triviamasters.domain.useCases.game.CreateRandomGameUseCase
 import com.monke.triviamasters.ui.uiModels.UiState
 import kotlinx.coroutines.flow.MutableStateFlow

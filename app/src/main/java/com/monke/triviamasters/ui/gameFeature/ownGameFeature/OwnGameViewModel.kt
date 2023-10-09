@@ -7,7 +7,6 @@ import com.monke.triviamasters.domain.models.Category
 import com.monke.triviamasters.domain.models.GameMode
 import com.monke.triviamasters.domain.models.GameSettings
 import com.monke.triviamasters.domain.models.QUESTIONS_COUNT_DEFAULT
-import com.monke.triviamasters.domain.models.Result
 import com.monke.triviamasters.domain.useCases.category.RemoveSelectedCategoryUseCase
 import com.monke.triviamasters.domain.useCases.game.CreateGameWithSettingsUseCase
 import com.monke.triviamasters.domain.useCases.game.GetGameSettingsUseCase

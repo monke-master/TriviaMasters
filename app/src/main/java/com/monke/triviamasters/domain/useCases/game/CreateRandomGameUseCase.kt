@@ -2,8 +2,6 @@ package com.monke.triviamasters.domain.useCases.game
 
 import com.monke.triviamasters.domain.exceptions.NoQuestionsException
 import com.monke.triviamasters.domain.models.Game
-import com.monke.triviamasters.domain.models.Question
-import com.monke.triviamasters.domain.models.Result
 import com.monke.triviamasters.domain.repositories.GameRepository
 import com.monke.triviamasters.domain.repositories.QuestionRepository
 import kotlinx.coroutines.Dispatchers

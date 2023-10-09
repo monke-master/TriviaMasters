@@ -4,12 +4,8 @@ import android.util.Log
 import com.monke.triviamasters.data.converters.toDomain
 import com.monke.triviamasters.data.remote.TriviaApi
 import com.monke.triviamasters.di.GameFragmentScope
-import com.monke.triviamasters.domain.mockedQuestions
-import com.monke.triviamasters.domain.models.GameSettings
 import com.monke.triviamasters.domain.models.Question
-import com.monke.triviamasters.domain.models.Result
 import com.monke.triviamasters.domain.repositories.QuestionRepository
-import kotlinx.coroutines.delay
 import retrofit2.HttpException
 import java.lang.Exception
 import java.lang.Integer.min
