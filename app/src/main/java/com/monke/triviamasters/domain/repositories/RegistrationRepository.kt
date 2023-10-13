@@ -9,6 +9,8 @@ interface RegistrationRepository {
 
     var password: String
 
+    var uid: String
+
     suspend fun sendConfirmationLetter(): Result<Any?>
 
 

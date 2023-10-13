@@ -24,7 +24,7 @@ class SaveStatsUseCase @Inject constructor(
             val newPlayer = player.copy(statistics = newStats)
             playerRepository.setPlayer(newPlayer)
             userRepository.getUser()?.let {
-                userRepository.setUser(it.copy(player = newPlayer))
+                userRepository.updateUser(it.copy(player = newPlayer))
             }
         }
         return Result.success(null)

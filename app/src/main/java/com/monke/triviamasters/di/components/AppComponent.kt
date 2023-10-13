@@ -5,6 +5,7 @@ import com.monke.triviamasters.di.AppScope
 import com.monke.triviamasters.di.modules.AppModule
 import com.monke.triviamasters.di.modules.FirebaseModule
 import com.monke.triviamasters.di.modules.PlayerModule
+import com.monke.triviamasters.di.modules.RoomModule
 import com.monke.triviamasters.di.modules.UserModule
 import dagger.BindsInstance
 import dagger.Component
@@ -14,7 +15,8 @@ import dagger.Component
     AppModule::class,
     PlayerModule::class,
     UserModule::class,
-    FirebaseModule::class
+    FirebaseModule::class,
+    RoomModule::class
 ])
 @AppScope
 interface AppComponent {

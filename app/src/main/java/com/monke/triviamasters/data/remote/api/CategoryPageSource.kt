@@ -1,4 +1,4 @@
-package com.monke.triviamasters.data.remote
+package com.monke.triviamasters.data.remote.api
 
 import androidx.paging.PagingSource
 import androidx.paging.PagingState

@@ -22,10 +22,12 @@ class RegistrationRepositoryImpl @Inject constructor(
     private val emailConfirmed = MutableStateFlow<Boolean>(false)
     override var email : String = ""
     override var password: String = ""
+    override var uid: String = ""
     private lateinit var rawPassword: String
 
     init {
         Log.d("RegistrationRepository", "init block")
+
     }
 
     override suspend fun sendConfirmationLetter(): Result<Any?> {
@@ -39,6 +41,7 @@ class RegistrationRepositoryImpl @Inject constructor(
                 rawPassword
             ).await()
             //result?.user?.sendEmailVerification()?.await()
+            uid = result.user?.uid ?: uid
             return Result.success(null)
         } catch (exception: Exception) {
             exception.printStackTrace()

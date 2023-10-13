@@ -6,7 +6,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 
 interface PlayerRepository {
 
-    fun setPlayer(player: Player?)
+    suspend fun setPlayer(player: Player?)
 
     fun getPlayer(): Flow<Player?>
 }

@@ -2,7 +2,7 @@ package com.monke.triviamasters.data.repository
 
 import android.util.Log
 import com.monke.triviamasters.data.converters.toDomain
-import com.monke.triviamasters.data.remote.TriviaApi
+import com.monke.triviamasters.data.remote.api.TriviaApi
 import com.monke.triviamasters.di.GameFragmentScope
 import com.monke.triviamasters.domain.models.Question
 import com.monke.triviamasters.domain.repositories.QuestionRepository

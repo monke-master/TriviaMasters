@@ -11,7 +11,7 @@ class CreatePlayerUseCase @Inject constructor(
     private val playerRepository: PlayerRepository
 ) {
 
-    fun execute(
+    suspend fun execute(
         startedPlayingDate: Long,
         username: String
     ): Player {

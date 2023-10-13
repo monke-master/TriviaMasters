@@ -1,4 +1,4 @@
-package com.monke.triviamasters.data.remote
+package com.monke.triviamasters.data.remote.api
 
 import com.monke.triviamasters.data.remote.dto.CategoryRemote
 import com.monke.triviamasters.data.remote.dto.QuestionRemote

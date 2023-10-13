@@ -17,7 +17,7 @@ class SignInUseCase @Inject constructor(
             val reposResult = userRepository.signIn(email, password)
             if (reposResult.isSuccess) {
                 val user = reposResult.getOrNull() as User
-                userRepository.setUser(user)
+                userRepository.updateUser(user)
                 playerRepository.setPlayer(user.player)
                 return@withContext reposResult
             } else {

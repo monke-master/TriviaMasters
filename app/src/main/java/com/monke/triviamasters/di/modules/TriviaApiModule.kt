@@ -1,6 +1,6 @@
 package com.monke.triviamasters.di.modules
 
-import com.monke.triviamasters.data.remote.TriviaApi
+import com.monke.triviamasters.data.remote.api.TriviaApi
 import com.monke.triviamasters.data.remote.BASE_URL
 import com.monke.triviamasters.di.GameFragmentScope
 import dagger.Module

@@ -31,11 +31,11 @@ class CreatePlayerViewModel(
     }
 
     fun savePlayer() {
-        val player = createPlayerUseCase.execute(
-            username = _playerUsername.value,
-            startedPlayingDate = Calendar.getInstance().timeInMillis
-        )
         viewModelScope.launch {
+            val player = createPlayerUseCase.execute(
+                username = _playerUsername.value,
+                startedPlayingDate = Calendar.getInstance().timeInMillis
+            )
             if (getConfirmationStatusUseCase.execute().value) {
                 _uiState.value = UiState.Loading
                 val res = signUpUseCase.execute(player)

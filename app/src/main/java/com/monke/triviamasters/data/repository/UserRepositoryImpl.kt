@@ -1,10 +1,9 @@
 package com.monke.triviamasters.data.repository
 
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.firestore.FirebaseFirestore
-import com.monke.triviamasters.data.firestore.UserFirestore
+import com.monke.triviamasters.data.remote.firestore.UserFirestore
 import com.monke.triviamasters.di.AppScope
-import com.monke.triviamasters.domain.mockedPlayer
+import com.monke.triviamasters.domain.exceptions.NoUserException
 import com.monke.triviamasters.domain.mockedUser
 import com.monke.triviamasters.domain.models.User
 import com.monke.triviamasters.domain.repositories.UserRepository
@@ -20,9 +19,14 @@ class UserRepositoryImpl @Inject constructor(
 
     private var user: User? = null
 
-    override suspend fun setUser(user: User): Result<Any?> {
+    override suspend fun updateUser(user: User): Result<Any?> {
         this.user = user
-        return kotlin.Result.success(null)
+        try {
+            return firestore.setUser(user)
+        } catch (exception: Exception) {
+            exception.printStackTrace()
+            return Result.failure(exception)
+        }
     }
 
     override fun getUser(): User? = user
@@ -35,17 +39,10 @@ class UserRepositoryImpl @Inject constructor(
     override suspend fun signIn(email: String, password: String): Result<User?> {
         try {
             val result = firebaseAuth.signInWithEmailAndPassword(email, password).await()
-            var user: User? = null
             result?.user?.let {
-                user = User(
-                    id = it.uid,
-                    password = password,
-                    email = email,
-                    registrationDate = 0L,
-                    player = mockedPlayer
-                )
+                return firestore.getUserById(it.uid)
             }
-            return Result.success(user)
+            return Result.failure(NoUserException())
         } catch (exception: Exception) {
             exception.printStackTrace()
             return Result.failure(exception)
@@ -53,8 +50,7 @@ class UserRepositoryImpl @Inject constructor(
     }
 
     override suspend fun createUser(user: User): Result<Any?> {
-        return firestore.createUser(user)
+        return firestore.setUser(user)
     }
-
 
 }

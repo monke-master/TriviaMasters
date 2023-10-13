@@ -3,14 +3,11 @@ package com.monke.triviamasters.domain.useCases.user
 
 import com.monke.triviamasters.domain.models.Player
 import com.monke.triviamasters.domain.models.User
-import com.monke.triviamasters.domain.repositories.PlayerRepository
 import com.monke.triviamasters.domain.repositories.RegistrationRepository
 import com.monke.triviamasters.domain.repositories.UserRepository
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.withContext
 import java.util.Calendar
-import java.util.UUID
 import javax.inject.Inject
 
 class SignUpUseCase @Inject constructor(
@@ -20,7 +17,7 @@ class SignUpUseCase @Inject constructor(
 
     suspend fun execute(player: Player): Result<Any?> = withContext(Dispatchers.IO) {
         val user = User(
-            id = UUID.randomUUID().toString(),
+            id = registrationRepository.uid,
             player = player,
             email = registrationRepository.email,
             password = registrationRepository.password,
@@ -36,7 +33,7 @@ class SignUpUseCase @Inject constructor(
         val result = userRepository.createUser(user)
         if (result.isFailure)
             return result
-        userRepository.setUser(user)
+        userRepository.updateUser(user)
         return result
     }
 }
